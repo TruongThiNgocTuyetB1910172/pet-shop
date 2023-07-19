@@ -14,4 +14,8 @@ class Order extends Model
         'total',
         'quantity',
     ];
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

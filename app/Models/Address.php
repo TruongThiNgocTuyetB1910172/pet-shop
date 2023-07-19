@@ -10,10 +10,15 @@ class Address extends Model
 
     protected $fillable = [
         'house_number',
+        'user_id',
         'address',
         'ward_id',
         'district_id',
-        'city_id',
+        'province_id',
     ];
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

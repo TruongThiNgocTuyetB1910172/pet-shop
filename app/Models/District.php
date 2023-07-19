@@ -12,4 +12,12 @@ class District extends Model
         'name',
         'province_id',
     ];
+    public function province(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Provinces::class);
+    }
+    public function wards(): HasMany
+    {
+        return $this->hasMany(Ward::class);
+    }
 }
