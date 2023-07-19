@@ -15,4 +15,5 @@ class Address extends Model
         'district_id',
         'city_id',
     ];
+
 }
