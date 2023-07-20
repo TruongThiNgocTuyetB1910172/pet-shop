@@ -13,6 +13,6 @@ class Appointment extends Model
         'phone',
         'email',
         'appointment_at',
-        'note',
+        'notes',
     ];
 }
