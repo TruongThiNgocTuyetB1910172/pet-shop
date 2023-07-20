@@ -16,6 +16,7 @@ class Order extends Model
         'total',
         'quantity',
         'status',
+        'notes',
     ];
 
     public function product(): BelongsTo

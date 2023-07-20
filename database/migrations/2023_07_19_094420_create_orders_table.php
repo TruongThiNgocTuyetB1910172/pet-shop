@@ -16,6 +16,7 @@ return new class () extends Migration
             $table->string('total');
             $table->integer('quantity');
             $table->string('status');
+            $table->string('notes');
             $table->timestamps();
         });
     }

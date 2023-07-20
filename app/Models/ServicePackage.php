@@ -18,6 +18,6 @@ class ServicePackage extends Model
 
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class, 'service_service_package', 'service_id','servicePackage_id');
+        return $this->belongsToMany(Service::class, 'service_service_packages', 'service_id','servicePackage_id');
     }
 }
