@@ -17,6 +17,8 @@ return new class () extends Migration
             $table->double( 'original_price');
             $table->double( 'selling_price');
             $table->string( 'sku');
+            $table->string( 'image');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }

@@ -3,21 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Ward extends Model
+class Province extends Model
 {
-    protected $table = 'wards';
+    protected $table = 'provinces';
 
     protected $fillable = [
         'name',
-        'district_id',
     ];
 
-    public function district(): BelongsTo
+    public function districts(): HasMany
     {
-        return $this->belongsTo(District::class);
+        return $this->hasMany(District::class);
     }
 
     public function addresses(): HasMany

@@ -11,8 +11,13 @@ class ServicePackage extends Model
     protected $fillable = [
         'name',
         'description',
-        'price',
+        'original_price',
+        'selling_price',
         'image',
-
     ];
+
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class, 'service_service_packages', 'service_id','service_package_id');
+    }
 }
