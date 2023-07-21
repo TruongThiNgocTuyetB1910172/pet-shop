@@ -17,20 +17,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check())
+        if (Auth::user()->is_admin == '1')
         {
-            if (Auth::user()->is_admin == '1')
-            {
-                return $next($request);
-            }
-            else
-            {
-                return redirect('/home')->with('status','Access Denied! as you are not as admin');
-            }
+            return $next($request);
         }
-        else
-        {
-            return redirect('/home')->with('status','Please Login First');
-        }
+
+        return redirect('/')->with('status','Access Denied! as you are not as admin');
     }
 }
