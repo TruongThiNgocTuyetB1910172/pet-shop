@@ -6,11 +6,9 @@
 
             <li><a href="{{ route('product.index') }}">Product</a></li>
 
-            <li><a href="{{ route('province.index') }}">Province</a></li>
+            <li><a href="{{ route('user.index') }}">User</a></li>
 
-            <li><a href="{{ route('district.index') }}">District</a></li>
-
-            <li> <a href="{{ route('ward.index') }}">Ward</a></li>
+            <li><a href="{{ route('banner.index') }}">Banner</a></li>
         </ul>
     </div>
 </div>

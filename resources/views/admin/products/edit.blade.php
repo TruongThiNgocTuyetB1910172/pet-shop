@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+@section('head')
+    <script src="ckeditor/ckeditor.js"></script>
+@endsection
 @section('content')
     <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
@@ -63,7 +66,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Mô tả:</label>
                     <div class="col-sm-10">
-                        <textarea type="text" class="form-control" name="description"  value="{{ $product->description }}" placeholder="Nhập mô tả"></textarea>
+                        <textarea type="text" class="form-control" id="editor" name="description"  value="{{ $product->description }}" placeholder="Nhập mô tả"></textarea>
                         @error('description')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -93,6 +96,14 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Hình ảnh:</label>
+                    <div class="col-sm-10">
+                        <img src="{{( 'storage/'.$product->image) }}" alt="{{ $product->name }}"
+                             class="rounded avatar-xs" width="50px" height="50px">
                     </div>
                 </div>
 
@@ -131,4 +142,9 @@
         </div>
     </form>
 
+@endsection
+@section('footer')
+    <script>
+        CKEDITOR.replace( 'editor' );
+    </script>
 @endsection

@@ -80,7 +80,7 @@ class ProductController extends Controller
 
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
-        $product->query()->update([
+        $product->update([
             'name' => $data['name'],
             'description' => $data['description'],
             'stock' => $data['stock'],
