@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    public int $itemPerPage = 1;
+    public int $itemPerPage = 10;
 
     public function index(): View
     {
