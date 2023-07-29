@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\CategoryController;
-use  \App\Http\Controllers\Admin\ProductController;
+use \App\Http\Controllers\Admin\ProductController;
+use \App\Http\Controllers\Admin\UserController;
+use \App\Http\Controllers\Admin\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +39,19 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('products', [ProductController::class ,'index'] )->name('product.index');
     Route::get('create-product', [ProductController::class ,'create'] )->name('product.create');
     Route::post('store-product', [ProductController::class ,'store'] )->name('product.store');
+    Route::get('delete-product/{id}', [ProductController::class ,'destroy'] )->name('product.destroy');
+
+    Route::get('users', [UserController::class, 'index'])->name('user.index');
+    Route::get('create-user', [UserController::class ,'create'] )->name('user.create');
+    Route::post('store-user', [UserController::class ,'store'] )->name('user.store');
+    Route::get('edit-user/{id}', [UserController::class ,'edit'] )->name('user.edit');
+    Route::put('update-user/{id}', [UserController::class ,'update'] )->name('user.update');
+    Route::get('delete-user/{id}', [UserController::class ,'destroy'] )->name('user.destroy');
+
+    Route::get('banners', [BannerController::class, 'index'])->name('banner.index');
+    Route::get('create-banner', [BannerController::class ,'create'] )->name('banner.create');
+    Route::post('store-banner', [BannerController::class ,'store'] )->name('banner.store');
+    Route::get('edit-banner/{id}', [BannerController::class ,'edit'] )->name('banner.edit');
+    Route::put('update-banner/{id}', [BannerController::class ,'update'] )->name('banner.update');
+    Route::get('delete-banner/{id}', [BannerController::class ,'destroy'] )->name('banner.destroy');
 });
