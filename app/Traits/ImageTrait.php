@@ -5,7 +5,6 @@ namespace App\Traits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-
 trait ImageTrait
 {
     public function uploadImage(Request $request, string $fieldName, string $storagePath): ?string
@@ -14,9 +13,7 @@ trait ImageTrait
             $file = $request->file($fieldName);
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
 
-            $path = $file->storeAs($storagePath, $filename, 'public');
-
-            return $path;
+            return $file->storeAs($storagePath, $filename, 'public');
         }
 
         return null;

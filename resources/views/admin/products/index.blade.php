@@ -1,5 +1,5 @@
-@extends('admin.layouts.app')
-@section('content')
+@extends("admin.layouts.app")
+@section("content")
     <div class="mb-3">
         <a href="{{ route('product.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create Product</a>
     </div>
@@ -11,27 +11,23 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Image</th>
                         <th>Category</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($products as $item)
                         <tr>
-                            <th>{{ $product->id }}</th>
-                            <td>{{ $product->name }}</td>
-                            <td><img src="{{( 'storage/'.$product->image) }}" alt="{{ $product->name }}"
-                                     class="rounded avatar-xs" width="50px" height="50px">
-                            </td>
-                            <td>{{ $product->category->name }}</td>
-                            <td>{{ $product->created_at }}</td>
+                            <th>{{$item->id}}</th>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->category->name}}</td>
+                            <td>{{$item->created_at}}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ route('product.edit', ['id' => $product->id]) }}">
+                                <a class="btn btn-primary btn-sm" href="#">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="{{ route('product.destroy', ['id' => $product->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>

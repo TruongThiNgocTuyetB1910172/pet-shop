@@ -1,19 +1,4 @@
 @extends('admin.layouts.app')
-@section('head')
-    <style>
-        .form-file-group{
-            width: 100%;
-            border: 2px dashed #000;
-        }
-        .form-file-group p {
-            width: 100%;
-            text-align: center;
-            line-height: 170px;
-        }
-    </style>
-    <script src="ckeditor/ckeditor.js"></script>
-@endsection
-
 @section('content')
     <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -26,30 +11,20 @@
                         <input type="text" class="form-control" name="name" placeholder="Nhập tên sản phẩm">
                         @error('name')
                         <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Danh mục:</label>
-                    <div class="col-sm-10">
-                        <select class="select-form" name="category_id" >
-                            <option value="">Select a Category</option>
-
-                            @foreach ($categories as $item )
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @error('category_id')
-                    <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <select class="select-form" name="category_id" >
+                        <option value="">Select a Category</option>
+                        @foreach ($categories as $item )
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Mã sản phẩm:</label>
                     <div class="col-sm-10">
@@ -61,7 +36,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Số lượng:</label>
                     <div class="col-sm-10">
@@ -73,11 +47,10 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Mô tả:</label>
                     <div class="col-sm-10">
-                        <textarea type="text" class="form-control"  id="editor" name="description" placeholder="Nhập mô tả"></textarea>
+                        <input type="text" class="form-control" name="description" placeholder="Nhập mô tả	">
                         @error('description')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -85,11 +58,10 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Giá Gốc:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="original_price" placeholder="Nhập giá gốc">
+                        <input type="text" class="form-control" name="original_price" placeholder="Nhập giá góc">
                         @error('original_price')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -97,7 +69,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Giá Bán:</label>
                     <div class="col-sm-10">
@@ -109,38 +80,11 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="form-group row">
-                    <div class="mb-3">
-                        <label for="editor" class="form-label">Chọn ảnh nổi bật</label>
-                        <p class="text-muted font-13">
-                            Ảnh được chọn phải có dạng jpeg,jpg,png,gif.
-                        </p>
-                        <div class="form-file-group">
-                            <input type="file" name="image" style="display: none" id="file-upload"
-                                   onchange="previewFile(this)">
-                            <p onclick="document.querySelector('#file-upload').click()">
-                                Nhấn vào đây để chọn ảnh tải lên.
-                            </p>
-                        </div>
-                        <div id="previewBox" style="display: none" class="text-center">
-                            <img src="" id="previewImg" class="img-fluid rounded" width="100px" height="100px">
-                            <i class="uil-trash-alt text-danger" style="cursor: pointer"
-                               onclick="removePreview()">Xóa ảnh</i>
-                        </div>
-
-                        @error('image')
-                        <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Nhiều ảnh hơn:</label>
+                    <label class="col-sm-2 col-form-label">Hình ảnh:</label>
                     <div class="col-sm-10">
-                        <input type="file" accept="image/*" class="form-control" name="product_image[]" multiple>
-
-                        @error('product_image.*')
+                        <input type="file" class="form-control" name="image">
+                        @error('selling_price')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -153,49 +97,10 @@
                         <button type="submit" class="btn btn-dark mb-2">Submit</button>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
+
     </form>
 
-@endsection
-@section('footer')
-    <script>
-        CKEDITOR.replace( 'editor' );
-
-        function previewFile(input){
-            let file = $("input[type=file]").get(0).files[0];
-            if(file){
-                let reader = new FileReader();
-                reader.onload = function (){
-                    $("#previewImg").attr('src', reader.result);
-                    $("#previewBox").css('display', 'block');
-                }
-                $(".form-file-group").css('display', 'none');
-                reader.readAsDataURL(file);
-            }
-        }
-        function removePreview(){
-            $("#previewImg").attr('src',"");
-            $("#previewBox").css('display', 'none');
-            $(".form-file-group").css('display', 'block');
-        }
-    </script>
-@endsection
-
-@section('head')
-    <style>
-        .form-file-group{
-            width: 100%;
-            border: 2px dashed #000;
-        }
-        .form-file-group p {
-            width: 100%;
-            text-align: center;
-            line-height: 170px;
-        }
-        .img-fluid rounded{
-            width: 50px;
-            height: 50px;
-        }
-    </style>
 @endsection
