@@ -33,8 +33,8 @@ class BannerController extends Controller
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
         Banner::query()->create([
-            'status' => $data['status'],
-            'image' => $data['image'],
+           'status' => $data['status'],
+           'image' => $data['image'],
         ]);
         return redirect('banners')->with('status','Banner added successfully');
     }

@@ -15,6 +15,7 @@ class Banner extends Model
         'image',
         'status',
     ];
+
     public static function getBannerById(string $id): Model|Collection|Builder|array|null
     {
         return Banner::query()->findOrFail($id);
