@@ -39,8 +39,6 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('products', [ProductController::class ,'index'] )->name('product.index');
     Route::get('create-product', [ProductController::class ,'create'] )->name('product.create');
     Route::post('store-product', [ProductController::class ,'store'] )->name('product.store');
-    Route::get('edit-product/{id}', [ProductController::class ,'edit'] )->name('product.edit');
-    Route::put('update-product/{id}', [ProductController::class ,'update'] )->name('product.update');
     Route::get('delete-product/{id}', [ProductController::class ,'destroy'] )->name('product.destroy');
 
     Route::get('users', [UserController::class, 'index'])->name('user.index');

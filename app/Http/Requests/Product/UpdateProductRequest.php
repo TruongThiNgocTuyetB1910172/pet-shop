@@ -14,9 +14,9 @@ class UpdateProductRequest extends FormRequest
             'category_id'=> ['required'],
             'image' => ['image', 'max:4096'],
             'product_image.*' => ['nullable', 'image',  'max:4096'],
-            'original_price' => ['required'],
-            'selling_price' => ['required'],
-            'stock' => ['required'],
+            'original_price' => ['required','integer','min:0','gt:0'],
+            'selling_price' => ['required','integer','min:0','gt:0'],
+            'stock' => ['required','integer','min:0','gt:0'],
             'sku' => ['required'],
         ];
     }

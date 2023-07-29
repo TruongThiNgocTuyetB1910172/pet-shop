@@ -9,7 +9,6 @@ use App\Models\Product;
 use App\Traits\ImageTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use JetBrains\PhpStorm\NoReturn;
 
 class ProductController extends Controller
 {
@@ -46,7 +45,9 @@ class ProductController extends Controller
     public function edit(string $id): View
     {
         $product = Product::getProductById($id);
+
         $categories = Category::all();
+
         return view('admin.products.edit',compact('product','categories'));
     }
 

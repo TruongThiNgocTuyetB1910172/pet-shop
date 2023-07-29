@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -44,26 +44,24 @@ class UserController extends Controller
         $user = User::getUserById($id);
         return view('admin.users.edit',compact('user'));
     }
-    public function update(CreateUserRequest $request, string $id): RedirectResponse
-    {
-        $data = $request->validated();
-
-        $user = User::getUserById($id);
-
-        if (! Hash::check($data['password'], $user->password)) {
-            return redirect()->back()->with('status','Sai mk');
-        }
-
-        $user->update([
-            'name'=> $data['name'] ,
-            'email'=> $data['email'] ,
-            'phone'=> $data['phone'] ,
-            'password'=> Hash::make($data['password']),
-            'is_admin'=> $data['is_admin']
-        ]);
-
-        return redirect('users')->with('status','User update Successfully');
-    }
+//    public function update(UpdateUserRequest $request, string $id): RedirectResponse
+//    {
+//        $data = $request->validated();
+//
+//        $user = User::getUserById($id);
+//
+//        if (! Hash::check($data['password'], $user->password)) {
+//            return redirect()->back()->with('status','Sai mk');
+//        }
+//        $user->update([
+//            'name'=> $data['name'] ,
+//            'email'=> $data['email'] ,
+//            'phone'=> $data['phone'] ,
+//            'password'=> $data['password'],
+//            'is_admin'=> $data['is_admin']
+//        ]);
+//        return redirect('users')->with('status','User update Successfully');
+//    }
 
     public function destroy(string $id): RedirectResponse
     {

@@ -13,10 +13,11 @@ use Illuminate\View\View;
 class BannerController extends Controller
 {
     use ImageTrait;
+    public int $itemPerPage = 10;
 
     public function index(): View
     {
-        $banners = Banner::all();
+        $banners = Banner::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
         return view('admin.banners.index',compact('banners'));
     }
 

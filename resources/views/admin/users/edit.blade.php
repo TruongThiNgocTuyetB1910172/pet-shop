@@ -42,12 +42,22 @@
                         @enderror
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Old Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="old_password"  placeholder="write old password" >
+                        @error('old_password')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" name="password" value="{{ $user->password }}" placeholder="write password" id="pwd">
-                        <p id="showHidePassword" onclick="showHidePassword()">Show password</p>
+                        <input type="password" class="form-control" name="password"  placeholder="write new password">
                         @error('password')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -63,6 +73,11 @@
                         <label for="html">Yes</label><br>
                         <input type="radio" id="css" name="is_admin" value="0">
                         <label for="css">No</label><br>
+                        @error('is_admin')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
 
 
