@@ -25,7 +25,7 @@
                                 <a class="btn btn-primary btn-sm" href="{{ route('category.edit', ['id' => $item->id]) }}">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="{{ route('category.delete', ['id' => $item->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                <a href="{{ route('category.destroy', ['id' => $item->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
