@@ -14,7 +14,7 @@
                         <th>Image</th>
                         <th>Category</th>
                         <th>Stock</th>
-                        <th>Selling_price</th>
+                        <th>Selling Price</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>

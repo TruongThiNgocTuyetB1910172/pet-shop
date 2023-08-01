@@ -6,16 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserRequest extends FormRequest
 {
-
-    public function rules(): array|string
+    public function rules(): array
     {
         return [
             'name' => ['required','string', 'max:255'],
-            'email' => ['required','string'],
+            'email' => ['required','string', 'unique:users'],
             'phone' => ['required', 'regex:/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/'],
-            'password' => ['required','min:8'],
-            'is_admin' => ['required'],
-
+            'password' => ['required', 'string', 'min:8', 'max:32'],
+            'is_admin' => ['required', 'in:0,1'],
+            'status' => ['required', 'in:0,1'],
         ];
     }
 }

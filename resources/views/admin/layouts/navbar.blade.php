@@ -1,6 +1,5 @@
 <div class="header">
     <div class="header-content clearfix">
-
         <div class="nav-control">
             <div class="hamburger">
                 <span class="toggle-icon"><i class="icon-menu"></i></span>
@@ -133,21 +132,8 @@
                         </div>
                     </div>
                 </li>
-                <li class="icons dropdown d-none d-md-flex">
-                    <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                        <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                    </a>
-                    <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                        <div class="dropdown-content-body">
-                            <ul>
-                                <li><a href="javascript:void()">English</a></li>
-                                <li><a href="javascript:void()">Dutch</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
                 <li class="icons dropdown">
-                    <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                    <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                         <span class="activity active"></span>
                         <img src="admin/images/user/1.png" height="40" width="40" alt="">
                     </div>

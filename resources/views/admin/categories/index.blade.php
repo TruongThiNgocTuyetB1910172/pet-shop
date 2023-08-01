@@ -11,21 +11,23 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Count Products</th>
                         <th>Date</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($categories as $item)
+                    @foreach ($categories as $category)
                         <tr>
-                            <th>{{$item->id}}</th>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->created_at}}</td>
+                            <th>{{ $category->id }}</th>
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->products->count() }}</td>
+                            <td>{{ $category->created_at }}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ route('category.edit', ['id' => $item->id]) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('category.edit', ['id' => $category->id]) }}">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="{{ route('category.destroy', ['id' => $item->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                <a href="{{ route('category.destroy', ['id' => $category->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>

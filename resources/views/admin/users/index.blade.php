@@ -13,8 +13,8 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Is_admin</th>
-                        <th>Date</th>
+                        <th>Role</th>
+                        <th>Activated At</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -25,14 +25,11 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
-                            <td>{{ $user->is_admin }}</td>
-                            <td>{{ $user->created_at }}</td>
+                            <td>{{ $user->is_admin === 1 ? 'Admin' : 'User' }}</td>
+                            <td>{{ $user->email_verified_at !== null ? $user->email_verified_at->diffForHumans() : 'No Activated'  }}</td>
                             <td>
-                                {{--                                <a class="btn btn-primary btn-sm" href="{{ route('user.edit', ['id' => $user->id]) }}">--}}
-                                {{--                                    <i class="fa fa-pencil"></i>--}}
-                                {{--                                </a>--}}
-                                <a href="{{ route('user.destroy', ['id' => $user->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                    <i class="fa fa-trash"></i>
+                                <a class="btn btn-primary btn-sm" href="{{ route('user.edit', ['id' => $user->id]) }}">
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </td>
                         </tr>

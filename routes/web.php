@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\CategoryController;
 use  \App\Http\Controllers\Admin\ProductController;
@@ -22,12 +23,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth', 'admin'])->group(function (){
-    Route::get('/dashboard', [HomeController::class ,'index'] );
+Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function (){
+    Route::get('/dashboard', [HomeController::class ,'index']);
 
     Route::get('categories', [CategoryController::class ,'index'] )->name('category.index');
     Route::get('create-category', [CategoryController::class ,'create'] )->name('category.create');
@@ -46,7 +47,9 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('users', [UserController::class ,'index'] )->name('user.index');
     Route::get('create-user', [UserController::class ,'create'] )->name('user.create');
     Route::post('store-user', [UserController::class ,'store'] )->name('user.store');
-    Route::get('delete-user/{id}', [UserController::class ,'destroy'] )->name('user.destroy');
+    Route::get('edit-user/{id}', [UserController::class ,'edit'] )->name('user.edit');
+    Route::put('update-user/{id}', [UserController::class ,'update'] )->name('user.update');
+    Route::put('update-user-password/{id}', [UserController::class ,'updatePassword'] )->name('user.update-password');
 
     Route::get('banners', [BannerController::class, 'index'])->name('banner.index');
     Route::get('create-banner', [BannerController::class ,'create'] )->name('banner.create');

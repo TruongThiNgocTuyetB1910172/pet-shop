@@ -57,6 +57,10 @@ class CategoryController extends Controller
     {
         $category = Category::getCategoryById($id);
 
+        if ($category->products->count() > 0) {
+            return redirect('categories')->with('status', 'Pls delete all products of category before delete this category');
+        }
+
         $category->delete();
 
         return redirect('categories')->with('status', 'Category deleted successfully');

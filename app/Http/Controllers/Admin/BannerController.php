@@ -68,6 +68,5 @@ class BannerController extends Controller
         $banner->delete();
 
         return redirect('banners')->with('status','Banner delete successfully');
-
     }
 }
