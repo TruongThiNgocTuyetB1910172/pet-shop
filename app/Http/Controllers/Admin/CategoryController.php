@@ -50,7 +50,9 @@ class CategoryController extends Controller
             'name' => $data['name'],
         ]);
 
-        return redirect('categories')->with('status', 'Category updated successfully');
+        toast('Update category ' . $categories->name . 'success','success');
+
+        return redirect('categories');
     }
 
     public function destroy(string $id): RedirectResponse
