@@ -36,7 +36,9 @@ class BannerController extends Controller
            'status' => $data['status'],
            'image' => $data['image'],
         ]);
-        return redirect('banners')->with('status','Banner added successfully');
+        toast('Create banner success','success');
+
+        return redirect('banners');
     }
 
     public function edit(string $id): View
@@ -58,7 +60,10 @@ class BannerController extends Controller
             'status' => $data['status'],
             'image' => $data['image'],
         ]);
-        return redirect('banners')->with('status','Banner update successfully');
+
+        toast('Update banner success','success');
+
+        return redirect('banners');
     }
 
     public function destroy(string $id): RedirectResponse
@@ -67,6 +72,8 @@ class BannerController extends Controller
 
         $banner->delete();
 
-        return redirect('banners')->with('status','Banner delete successfully');
+        toast('Delete banner success','success');
+
+        return redirect('banners');
     }
 }

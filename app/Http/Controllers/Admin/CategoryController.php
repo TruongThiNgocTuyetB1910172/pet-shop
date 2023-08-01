@@ -31,7 +31,9 @@ class CategoryController extends Controller
         Category::query()->create([
             'name' => $data['name'],
         ]);
-        return redirect('categories')->with('status', 'Category Added Successfully');
+        toast('Create category success','success');
+
+        return redirect('categories');
     }
 
     public function edit(string $id): View
@@ -60,11 +62,16 @@ class CategoryController extends Controller
         $category = Category::getCategoryById($id);
 
         if ($category->products->count() > 0) {
-            return redirect('categories')->with('status', 'Pls delete all products of category before delete this category');
+
+            toast('Pls delete all products of category before delete this category','warning');
+
+            return redirect('categories');
         }
 
         $category->delete();
 
-        return redirect('categories')->with('status', 'Category deleted successfully');
+        toast('Delete category ' . $category->name . 'success','success');
+
+        return redirect('categories');
     }
 }

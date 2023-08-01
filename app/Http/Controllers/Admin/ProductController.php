@@ -65,7 +65,9 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('products')->with('status', 'Product Added Successfully');
+        toast('Create product category success','success');
+
+        return redirect('products');
     }
 
     public function edit(string $id): View
@@ -110,7 +112,9 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('products')->with('status','Product update successfully');
+        toast('Update Product ' . $product->name . 'success','success');
+
+        return redirect('products');
     }
 
     public function destroy(string $id): RedirectResponse
@@ -119,7 +123,9 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect('products')->with('status','Product delete successfully');
+        toast('Update product ' . $product->name . 'success','success');
+
+        return redirect('products');
     }
 
 
