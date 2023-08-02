@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('admin.layouts.head')
+@include('admin.layouts.header')
 
 <body>
 
@@ -15,7 +15,6 @@
 </div>
 
 <div id="main-wrapper">
-
     <div class="nav-header">
         <div class="brand-logo">
             <a href="#">
@@ -28,24 +27,17 @@
         </div>
     </div>
 
-   @include('admin.layouts.navbar')
+    @include('admin.layouts.navbar')
 
     @include('admin.layouts.sidebar')
 
+    @include('sweetalert::alert')
+
     <div class="content-body">
-
         <div class="container-fluid mt-3">
-                @yield('content')
-        </div>
-        <!-- #/ container -->
-    </div>
-
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            @yield('content')
         </div>
     </div>
-
 </div>
 
 @include('admin.layouts.footer')

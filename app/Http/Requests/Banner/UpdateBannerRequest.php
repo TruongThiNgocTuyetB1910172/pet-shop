@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class UpdateBannerRequest extends FormRequest
 {
 
-    public function rules()
+    public function rules(): array|string
     {
         return [
             'status' => ['required'],

@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'is_admin',
         'phone',
+        'status',
     ];
 
     /**
@@ -57,9 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Address::class);
     }
-
-    public static  function getUserById(string $id): Model|Collection|Builder|array|null
+    public static function getUserById(string $id): Model|Collection|Builder|array|null
     {
         return User::query()->findOrFail($id);
+
     }
 }

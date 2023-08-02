@@ -28,10 +28,12 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
 
-        Category::query()->create([
+        $categories =Category::query()->create([
             'name' => $data['name'],
         ]);
-        return redirect('categories')->with('status', 'Category Added Successfully');
+        toast('Tạo mới danh mục' . $categories->name .' thành công','success');
+
+        return redirect('categories');
     }
 
     public function edit(string $id): View
@@ -50,15 +52,26 @@ class CategoryController extends Controller
             'name' => $data['name'],
         ]);
 
-        return redirect('categories')->with('status', 'Category updated successfully');
+        toast('Cập nhật danh mục' . $categories->name . 'thành công','success');
+
+        return redirect('categories');
     }
 
     public function destroy(string $id): RedirectResponse
     {
         $category = Category::getCategoryById($id);
 
+        if ($category->products->count() > 0) {
+
+            toast('Xóa sản phẩm thuộc danh mục trước khi xóa danh mục !!','warning');
+
+            return redirect('categories');
+        }
+
         $category->delete();
 
-        return redirect('categories')->with('status', 'Category deleted successfully');
+        toast('Xóa danh mục ' . $category->name . 'thành công','success');
+
+        return redirect('categories');
     }
 }

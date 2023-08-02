@@ -36,7 +36,9 @@ class BannerController extends Controller
            'status' => $data['status'],
            'image' => $data['image'],
         ]);
-        return redirect('banners')->with('status','Banner added successfully');
+        toast('Tạo mới banner thành công','success');
+
+        return redirect('banners');
     }
 
     public function edit(string $id): View
@@ -50,24 +52,42 @@ class BannerController extends Controller
     {
         $data = $request->validated();
 
-        $data['image'] = $this->uploadImage($request, 'image','images');
-
         $banner = Banner::getBannerById($id);
+
+        if (! $request->hasFile('image')) {
+            $data['image'] = $banner->image;
+        }
+
+        if ($request->hasFile('image')) {
+            $oldImage = 'storage/' . $banner->image;
+
+            $this->deleteImage($oldImage);
+
+            $data['image'] = $this->uploadImage($request, 'image', 'images');
+        }
 
         $banner->update([
             'status' => $data['status'],
             'image' => $data['image'],
         ]);
-        return redirect('banners')->with('status','Banner update successfully');
+
+        toast('Cập nhật banner thành công','success');
+
+        return redirect('banners');
     }
 
     public function destroy(string $id): RedirectResponse
     {
         $banner = Banner::getBannerById($id);
 
+        $image = 'storage/' . $banner->image;
+
+        $this->deleteImage($image);
+
         $banner->delete();
 
-        return redirect('banners')->with('status','Banner delete successfully');
+        toast('Xóa banner thành công','success');
 
+        return redirect('banners');
     }
 }

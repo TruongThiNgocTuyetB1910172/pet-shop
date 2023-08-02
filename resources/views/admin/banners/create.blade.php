@@ -15,56 +15,63 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="card">
-                <div class="form-group row">
-                    <form>
-                        <label class="col-sm-2 col-form-label">Status:</label>
-                        <div>
-                            <input type="radio"  name="status" value="1">
-                            <label for="html">Yes</label><br>
-                            <input type="radio"  name="status" value="0">
-                            <label for="css">No</label><br>
-                        </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="basic-form">
+                <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Thêm mới banner</h4>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-form-label">Trạng thái:</label>
+                                    <div class="d-flex">
+                                        <div class="justify-content-center align-content-center">
+                                            <input type="radio" id="is_active" name="status" value="1">
+                                            <label for="is_active">Hiện</label><br></div>
+                                        <div class="justify-content-center align-content-center ml-5">
+                                            <input type="radio" id="is_block" name="status" value="0">
+                                            <label for="is_block">Ẩn</label><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <label for="editor" class="form-label">Chọn ảnh: </label>
+                                    <div class="form-file-group">
+                                        <input type="file" name="image" style="display: none" id="file-upload"
+                                               onchange="previewFile(this)">
+                                        <p onclick="document.querySelector('#file-upload').click()">
+                                            Nhấn vào đây để chọn ảnh tải lên.
+                                        </p>
+                                    </div>
+                                    <div id="previewBox" style="display: none" class="text-center">
+                                        <img src="" id="previewImg" class="img-fluid rounded" width="100px" height="100px">
+                                        <i class="uil-trash-alt text-danger" style="cursor: pointer"
+                                           onclick="removePreview()">Xóa ảnh</i>
+                                    </div>
+
+                                    @error('image')
+                                    <span class="text-danger"> {{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
 
 
-                    </form>
-                </div>
-                <div class="form-group row">
-                    <div class="mb-3">
-                        <label for="editor" class="form-label">Chọn ảnh: </label>
-                        <p class="text-muted font-13">
-                            Ảnh được chọn phải có dạng jpeg,jpg,png,gif.
-                        </p>
-                        <div class="form-file-group">
-                            <input type="file" name="image" style="display: none" id="file-upload"
-                                   onchange="previewFile(this)">
-                            <p onclick="document.querySelector('#file-upload').click()">
-                                Nhấn vào đây để chọn ảnh tải lên.
-                            </p>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-dark mb-2">Thêm mới</button>
+                                </div>
+                            </div>
                         </div>
-                        <div id="previewBox" style="display: none" class="text-center">
-                            <img src="" id="previewImg" class="img-fluid rounded" width="100px" height="100px">
-                            <i class="uil-trash-alt text-danger" style="cursor: pointer"
-                               onclick="removePreview()">Xóa ảnh</i>
-                        </div>
-
-                        @error('image')
-                        <span class="text-danger"> {{ $message }}</span>
-                        @enderror
                     </div>
-                </div>
 
+            </form>
 
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-dark mb-2">Submit</button>
-                    </div>
-                </div>
-            </div>
         </div>
-    </form>
+        </div>
+    </div>
+
 
 @endsection
 @section('footer')
