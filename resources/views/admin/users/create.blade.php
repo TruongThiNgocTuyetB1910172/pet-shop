@@ -4,11 +4,11 @@
         @csrf
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">New User</h4>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Name user:</label>
+                <h4 class="card-title">Thêm mới người dùng</h4>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Tên người dùng:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" placeholder="Write name user">
+                        <input type="text" class="form-control" name="name" placeholder="Nhập tên người dùng">
                         @error('name')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -17,10 +17,10 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group">
                     <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" name="email" placeholder="Enter email">
+                        <input type="email" class="form-control" name="email" placeholder="Nhập email">
                         @error('email')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -29,10 +29,10 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Phone number:</label>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Số điện thoại:</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" name="phone" placeholder="Enter phone number">
+                        <input type="number" class="form-control" name="phone" placeholder="Nhập số điện thoại">
                         @error('phone')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
@@ -41,10 +41,10 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Password:</label>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Mật khẩu:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" name="password" placeholder="Enter password" id="pwd">
+                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" id="pwd">
                         <p style="cursor: pointer" id="showHidePassword" onclick="showHidePassword()" class="mt-2">Show password</p>
                         @error('password')
                         <span class="text-danger" role="alert">
@@ -54,35 +54,35 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Is Admin:</label>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Quyền:</label>
                     <div class="d-flex">
                         <div class="justify-content-center align-content-center">
                             <input type="radio" id="is_admin" name="is_admin" value="1">
-                            <label for="is_admin">Yes</label><br></div>
+                            <label for="is_admin">Người quản trị</label><br></div>
                         <div class="justify-content-center align-content-center ml-5">
                             <input type="radio" id="not_admin" name="is_admin" value="0">
-                            <label for="not_admin">No</label><br>
+                            <label for="not_admin">Người dùng</label><br>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Is Active:</label>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Trạng thái:</label>
                     <div class="d-flex">
                         <div class="justify-content-center align-content-center">
                             <input type="radio" id="is_active" name="status" value="1">
-                            <label for="is_active">Yes</label><br></div>
+                            <label for="is_active">Kích hoạt</label><br></div>
                         <div class="justify-content-center align-content-center ml-5">
                             <input type="radio" id="is_block" name="status" value="0">
-                            <label for="is_block">No</label><br>
+                            <label for="is_block">Block</label><br>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-dark mb-2">Submit</button>
+                        <button type="submit" class="btn btn-dark mb-2">Thêm mới</button>
                     </div>
                 </div>
             </div>

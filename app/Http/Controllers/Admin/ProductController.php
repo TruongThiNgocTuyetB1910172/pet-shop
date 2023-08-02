@@ -40,7 +40,7 @@ class ProductController extends Controller
 
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
-        $product=Product::query()->create([
+        $product = Product::query()->create([
             'name' => $data['name'],
             'description' => $data['description'],
             'stock' => $data['stock'],
@@ -51,21 +51,7 @@ class ProductController extends Controller
             'image' => $data['image'],
         ]);
 
-        if (isset($data['product_image'])) {
-            $images = $data['product_image'];
-
-            foreach ($images as $image) {
-                $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('images/', $fileName);
-
-                ProductImage::query()->create([
-                    'product_id' => $product->id,
-                    'image' => 'images/' . $fileName,
-                ]);
-            }
-        }
-
-        toast('Create product category success','success');
+        toast('Thêm mới sản phẩm ' . $product->name .' thành công','success');
 
         return redirect('products');
     }
@@ -85,7 +71,17 @@ class ProductController extends Controller
 
         $product = Product::getProductById($id);
 
-        $data['image'] = $this->uploadImage($request, 'image', 'images');
+        if (! $request->hasFile('image')) {
+            $data['image'] = $product->image;
+        }
+
+        if ($request->hasFile('image')) {
+            $oldImage = 'storage/' . $product->image;
+
+            $this->deleteImage($oldImage);
+
+            $data['image'] = $this->uploadImage($request, 'image', 'images');
+        }
 
         $product->update([
             'name' => $data['name'],
@@ -98,21 +94,7 @@ class ProductController extends Controller
             'selling_price' => $data['selling_price'],
         ]);
 
-        if (isset($data['product_image'])) {
-            $images = $data['product_image'];
-
-            foreach ($images as $image) {
-                $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('images/', $fileName);
-
-                ProductImage::query()->update([
-                    'product_id' => $product->id,
-                    'image' => 'images/' . $fileName,
-                ]);
-            }
-        }
-
-        toast('Update Product ' . $product->name . 'success','success');
+        toast('Cập nhật sản phẩm ' . $product->name . 'thành công','success');
 
         return redirect('products');
     }
@@ -121,12 +103,14 @@ class ProductController extends Controller
     {
         $product = Product::getProductById($id);
 
+        $image = 'storage/' . $product->image;
+
+        $this->deleteImage($image);
+
         $product->delete();
 
-        toast('Update product ' . $product->name . 'success','success');
+        toast('Xóa sản phẩm ' . $product->name . 'thành công','success');
 
         return redirect('products');
     }
-
-
 }

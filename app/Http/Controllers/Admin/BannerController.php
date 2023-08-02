@@ -36,7 +36,7 @@ class BannerController extends Controller
            'status' => $data['status'],
            'image' => $data['image'],
         ]);
-        toast('Create banner success','success');
+        toast('Tạo mới banner thành công','success');
 
         return redirect('banners');
     }
@@ -52,16 +52,26 @@ class BannerController extends Controller
     {
         $data = $request->validated();
 
-        $data['image'] = $this->uploadImage($request, 'image','images');
-
         $banner = Banner::getBannerById($id);
+
+        if (! $request->hasFile('image')) {
+            $data['image'] = $banner->image;
+        }
+
+        if ($request->hasFile('image')) {
+            $oldImage = 'storage/' . $banner->image;
+
+            $this->deleteImage($oldImage);
+
+            $data['image'] = $this->uploadImage($request, 'image', 'images');
+        }
 
         $banner->update([
             'status' => $data['status'],
             'image' => $data['image'],
         ]);
 
-        toast('Update banner success','success');
+        toast('Cập nhật banner thành công','success');
 
         return redirect('banners');
     }
@@ -70,9 +80,13 @@ class BannerController extends Controller
     {
         $banner = Banner::getBannerById($id);
 
+        $image = 'storage/' . $banner->image;
+
+        $this->deleteImage($image);
+
         $banner->delete();
 
-        toast('Delete banner success','success');
+        toast('Xóa banner thành công','success');
 
         return redirect('banners');
     }

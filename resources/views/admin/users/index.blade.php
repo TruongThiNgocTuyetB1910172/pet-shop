@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="mb-3">
-        <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create User</a>
+        <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới người dùng</a>
     </div>
     <div class="card">
         <div class="card-body">
@@ -9,13 +9,13 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
+                        <th>Id</th>
+                        <th>Tên người dùng</th>
                         <th>Email</th>
-                        <th>Phone</th>
-                        <th>Role</th>
-                        <th>Activated At</th>
-                        <th>Action</th>
+                        <th>Số điện thoại</th>
+                        <th>Quyền</th>
+                        <th>Ngày thêm</th>
+                        <th>Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,7 +26,9 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
                             <td>{{ $user->is_admin === 1 ? 'Admin' : 'User' }}</td>
-                            <td>{{ $user->email_verified_at !== null ? $user->email_verified_at->diffForHumans() : 'No Activated'  }}</td>
+                            <td>{{$user->created_at->format('d')}} - {{$user->created_at->format('m')}} -
+                                {{$user->created_at->format('Y')}} <small>{{ $user->created_at->format('g:i A') }}</small>
+                            </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{ route('user.edit', ['id' => $user->id]) }}">
                                     <i class="fa fa-pencil"></i>

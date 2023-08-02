@@ -1,9 +1,10 @@
 @extends('admin.layouts.app')
+
 @section('head')
     <script src="/ckeditor/ckeditor.js"></script>
     <style>
         .form-file-group{
-            width: 100%;
+            width: 82%;
             border: 2px dashed #000;
         }
         .form-file-group p {
@@ -13,31 +14,33 @@
         }
     </style>
 @endsection
+
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">cập nhật sản phẩm</h4>
+            <h4 class="card-title">Cập nhật sản phẩm</h4>
             <div class="basic-form">
-                <form action="{{ route('product.update',['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Tên sản phẩm</label>
                         <div class="col-sm-10">
-                            <input type="text " class="form-control" name="name" value="{{ $product->name }}" placeholder="Nhập tên sản phâm">
+                            <input type="text" class="form-control" name="name" value="{{ $product->name }}" placeholder="Nhập tên sản phâm">
                             @error('name')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Danh mục</label>
-                        <div  class="col-sm-10">
-                            <select class="select-form" name="category_id" >
-                                <option >Select a Category</option>
-                                @foreach ($categories as $item )
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 col-form-label">Danh mục</label>
+                        <div class="col-sm-10 form-group">
+                            <select class="form-control" name="category_id" >
+                                <option >Select a Category</option>
+                                @foreach ($categories as $category )
+                                    <option value="{{ $category->id }}" {{ $product->category->id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -45,7 +48,8 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Mã sản phẩm</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="sku" value="{{ $product->sku }}" placeholder="Nhập Mã sản phẩm">
@@ -54,7 +58,8 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Số lượng</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="stock" value="{{ $product->stock }}" placeholder="Nhập số lượng	">
@@ -63,16 +68,18 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Mô tả</label>
                         <div class="col-sm-10">
-                            <textarea type="text" class="form-control" id="editor" name="description" value="{{ $product->description }}" placeholder="Nhập mô tả"></textarea>
+                            <textarea type="text" class="form-control" id="editor" name="description" placeholder="Nhập mô tả">{{ $product->description }}</textarea>
                             @error('description')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Giá Gốc</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="original_price" value="{{ $product->original_price }}" placeholder="Nhập giá góc">
@@ -81,7 +88,8 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Giá Bán</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="selling_price" value="{{ $product->selling_price }}" placeholder="Nhập giá bán">
@@ -90,16 +98,18 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-form-label">Hình ảnh:</label>
                         <div class="col-sm-10">
                             <img src="{{( 'storage/'.$product->image) }}" alt="{{ $product->name }}"
-                                 class="rounded avatar-xs" width="50px" height="50px">
+                                 class="img-fluid">
                         </div>
                     </div>
-                    <div class="form-group row">
+
+                    <div class="form-group">
                         <div class="mb-3">
-                            <label for="editor" class="form-label">Chọn ảnh thay the: </label>
+                            <label for="editor" class="form-label">Chọn ảnh thay thế: </label>
                             <div class="form-file-group">
                                 <input type="file" name="image" style="display: none" id="file-upload"
                                        onchange="previewFile(this)">
@@ -118,21 +128,10 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Chọn nhiều ảnh:</label>
 
-                        <input type="file" accept="image/*" name="product_image[]" multiple  >
-
-                        @error('product_image.*')
-                        <span class="text-xs text-red-600" role="alert">
-                            <strong>{{ $message }}</strong>
-
-                        @enderror
-
-                    </div>
-                    <div class="form-group row">
+                    <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="submit" class="btn btn-dark">Create</button>
+                            <button type="submit" class="btn btn-dark">Cập nhật</button>
                         </div>
                     </div>
                 </form>
