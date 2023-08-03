@@ -1,32 +1,18 @@
 @extends('admin.layouts.app')
 
-@section('head')
-    <script src="/ckeditor/ckeditor.js"></script>
-    <style>
-        .form-file-group{
-            width: 82%;
-            border: 2px dashed #000;
-        }
-        .form-file-group p {
-            width: 100%;
-            text-align: center;
-            line-height: 170px;
-        }
-    </style>
-@endsection
+@section('title','Cập nhật sản phẩm')
 
 @section('content')
+    <div>  <h4 class="card-title text-uppercase">Cập nhật sản phẩm: {{ $product->name }}</h4></div>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Cập nhật sản phẩm</h4>
             <div class="basic-form">
                 <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Tên sản phẩm</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Tên sản phẩm: </strong></label>
+                        <div >
                             <input type="text" class="form-control" name="name" value="{{ $product->name }}" placeholder="Nhập tên sản phâm">
                             @error('name')
                             <span class="text-danger"> {{ $message }}</span>
@@ -35,8 +21,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Danh mục</label>
-                        <div class="col-sm-10 form-group">
+                        <label class="form-label"> <strong>Danh mục:</strong></label>
+                        <div class="form-group">
                             <select class="form-control" name="category_id" >
                                 <option >Select a Category</option>
                                 @foreach ($categories as $category )
@@ -50,8 +36,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Mã sản phẩm</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Mã sản phẩm: </strong></label>
+                        <div >
                             <input type="text" class="form-control" name="sku" value="{{ $product->sku }}" placeholder="Nhập Mã sản phẩm">
                             @error('sku')
                             <span class="text-danger"> {{ $message }}</span>
@@ -60,8 +46,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Số lượng</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Số lượng</strong></label>
+                        <div >
                             <input type="text" class="form-control" name="stock" value="{{ $product->stock }}" placeholder="Nhập số lượng	">
                             @error('stock')
                             <span class="text-danger"> {{ $message }}</span>
@@ -70,8 +56,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Mô tả</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Mô tả: </strong></label>
+                        <div >
                             <textarea type="text" class="form-control" id="editor" name="description" placeholder="Nhập mô tả">{{ $product->description }}</textarea>
                             @error('description')
                             <span class="text-danger"> {{ $message }}</span>
@@ -80,8 +66,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Giá Gốc</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Giá Gốc:</strong></label>
+                        <div >
                             <input type="text" class="form-control" name="original_price" value="{{ $product->original_price }}" placeholder="Nhập giá góc">
                             @error('original_price')
                             <span class="text-danger"> {{ $message }}</span>
@@ -90,8 +76,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Giá Bán</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Giá Bán:</strong></label>
+                        <div >
                             <input type="text" class="form-control" name="selling_price" value="{{ $product->selling_price }}" placeholder="Nhập giá bán">
                             @error('selling_price')
                             <span class="text-danger"> {{ $message }}</span>
@@ -100,17 +86,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Hình ảnh:</label>
-                        <div class="col-sm-10">
-                            <img src="{{( 'storage/'.$product->image) }}" alt="{{ $product->name }}"
+                        <label class="form-label"><strong>Hình ảnh:</strong></label>
+                        <div >
+                            <img src="{{( 'storage/'.$product->image) }}" alt="{{ $product->name }}" height="100px" width="100px"
                                  class="img-fluid">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="editor" class="form-label">Chọn ảnh thay thế: </label>
-                            <div class="form-file-group">
+                            <label for="editor" class="form-label"><strong>Chọn ảnh thay thế: </strong></label>
+                            <div class=" form-file-group">
                                 <input type="file" name="image" style="display: none" id="file-upload"
                                        onchange="previewFile(this)">
                                 <p onclick="document.querySelector('#file-upload').click()">
@@ -130,9 +116,7 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-10">
                             <button type="submit" class="btn btn-dark">Cập nhật</button>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -141,26 +125,3 @@
 
 @endsection
 
-@section('footer')
-    <script>
-        CKEDITOR.replace( 'editor' );
-
-        function previewFile(input){
-            let file = $("input[type=file]").get(0).files[0];
-            if(file){
-                let reader = new FileReader();
-                reader.onload = function (){
-                    $("#previewImg").attr('src', reader.result);
-                    $("#previewBox").css('display', 'block');
-                }
-                $(".form-file-group").css('display', 'none');
-                reader.readAsDataURL(file);
-            }
-        }
-        function removePreview(){
-            $("#previewImg").attr('src',"");
-            $("#previewBox").css('display', 'none');
-            $(".form-file-group").css('display', 'block');
-        }
-    </script>
-@endsection

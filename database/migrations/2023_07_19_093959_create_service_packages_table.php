@@ -12,8 +12,8 @@ return new class () extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->double( 'original_price');
-            $table->double( 'selling_price');
+            $table->double( 'original_price')->nullable();
+            $table->double( 'selling_price')->nullable();
             $table->string('image');
             $table->timestamps();
         });

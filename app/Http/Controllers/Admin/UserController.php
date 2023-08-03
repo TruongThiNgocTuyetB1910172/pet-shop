@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $users= User::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
 
-        return view('admin.users.index',compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function create(): View

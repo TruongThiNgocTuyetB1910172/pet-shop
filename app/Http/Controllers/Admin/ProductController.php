@@ -94,7 +94,7 @@ class ProductController extends Controller
             'selling_price' => $data['selling_price'],
         ]);
 
-        toast('Cập nhật sản phẩm ' . $product->name . 'thành công','success');
+        toast('Cập nhật sản phẩm ' . $product->name . ' thành công','success');
 
         return redirect('products');
     }
@@ -109,7 +109,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        toast('Xóa sản phẩm ' . $product->name . 'thành công','success');
+        toast('Xóa sản phẩm ' . $product->name . ' thành công','success');
 
         return redirect('products');
     }

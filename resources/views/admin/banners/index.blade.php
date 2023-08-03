@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+
+@section('title', 'Danh sách banner')
+
 @section('content')
     <div class="mb-3">
         <a href="{{ route('banner.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Thêm Banner</a>
@@ -6,6 +9,10 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
+                <div >
+                    <h4>Danh sách banner</h4>
+                    <hr>
+                </div>
                 <table class="table">
                     <thead>
                     <tr>

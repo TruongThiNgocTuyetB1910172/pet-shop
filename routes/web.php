@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ServicePackageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\CategoryController;
 use  \App\Http\Controllers\Admin\ProductController;
 use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\BannerController;
+use \App\Http\Controllers\Admin\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,4 +59,18 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-banner/{id}', [BannerController::class ,'edit'] )->name('banner.edit');
     Route::put('update-banner/{id}', [BannerController::class ,'update'] )->name('banner.update');
     Route::get('delete-banner/{id}', [BannerController::class ,'destroy'] )->name('banner.destroy');
+
+    Route::get('services', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('create-service', [ServiceController::class ,'create'] )->name('service.create');
+    Route::post('store-service', [ServiceController::class ,'store'] )->name('service.store');
+    Route::get('edit-service/{id}', [ServiceController::class ,'edit'] )->name('service.edit');
+    Route::put('update-service/{id}', [ServiceController::class ,'update'] )->name('service.update');
+    Route::get('delete-service/{id}', [ServiceController::class ,'destroy'] )->name('service.destroy');
+
+    Route::get('package-services', [ServicePackageController::class, 'index'])->name('package-service.index');
+    Route::get('create-package-service', [ServicePackageController::class ,'create'] )->name('package-service.create');
+    Route::post('store-package-service', [ServicePackageController::class ,'store'] )->name('package-service.store');
+    Route::get('edit-package-service/{id}', [ServicePackageController::class ,'edit'] )->name('package-service.edit');
+    Route::put('update-package-service/{id}', [ServicePackageController::class ,'update'] )->name('package-service.update');
+    Route::get('delete-package-service/{id}', [ServicePackageController::class ,'destroy'] )->name('package-service.destroy');
 });
