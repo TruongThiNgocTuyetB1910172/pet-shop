@@ -21,12 +21,12 @@
                 <div class="form-input-content">
                     <div class="card login-form mb-0">
                         <div class="card-body pt-5">
-                            <h4 class="text-center ">Reset Password</h4>
+                            <h4 class="text-center text-uppercase ">Đặt lại mật khẩu</h4>
                             <form method="POST" action="{{ route('password.email') }}">
                                 @csrf
 
                                 <div class="form-group">
-                                    <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                                    <label for="email" class="form-label"><strong>{{ __('Địa chỉ email: ') }}</strong></label>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -37,7 +37,7 @@
                                 <div >
                                     <div >
                                         <button type="submit" class="btn btn-primary w-100">
-                                            {{ __('Send Password Reset Link') }}
+                                            {{ __('Gửi liên kết đặt lại mật khẩu') }}
                                         </button>
                                     </div>
                                 </div>

@@ -28,12 +28,12 @@
                 <div class="form-input-content">
                     <div class="card login-form mb-0">
                         <div class="card-body pt-5">
-                            <h4 class="text-center ">ĐĂNG NHẬP</h4>
+                            <h4 class="text-center text-uppercase ">ĐĂNG NHẬP</h4>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 
                                 <div class="form-group">
-                                    <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                                    <label for="email" class="form-label"><strong>{{ __('Địa chỉ email:') }}</strong></label>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password" class="form-label">{{ __('Password') }}</label>
+                                    <label for="password" class="form-label"><strong>{{ __('Mật khẩu:') }}</strong></label>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                             <label class="form-check-label" for="remember">
-                                                {{ __('Remember Me') }}
+                                                {{ __('Ghi nhớ tôi') }}
                                             </label>
                                         </div>
                                     </div>
@@ -64,14 +64,14 @@
 
                                 <div >
                                     <button type="submit" class="btn btn-primary w-100" >
-                                        {{ __('Login') }}
+                                        {{ __('Đăng nhập') }}
                                     </button>
                                 </div>
 
                                 <div >
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link mt-3" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('Quên mật khẩu ?') }}
                                         </a>
                                     @endif
                                 </div>
