@@ -20,6 +20,27 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label"> <strong>Danh mục loai:</strong></label>
+                        <div class="form-check mt-3 ">
+                            <label class="form-check-label">
+                                @foreach($animal_details as $animal_detail)
+                                    <div class="form-check mt-3 ">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" value="{{ $animal_detail->id }}" name="animal_ids">
+                                            {{ $animal_detail->animal->name }}: giống ({{ $animal_detail->variant }}) - cân nặng({{ $animal_detail->weight }})
+
+                                            @error('animal_ids')
+                                            <span class="text-danger"> {{ $message }}</span>
+                                            @enderror
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
                         <label class="form-label"><strong>Mô tả:</strong></label>
                         <div>
                             <textarea type="text" class="form-control" id="editor" name="description" placeholder="Nhập mô tả"></textarea>
@@ -30,20 +51,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label"><strong>Giá Gốc:</strong></label>
+                        <label class="form-label"><strong>Giá:</strong></label>
                         <div>
-                            <input type="text" class="form-control" name="original_price" placeholder="Nhập giá gốc">
-                            @error('original_price')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label"><strong>Giá Bán:</strong></label>
-                        <div>
-                            <input type="text" class="form-control" name="selling_price" placeholder="Nhập giá bán">
-                            @error('selling_price')
+                            <input type="text" class="form-control" name="price" placeholder="Nhập giá bán">
+                            @error('price')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
                         </div>

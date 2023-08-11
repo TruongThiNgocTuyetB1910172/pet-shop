@@ -7,4 +7,6 @@
 <script>
     CKEDITOR.replace('editor');
 </script>
+
+@livewireScripts
 @yield('footer')

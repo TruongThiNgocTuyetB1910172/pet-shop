@@ -24,9 +24,15 @@ class ServicePackageController extends Controller
         return view('admin.service-packages.index', compact('servicePackages'));
     }
 
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
         $services = Service::all();
+
+        if ($services->count() === 0) {
+            toast('Vui lòng thêm dịch vụ trước khi thêm mới gói dịch vụ');
+
+            return redirect()->route('service.create');
+        }
 
         return view('admin.service-packages.create', compact('services'));
     }

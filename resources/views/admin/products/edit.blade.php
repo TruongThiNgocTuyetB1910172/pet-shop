@@ -115,6 +115,16 @@
                         </div>
                     </div>
 
+                    <div class="mt-6">
+                        @foreach($product->productImages as $image)
+                           <div class="mt-6">
+                               <img src="{{ $image->image }}" alt="{{ $product->name }}">
+
+                               <span onclick="return confirm('Are you sure?')"><a href="{{ route('product.delete-image', ['id' => $image->id]) }}">Xoa</a></span>
+                           </div>
+                        @endforeach
+                    </div>
+
                     <div class="form-group">
                             <button type="submit" class="btn btn-dark">Cập nhật</button>
                     </div>

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AnimalDetailController ;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServicePackageController;
+use App\Http\Controllers\Client\ClientController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\CategoryController;
@@ -9,6 +12,9 @@ use  \App\Http\Controllers\Admin\ProductController;
 use \App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\BannerController;
 use \App\Http\Controllers\Admin\ServiceController;
+use \App\Http\Controllers\Admin\AppointmentController;
+use \App\Http\Controllers\Client\ProductContronller;
+use \App\Http\Controllers\Client\ServiceContronller;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +33,10 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [ClientController::class, 'index']) ->name('home');
+Route::get('products_list',[ProductContronller::class, 'index'])->name('product-list.index');
+Route::get('service_list',[ServiceContronller::class, 'index'])->name('service-list.index');
 
 Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function (){
     Route::get('/dashboard', [HomeController::class ,'index']);
@@ -45,6 +54,7 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-product/{id}', [ProductController::class ,'edit'] )->name('product.edit');
     Route::put('update-product/{id}', [ProductController::class ,'update'] )->name('product.update');
     Route::get('delete-product/{id}', [ProductController::class ,'destroy'] )->name('product.destroy');
+    Route::get('delete-product-image/{id}', [ProductController::class ,'deleteProductImage'] )->name('product.delete-image');
 
     Route::get('users', [UserController::class ,'index'] )->name('user.index');
     Route::get('create-user', [UserController::class ,'create'] )->name('user.create');
@@ -52,6 +62,8 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-user/{id}', [UserController::class ,'edit'] )->name('user.edit');
     Route::put('update-user/{id}', [UserController::class ,'update'] )->name('user.update');
     Route::put('update-user-password/{id}', [UserController::class ,'updatePassword'] )->name('user.update-password');
+
+    Route::get('profiles', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::get('banners', [BannerController::class, 'index'])->name('banner.index');
     Route::get('create-banner', [BannerController::class ,'create'] )->name('banner.create');
@@ -73,4 +85,21 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-package-service/{id}', [ServicePackageController::class ,'edit'] )->name('package-service.edit');
     Route::put('update-package-service/{id}', [ServicePackageController::class ,'update'] )->name('package-service.update');
     Route::get('delete-package-service/{id}', [ServicePackageController::class ,'destroy'] )->name('package-service.destroy');
+
+    Route::get('appointments', [AppointmentController::class, 'index'])->name('appointment.index');
+    Route::get('create-appointment', [AppointmentController::class ,'create'] )->name('appointment.create');
+    Route::post('store-appointment', [AppointmentController::class ,'store'] )->name('appointment.store');
+    Route::get('edit-appointment/{id}', [AppointmentController::class ,'edit'] )->name('appointment.edit');
+    Route::put('update-appointment/{id}', [AppointmentController::class ,'update'] )->name('appointment.update');
+    Route::get('delete-appointment/{id}', [AppointmentController::class ,'destroy'] )->name('appointment.destroy');
+
+    Route::get('animal-details', [AnimalDetailController::class, 'index'])->name('animal-detail.index');
+    Route::get('create-animal-detail', [AnimalDetailController::class ,'create'] )->name('animal-detail.create');
+    Route::post('store-animal-detail', [AnimalDetailController::class ,'store'] )->name('animal-detail.store');
+    Route::get('edit-animal-detail/{id}', [AnimalDetailController::class ,'edit'] )->name('animal-detail.edit');
+    Route::put('update-animal-detail/{id}', [AnimalDetailController::class ,'update'] )->name('animal-detail.update');
+    Route::get('delete-animal-detail/{id}', [AnimalDetailController::class ,'destroy'] )->name('animal-detail.destroy');
+
+
 });
+

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reset password</title>
+    <title>Cập nhật mật khẩu</title>
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 
 </head>
@@ -31,11 +31,12 @@
                             <h4 class="text-center text-uppercase">Cập nhật mật khẩu</h4>
                             <form method="POST" action="{{ route('password.update') }}">
                                 @csrf
+
                                 <input type="hidden" name="token" value="{{ $token }}">
 
                                 <div class="form-group">
                                     <label for="email" class="form-label"> <strong>{{ __('Địa chỉ email:') }}</strong></label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email }}" required autocomplete="email" autofocus readonly>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

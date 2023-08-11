@@ -10,6 +10,7 @@ use App\Traits\ImageTrait;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -35,12 +36,11 @@ class ProductController extends Controller
 
     public function store(CreateProductRequest $request): RedirectResponse
     {
-
         $data = $request->validated();
 
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
-        $product = Product::query()->create([
+        $product = Product::create([
             'name' => $data['name'],
             'description' => $data['description'],
             'stock' => $data['stock'],
@@ -50,6 +50,21 @@ class ProductController extends Controller
             'category_id' => $data['category_id'],
             'image' => $data['image'],
         ]);
+
+
+        if (isset($data['product_image'])) {
+            $images = $data['product_image'];
+
+            foreach ($images as $image) {
+                $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move('images/', $fileName);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => 'images/' . $fileName,
+                ]);
+            }
+        }
 
         toast('Thêm mới sản phẩm ' . $product->name .' thành công','success');
 
@@ -107,9 +122,27 @@ class ProductController extends Controller
 
         $this->deleteImage($image);
 
+        foreach ($product->productImages as $image) {
+            File::delete($image->image);
+            $image->delete();
+        }
+
         $product->delete();
 
         toast('Xóa sản phẩm ' . $product->name . ' thành công','success');
+
+        return redirect('products');
+    }
+
+    public function deleteProductImage(string $id): RedirectResponse
+    {
+        $image = ProductImage::findOrFail($id);
+
+        File::delete($image->image);
+
+        $image->delete();
+
+        toast('Xóa ảnh thành công','success');
 
         return redirect('products');
     }

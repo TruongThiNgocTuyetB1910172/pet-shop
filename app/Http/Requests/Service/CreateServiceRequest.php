@@ -11,9 +11,9 @@ class CreateServiceRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
-            'original_price' => ['required', 'integer', 'min:0'],
-            'selling_price' => ['required', 'integer', 'min:0'],
+            'price' => ['required', 'min:0'],
             'image' => ['required', 'image', 'max:4096'],
+            'animal_ids' => ['nullable'],
         ];
     }
 }

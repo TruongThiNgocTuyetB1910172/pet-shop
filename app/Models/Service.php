@@ -14,8 +14,7 @@ class Service extends Model
     protected $fillable = [
         'name',
         'description',
-        'original_price',
-        'selling_price',
+        'price',
         'image',
     ];
 
@@ -23,6 +22,12 @@ class Service extends Model
     {
         return $this->belongsToMany(Service::class, 'service_service_packages', 'service_id', 'service_package_id')
             ->withTimestamps();
+    }
+
+    public function animalDetail(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class,'animal_detail_services','service_id','animal_detail_id')
+            ->withTimestamps();;
     }
 
     public static function getServiceById(string $id): Model|Collection|Builder|array|null

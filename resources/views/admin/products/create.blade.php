@@ -20,12 +20,12 @@
                     </div>
 
                     <div class="form-group">
-                        <labelform-label"><strong>Danh mục: </strong></label>
+                        <label class="form-control"><strong>Danh mục: </strong></label>
                         <div >
                             <select class="select-form" name="category_id" >
                                 <option value="">Select a Category</option>
-                                @foreach ($categories as $item )
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @foreach ($categories as $category )
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
 
                                 @endforeach
                             </select>
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label form-label"><strong>Số lượng: </strong></label>
+                        <label class="form-label"><strong>Số lượng: </strong></label>
                         <div>
                             <input type="text" class="form-control" name="stock" placeholder="Nhập số lượng	">
                             @error('stock')
@@ -106,6 +106,8 @@
                             @enderror
                         </div>
                     </div>
+
+                    <input type="file" name="product_image[]" multiple>
 
                     <div class="form-group">
                             <button type="submit" class="btn btn-dark">Thêm mới</button>

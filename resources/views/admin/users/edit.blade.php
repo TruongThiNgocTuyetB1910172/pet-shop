@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+
+@section('title','Cập nhât người dùng')
+
 @section('content')
     <div><h4 class="card-title text-uppercase">Cập nhật người dùng: {{ $user->name }}</h4></div>
     <form action="{{ route('user.update', ['id' => $user->id]) }}" method="POST">

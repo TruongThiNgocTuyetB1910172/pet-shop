@@ -31,7 +31,7 @@
                     @if($products->count() > 0)
                         @foreach ($products as $product)
                             <tr>
-                                <th>{{ $product->id }}</th>
+                                <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td><img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                                          width="50px" height="50px"></td>

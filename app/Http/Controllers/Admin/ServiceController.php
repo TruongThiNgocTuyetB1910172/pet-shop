@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Service\CreateServiceRequest;
 use App\Http\Requests\Service\UpdateServiceRequest;
+use App\Models\Animal;
+use App\Models\AnimalDetail;
 use App\Models\Service;
 use App\Traits\ImageTrait;
 use Illuminate\Http\RedirectResponse;
@@ -25,12 +27,12 @@ class ServiceController extends Controller
 
     public function create(): View
     {
-        return view('admin.services.create');
+        $animal_details = AnimalDetail::all();
+        return view('admin.services.create',compact('animal_details'));
     }
 
     public function store(CreateServiceRequest $request): RedirectResponse
     {
-
         $data = $request->validated();
 
         $data['image'] = $this->uploadImage($request, 'image', 'images');
@@ -38,10 +40,15 @@ class ServiceController extends Controller
         $services = Service::query()->create([
             'name' => $data['name'],
             'description' => $data['description'],
-            'original_price' => $data['original_price'],
-            'selling_price' => $data['selling_price'],
             'image' => $data['image'],
         ]);
+
+        $services->animalDetail()->attach(
+            $data['animal_ids'],
+            [
+                'price' => $data['price'],
+            ]
+        );
 
         toast('Thêm mới dịch vụ ' . $services->name .' thành công','success');
 
