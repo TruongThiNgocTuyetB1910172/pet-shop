@@ -1,6 +1,6 @@
 <script src="client/js/library/jquery.min.js"></script>
 <script src="client/js/library/bootstrap.min.js"></script>
-<script src="client/js/function-check-viewport.js"></script>
+<script src="js/function-check-viewport.js"></script>
 <script src="client/js/library/slick.min.js"></script>
 <script src="client/js/library/select2.full.min.js"></script>
 <script src="client/js/library/imagesloaded.pkgd.min.js"></script>
@@ -12,6 +12,22 @@
 <script src="client/js/library/in-view.min.js"></script>
 <script src="client/js/library/countUp.js"></script>
 <script src="client/js/library/animsition.min.js"></script>
+<script src="client/js/global.js"></script>
+<script src="client/js/config-mm-menu.js"></script>
+<script src="client/js/config-carousel.js"></script>
+<script src="client/js/config-carousel-thumbnail.js"></script>
+<script src="client/js/config-carousel-product-quickview.js"></script>
+
+<script src="client/js/config-banner-slider-2.js"></script>
+<script src="client/js/config-mm-menu.js"></script>
+<script src="client/js/config-set-bg-blog-thumb.js"></script>
+<script src="client/js/config-isotope-product-home-1.js"></script>
+<script type="text/javascript" src="client/js/config-youtube-post.js"></script>
+<script src="client/js/config-isotope-product-home-2.js"></script>
+<script src="client/js/config-carousel-product-quickview.js"></script>
+
+<script src="client/js/demo-add-to-cart.js"></script>
+
 <link rel="stylesheet" type="text/css" href="client/revolution/css/settings.css" />
 <link rel="stylesheet" type="text/css" href="client/revolution/css/layers.css" />
 <link rel="stylesheet" type="text/css" href="client/revolution/css/navigation.css" />
@@ -30,21 +46,4 @@
 <script src="client/js/config-banner-slider-2.js"></script>
 <script src="client/js/config-mm-menu.js"></script>
 <script src="client/js/config-set-bg-blog-thumb.js"></script>
-<script src="client/js/config-isotope-product-home-1.js">
-
-
-</script>
-<script type="text/javascript" src="js/config-youtube-post.js">
-
-
-</script>
-<script src="js/config-isotope-product-home-2.js">
-
-
-</script>
-<script src="js/config-carousel-product-quickview.js"></script>
-
-<script src="js/demo-add-to-cart.js">
-
-
-</script>
+<script src="client/js/config-isotope-product-home-1.js"></script>

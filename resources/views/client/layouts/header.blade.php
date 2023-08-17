@@ -1,4 +1,5 @@
 <head>
+    <base href="/">
     <title>Home</title>
     <meta charset="utf-8" />
     <meta name="description" content="" />

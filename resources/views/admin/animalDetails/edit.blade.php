@@ -25,18 +25,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label"><strong>Giống loài:</strong></label>
-                    <div>
-                        <input type="text" class="form-control" name="variant" value="{{$animalDetails->variant}}" placeholder="Nhập giống loài">
-                        @error('variant')
-                        <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-label"><strong>Cân nặng:</strong></label>
                     <div>
                         <input type="text" class="form-control" name="weight" value="{{$animalDetails->weight}}" placeholder="Nhập số cân">

@@ -9,7 +9,7 @@
     <section class="box-sm">
         <div class="container">
             <div class="heading-wrapper text-center">
-                <h3 class="heading-style-2">Sản phẩm của chúng tôi</h3>
+                <h3 class="heading-style-2">Dịch vụ của chúng tôi</h3>
             </div>
 
             <div class="row main">
@@ -19,7 +19,7 @@
                             <div class="product product-style-1">
                                 <div class="img-wrapper">
                                     <a href="#">
-                                        <img style="height:350px"  src="{{( 'storage/'.$service->image) }}"  alt="product thumbnail" />
+                                        <img style="height:280px"  src="{{( 'storage/'.$service->image) }}"  alt="product thumbnail" />
                                     </a>
                                     <div class="product-control-wrapper bottom-right">
                                         <div class="wrapper-control-item">
@@ -32,6 +32,7 @@
                                                 <span class="lnr lnr-heart"></span>
                                             </a>
                                         </div>
+
                                         <div class="wrapper-control-item item-add-cart js-action-add-cart">
                                             <a class="animate-icon-cart" href="#">
                                                 <span class="lnr lnr-cart"></span>
@@ -46,7 +47,7 @@
                                     <h3>
                                         <a class="product-name" href="product-detail.html">{{$service->name}}</a>
                                     </h3>
-                                    <span class="price">{{ CurrencyHelper::format($service->selling_price) }}</span>
+
                                 </figcaption>
                             </div>
                         </figure>

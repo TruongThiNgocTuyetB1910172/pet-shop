@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <div >
-                    <h4>Danh sách chi tiet</h4>
+                    <h4>Danh sách loài</h4>
                     <hr>
                 </div>
                 <table class="table">
@@ -17,7 +17,6 @@
                     <tr>
                         <th>Id</th>
                         <th>Danh mục loài</th>
-                        <th>Giống loài</th>
                         <th>Cân nặng</th>
                         <th>Ngày thêm</th>
                         <th>Hành động</th>
@@ -29,7 +28,6 @@
                             <tr>
                                 <td>{{ $animal_detail->id }}</td>
                                 <td>{{ $animal_detail->animal->name }}</td>
-                                <td>{{ $animal_detail->variant }}</td>
                                 <td>{{ $animal_detail->weight }}</td>
                                 <td>{{ $animal_detail->created_at->format('d') }} - {{ $animal_detail->created_at->format('m') }} -
                                     {{ $animal_detail->created_at->format('Y') }}

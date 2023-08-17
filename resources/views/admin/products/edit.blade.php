@@ -24,7 +24,7 @@
                         <label class="form-label"> <strong>Danh mục:</strong></label>
                         <div class="form-group">
                             <select class="form-control" name="category_id" >
-                                <option >Select a Category</option>
+                                <option >Chọn danh mục</option>
                                 @foreach ($categories as $category )
                                     <option value="{{ $category->id }}" {{ $product->category->id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
@@ -62,6 +62,19 @@
                             @error('description')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"> <strong>Nỗi bật: </strong></label>
+                        <div class="d-flex">
+                            <div class="justify-content-center align-content-center">
+                                <input type="radio" id="is_active" name="feature" value="1" @if($product->feature == 1) checked @endif>
+                                <label for="is_active">SP nỗi bật</label><br></div>
+                            <div class="justify-content-center align-content-center ml-5">
+                                <input type="radio" id="is_block" name="feature" value="0" @if($product->feature == 0) checked @endif>
+                                <label for="is_block">SP thường</label><br>
+                            </div>
                         </div>
                     </div>
 
@@ -115,17 +128,26 @@
                         </div>
                     </div>
 
-                    <div class="mt-6">
-                        @foreach($product->productImages as $image)
-                           <div class="mt-6">
-                               <img src="{{ $image->image }}" alt="{{ $product->name }}">
+                    <div class="form-group">
+                        <label for="editor" class="form-label"><strong>Ảnh phụ: </strong></label>
+                        <div class="mt-6">
+                            @foreach($product->productImages as $image)
+                                <div class="mt-6">
+                                    <img src="{{ $image->image }}" height="100px" width="100px" alt="photo">
 
-                               <span onclick="return confirm('Are you sure?')"><a href="{{ route('product.delete-image', ['id' => $image->id]) }}">Xoa</a></span>
-                           </div>
-                        @endforeach
+                                    <span onclick="return confirm('Are you sure?')"><a href="{{ route('product.delete-image', ['id' => $image->id]) }}">Xóa</a></span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editor" class="form-label"><strong>Chọn ảnh phụ thay thế: </strong></label>
+                        <div class="mb-3">
+                            <input type="file" name="product_image[]" multiple>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                             <button type="submit" class="btn btn-dark">Cập nhật</button>
                     </div>
                 </form>

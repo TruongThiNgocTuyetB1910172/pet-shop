@@ -20,13 +20,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-control"><strong>Danh mục: </strong></label>
-                        <div >
-                            <select class="select-form" name="category_id" >
-                                <option value="">Select a Category</option>
+                        <label class="form-label"> <strong>Danh mục:</strong></label>
+                        <div class="form-group">
+                            <select class="form-control" name="category_id" >
+                                <option >Chọn danh mục</option>
                                 @foreach ($categories as $category )
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-
+                                    <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -38,7 +37,7 @@
                     <div class="form-group">
                         <label class="form-label"><strong>Mã sản phẩm: </strong></label>
                         <div >
-                            <input type="text" class="form-control" name="sku" placeholder="Nhập Mã sản phẩm	">
+                            <input type="number" class="form-control" name="sku" placeholder="Nhập Mã sản phẩm	">
                             @error('sku')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
@@ -48,7 +47,7 @@
                     <div class="form-group">
                         <label class="form-label"><strong>Số lượng: </strong></label>
                         <div>
-                            <input type="text" class="form-control" name="stock" placeholder="Nhập số lượng	">
+                            <input type="number" class="form-control" name="stock" placeholder="Nhập số lượng	">
                             @error('stock')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
@@ -62,6 +61,19 @@
                             @error('description')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"> <strong>Nổi bật:</strong></label>
+                        <div class="d-flex">
+                            <div class="justify-content-center align-content-center">
+                                <input type="radio" name="feature" value="1">
+                                <label for="is_active">Sp nổi bật</label><br></div>
+                            <div class="justify-content-center align-content-center ml-5">
+                                <input type="radio" name="feature" value="0">
+                                <label for="is_block">Sp thường</label><br>
+                            </div>
                         </div>
                     </div>
 
@@ -107,10 +119,12 @@
                         </div>
                     </div>
 
-                    <input type="file" name="product_image[]" multiple>
+                    <div class="mb-3">
+                        <input type="file" name="product_image[]" multiple>
+                    </div>
 
                     <div class="form-group">
-                            <button type="submit" class="btn btn-dark">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
                     </div>
                 </form>
             </div>

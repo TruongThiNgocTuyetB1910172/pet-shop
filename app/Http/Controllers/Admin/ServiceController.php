@@ -10,6 +10,7 @@ use App\Models\AnimalDetail;
 use App\Models\Service;
 use App\Traits\ImageTrait;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ServiceController extends Controller
@@ -28,38 +29,38 @@ class ServiceController extends Controller
     public function create(): View
     {
         $animal_details = AnimalDetail::all();
-        return view('admin.services.create',compact('animal_details'));
+
+        $services = Service::all();
+
+        return view('admin.services.create',compact('animal_details','services'));
     }
 
     public function store(CreateServiceRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $data['image'] = $this->uploadImage($request, 'image', 'images');
+            $data['image'] = $this->uploadImage($request, 'image', 'images');
 
-        $services = Service::query()->create([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'image' => $data['image'],
-        ]);
+            $services = Service::query()->create([
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'image' => $data['image'],
+            ]);
 
-        $services->animalDetail()->attach(
-            $data['animal_ids'],
-            [
-                'price' => $data['price'],
-            ]
-        );
 
-        toast('Thêm mới dịch vụ ' . $services->name .' thành công','success');
+        toast('Thêm mới dịch vụ ' . $services->name . ' thành công', 'success');
 
         return redirect('services');
+
     }
 
     public function edit(string $id): View
     {
+        $animal_details = AnimalDetail::all();
+
         $service = Service::getServiceById($id);
 
-        return view('admin.services.edit',compact('service'));
+        return view('admin.services.edit',compact('service','animal_details'));
     }
 
     public function update(UpdateServiceRequest $request,string $id): RedirectResponse
@@ -84,9 +85,8 @@ class ServiceController extends Controller
             'name' => $data['name'],
             'description' => $data['description'],
             'image' => $data['image'],
-            'original_price' => $data['original_price'],
-            'selling_price' => $data['selling_price'],
         ]);
+
 
         toast('Cập nhật dịch vụ' . $service->name . ' thành công','success');
 

@@ -18,7 +18,6 @@
                         <th>Id</th>
                         <th>Tên dịch vụ</th>
                         <th>Hình ảnh</th>
-                        <th>Giá bán</th>
                         <th>Ngày thêm</th>
                         <th>Hành động</th>
                     </tr>
@@ -31,7 +30,6 @@
                                 <td>{{ $service->name }}</td>
                                 <td><img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}"
                                          width="50px" height="50px"></td>
-                                <td>{{ CurrencyHelper::format($service->selling_price) }}</td>
                                 <td>{{$service->created_at->format('d')}} - {{$service->created_at->format('m')}} -
                                     {{$service->created_at->format('Y')}}
                                     <small>{{ $service->created_at->format('g:i A') }}</small></td>

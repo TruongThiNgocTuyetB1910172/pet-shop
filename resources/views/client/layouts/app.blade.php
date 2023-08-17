@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
-                    <a class="control" href="#">
+                    <a class="control" href="{{ route('cart-list.index') }}">
                         <p class="counter">0</p>
                         <span class="lnr lnr-bag"></span>
                     </a>

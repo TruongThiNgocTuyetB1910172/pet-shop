@@ -18,22 +18,21 @@ class AnimalDetailController extends Controller
     {
         $animal_details = AnimalDetail::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
 
-        return view('admin.animal-details.index',compact('animal_details'));
+        return view('admin.animalDetails.index',compact('animal_details'));
     }
 
     public function create(): View
     {
         $animals = Animal::all();
 
-        return view('admin.animal-details.create',compact('animals'));
+        return view('admin.animalDetails.create',compact('animals'));
     }
 
     public function store(CreateAnimalDetailRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        AnimalDetail::query()->create([
-            'variant' => $data['variant'],
+        AnimalDetail::create([
             'weight' => $data['weight'],
             'animal_id' => $data['animal_id'],
         ]);
@@ -49,7 +48,7 @@ class AnimalDetailController extends Controller
 
         $animals = Animal::all();
 
-        return view('admin.animal-details.edit',compact('animalDetails','animals'));
+        return view('admin.animalDetails.edit',compact('animalDetails','animals'));
 
     }
 
@@ -60,7 +59,6 @@ class AnimalDetailController extends Controller
         $animalDetail = AnimalDetail::getAnimalDetailById($id);
 
         $animalDetail->update([
-            'variant' => $data['variant'],
             'weight' => $data['weight'],
             'animal_id' => $data['animal_id'],
         ]);

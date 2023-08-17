@@ -49,6 +49,7 @@ class ProductController extends Controller
             'sku' => $data['sku'],
             'category_id' => $data['category_id'],
             'image' => $data['image'],
+            'feature' => $data['feature'],
         ]);
 
 
@@ -107,7 +108,22 @@ class ProductController extends Controller
             'image' => $data['image'],
             'original_price' => $data['original_price'],
             'selling_price' => $data['selling_price'],
+            'feature' => $data['feature'],
         ]);
+
+        if (isset($data['product_image'])) {
+            $images = $data['product_image'];
+
+            foreach ($images as $image) {
+                $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move('images/', $fileName);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => 'images/' . $fileName,
+                ]);
+            }
+        }
 
         toast('Cập nhật sản phẩm ' . $product->name . ' thành công','success');
 
@@ -144,6 +160,6 @@ class ProductController extends Controller
 
         toast('Xóa ảnh thành công','success');
 
-        return redirect('products');
+        return redirect()->back();
     }
 }

@@ -14,7 +14,6 @@ class Service extends Model
     protected $fillable = [
         'name',
         'description',
-        'price',
         'image',
     ];
 
@@ -26,7 +25,8 @@ class Service extends Model
 
     public function animalDetail(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class,'animal_detail_services','service_id','animal_detail_id')
+        return $this->belongsToMany(AnimalDetail::class,'animal_detail_services','service_id','animal_detail_id')
+            ->withPivot('price')
             ->withTimestamps();;
     }
 

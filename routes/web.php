@@ -15,6 +15,8 @@ use \App\Http\Controllers\Admin\ServiceController;
 use \App\Http\Controllers\Admin\AppointmentController;
 use \App\Http\Controllers\Client\ProductContronller;
 use \App\Http\Controllers\Client\ServiceContronller;
+use \App\Http\Controllers\Client\CartController;
+use \App\Http\Controllers\Admin\VariantServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +35,14 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [ClientController::class, 'index']) ->name('home');
-Route::get('products_list',[ProductContronller::class, 'index'])->name('product-list.index');
-Route::get('service_list',[ServiceContronller::class, 'index'])->name('service-list.index');
+Route::get('/', [ClientController::class, 'index']) ->name('home');
+Route::get('products-list',[ProductContronller::class, 'index'])->name('product-list.index');
+Route::get('services-list',[ServiceContronller::class, 'index'])->name('service-list.index');
+Route::get('product-detail/{id}', [ProductContronller::class, 'detail'])->name('product-list.detail');
+Route::post('cart/{id}', [ProductContronller::class,'addToCart'])->name('cart.addToCart');
+Route::get('cart-list',[CartController::class,'index'])->name('cart-list.index');
+Route::put('cart-update/{id}', [CartController::class,'update'])->name('cart.update');
+Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function (){
     Route::get('/dashboard', [HomeController::class ,'index']);
@@ -78,6 +84,13 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-service/{id}', [ServiceController::class ,'edit'] )->name('service.edit');
     Route::put('update-service/{id}', [ServiceController::class ,'update'] )->name('service.update');
     Route::get('delete-service/{id}', [ServiceController::class ,'destroy'] )->name('service.destroy');
+
+    Route::get('variant-services', [VariantServiceController::class, 'index'])->name('variant-service.index');
+    Route::get('create-variant-service', [VariantServiceController::class ,'create'] )->name('variant-service.create');
+    Route::post('store-variant-service', [VariantServiceController::class ,'store'] )->name('variant-service.store');
+    Route::get('edit-variant-service/{id}', [VariantServiceController::class ,'edit'] )->name('variant-service.edit');
+    Route::put('update-variant-service/{id}', [VariantServiceController::class ,'update'] )->name('variant-service.update');
+    Route::get('delete-variant-service/{id}', [VariantServiceController::class ,'destroy'] )->name('variant-service.destroy');
 
     Route::get('package-services', [ServicePackageController::class, 'index'])->name('package-service.index');
     Route::get('create-package-service', [ServicePackageController::class ,'create'] )->name('package-service.create');

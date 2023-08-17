@@ -15,10 +15,7 @@
                 <div class="js-product-filter-home-2 product-filter-home-2 text-center">
                     <div class="product-filter-home-2-inner">
 
-                        @foreach($categories as $category)
-                            <h4 class="filter-title" data-filter=".Vegetable">{{$category->name}}</h4>
 
-                        @endforeach
                     </div>
                 </div>
             </div>
@@ -28,12 +25,12 @@
                         <figure class="item" style="margin-top: 30px">
                             <div class="product product-style-1">
                                 <div class="img-wrapper">
-                                    <a href="#">
-                                        <img style="height:350px"  src="{{( 'storage/'.$product->image) }}"  alt="product thumbnail" />
+                                    <a href="{{ route('product-list.detail', ['id' => $product->id]) }}">
+                                        <img style="height:280px"  src="{{( 'storage/'.$product->image) }}"  alt="product thumbnail" />
                                     </a>
                                     <div class="product-control-wrapper bottom-right">
                                         <div class="wrapper-control-item">
-                                            <a class="js-quick-view" href="#" type="button" data-toggle="modal" data-target="#quick-view-product">
+                                            <a class="js-quick-view" href="{{ route('product-list.detail', ['id' => $product->id]) }}" type="button" data-toggle="modal" data-target="#quick-view-product">
                                                 <span class="lnr lnr-eye"></span>
                                             </a>
                                         </div>
@@ -42,19 +39,19 @@
                                                 <span class="lnr lnr-heart"></span>
                                             </a>
                                         </div>
-                                        <div class="wrapper-control-item item-add-cart js-action-add-cart">
-                                            <a class="animate-icon-cart" href="#">
+                                        <div class="wrapper-control-item item-add-cart ">
+                                            <a class="animate-icon-cart" href="{{ route('cart.addToCart', ['id' => $product->id]) }}">
                                                 <span class="lnr lnr-cart"></span>
                                             </a>
                                             <svg x="0px" y="0px" width="36px" height="32px" viewbox="0 0 36 32">
-                                                <path stroke-dasharray="19.79 19.79" fill="none" ,="," stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
+                                                <path stroke-dasharray="19.79 19.79" fill="none" ,="," stroke-width="1" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
                                             </svg>
                                         </div>
                                     </div>
                                 </div>
-                                <figcaption class="desc text-center" style="background-color: #9abf65">
+                                <figcaption class="desc text-center" >
                                     <h3>
-                                        <a class="product-name" href="product-detail.html">{{$product->name}}</a>
+                                        <a class="product-name" href="{{ route('product-list.detail', ['id' => $product->id]) }}">{{$product->name}}</a>
                                     </h3>
                                     <span class="price">{{ CurrencyHelper::format($product->selling_price) }}</span>
                                 </figcaption>

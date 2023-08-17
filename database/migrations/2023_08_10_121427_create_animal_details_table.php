@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('animal_details', function (Blueprint $table) {
             $table->id();
-            $table->string('variant');
             $table->string('weight');
             $table->integer('animal_id');
             $table->timestamps();

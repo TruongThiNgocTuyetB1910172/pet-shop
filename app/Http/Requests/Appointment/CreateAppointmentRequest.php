@@ -11,10 +11,10 @@ class CreateAppointmentRequest extends FormRequest
     {
         return [
             'name' => ['required','string', 'max:255'],
-            'email' => ['required','email',],
+            'email' => ['required','email'],
             'phone' => ['required', 'regex:/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/'],
             'appointment_at' => ['required', 'after:' . Carbon::now()],
-            'status' => ['required'],
+            'status' => ['required', 'in:0,1'],
             'notes' => ['nullable'],
         ];
     }

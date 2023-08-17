@@ -21,23 +21,25 @@ class Product extends Model
         'selling_price',
         'image',
         'category_id',
+        'feature',
     ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
-
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class, 'productId');
+    }
     public function productImages(): HasMany
     {
         return $this->hasMany(ProductImage::class);
     }
-
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
-
     public static function getProductById(string $id): Model|Collection|Builder|array|null
     {
         return Product::query()->findOrFail($id);

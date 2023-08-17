@@ -12,7 +12,9 @@ class ServiceContronller extends Controller
 
     public function index(): View
     {
-        $services = Service::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
+        $services = Service::orderByDesc('created_at')
+            ->paginate($this->itemPerPage);
+
         return view('client.service.list',compact('services'));
     }
 }
