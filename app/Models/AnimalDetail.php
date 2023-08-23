@@ -27,9 +27,10 @@ class AnimalDetail extends Model
 
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class,'animal_detail_services','service_id','animal_detail_id')
+        return $this->belongsToMany(Service::class, 'animal_detail_services', 'service_id', 'animal_detail_id')
             ->withPivot('price')
-            ->withTimestamps();;
+            ->withTimestamps();
+        ;
     }
 
     public static function getAnimalDetailById(string $id): Model|Collection|Builder|array|null

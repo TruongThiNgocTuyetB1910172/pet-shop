@@ -146,7 +146,7 @@ class ServicePackageController extends Controller
 
         $servicePackage->delete();
 
-        toast('Xóa sản phẩm ' . $servicePackage->name . ' thành công','success');
+        toast('Xóa sản phẩm ' . $servicePackage->name . ' thành công', 'success');
 
         return redirect('package-services');
     }

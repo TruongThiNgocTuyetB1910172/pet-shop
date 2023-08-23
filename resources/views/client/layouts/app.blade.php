@@ -1,11 +1,48 @@
 
 <!DOCTYPE html>
 <html>
+<style>
+    @media (min-width: 1025px) {
+        .h-custom {
+            height: 100vh !important;
+        }
+    }
 
-<!-- Mirrored from freebw.com/templates/organic/index-02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Dec 2022 14:24:41 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    .bg-grey {
+        background-color: #eae8e8;
+    }
+
+    @media (min-width: 992px) {
+        .card-registration-2 .bg-grey {
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .card-registration-2 .bg-grey {
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+    }
+</style>
+
 @include('client.layouts.header')
 <body class="animsition">
+
+@include('sweetalert::alert')
+
 <div class="home-2" id="page">
 @include('client.layouts.navbar')
     <header class="header-style-2">
@@ -50,26 +87,57 @@
                     </li>
                     <li>
                         <a href="faq.html">Liên hệ</a>
+
                     </li>
+
                 </ul>
             </nav>
             <aside class="right">
-                <div class="widget widget-control-header">
-                    <div class="select-custom-wrapper">
-                        <select class="no-border">
-                            <option>USD</option>
-                            <option>VND</option>
-                            <option>EUR</option>
-                            <option>JPY</option>
-                        </select>
-                    </div>
-                </div>
+{{--                <div class="widget widget-control-header">--}}
+{{--                    <div class="select-custom-wrapper">--}}
+{{--                        <select class="no-border">--}}
+{{--                            <option>USD</option>--}}
+
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
                     <a class="control" href="{{ route('cart-list.index') }}">
                         <p class="counter">0</p>
                         <span class="lnr lnr-bag"></span>
                     </a>
                 </div>
+                <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
+                    <div class="dropdown-content-body">
+                        <ul>
+
+{{--                            <li>--}}
+{{--                                <a class="dropdown-item" href="{{ route('logout') }}"--}}
+{{--                                   onclick="event.preventDefault();--}}
+{{--                                document.getElementById('logout-form').submit();">--}}
+{{--                                    {{ __('Logout') }}--}}
+{{--                                </a>--}}
+
+{{--                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+{{--                                    @csrf--}}
+{{--                                </form>--}}
+{{--                            </li>--}}
+                            @if (Auth::check())
+                                <li><a href="" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Logout
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </a>
+                                </li>
+                            @else
+                                <li><a href="{{ route("login") }}"><span class="icon icon-person">Login</span></a></li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="widget widget-control-header hidden-lg hidden-md hidden-sm">
                     <a class="navbar-toggle js-offcanvas-has-events" type="button" href="#menu">
                         <span class="icon-bar"></span>

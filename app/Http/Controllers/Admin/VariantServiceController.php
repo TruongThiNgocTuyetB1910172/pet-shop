@@ -7,7 +7,6 @@ use App\Http\Requests\VariantService\CreateVariantServiceRequest;
 use App\Models\AnimalDetail;
 use App\Models\Service;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class VariantServiceController extends Controller
@@ -15,7 +14,7 @@ class VariantServiceController extends Controller
     public function index(): View
     {
         $animalDetails = AnimalDetail::all();
-        return view('admin.variantServices.index',compact('animalDetails'));
+        return view('admin.variantServices.index', compact('animalDetails'));
 
     }
 
@@ -25,7 +24,7 @@ class VariantServiceController extends Controller
 
         $animalDetails = AnimalDetail::all();
 
-        return view('admin.variantServices.create', compact('services','animalDetails' ));
+        return view('admin.variantServices.create', compact('services', 'animalDetails'));
 
     }
 
@@ -39,7 +38,8 @@ class VariantServiceController extends Controller
             $data['animal_detail_id'],
             ['price' => $data['price'] ,
 
-        ]);
+        ]
+        );
 
         toast('Them thanh cong', 'success');
 

@@ -40,7 +40,7 @@ class UserController extends Controller
             'status' => $data['status'],
         ]);
 
-        toast('Tạo mới người dùng thành công','success');
+        toast('Tạo mới người dùng thành công', 'success');
 
         return redirect('users');
     }
@@ -57,7 +57,7 @@ class UserController extends Controller
         $user = User::getUserById($id);
 
         if ($user->is_root == 1) {
-            toast('Đây là một tài khoản root bạn không thể cập nhật!','warning');
+            toast('Đây là một tài khoản root bạn không thể cập nhật!', 'warning');
 
             return redirect('users');
         }
@@ -71,7 +71,7 @@ class UserController extends Controller
             'status' => $data['status'],
         ]);
 
-        toast('Cập nhật hồ sơ người dùng thành công','success');
+        toast('Cập nhật hồ sơ người dùng thành công', 'success');
 
         return redirect('users');
     }
@@ -88,7 +88,7 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        toast('Cập nhật mật khẩu mới thành công','success');
+        toast('Cập nhật mật khẩu mới thành công', 'success');
 
         return redirect('users');
     }

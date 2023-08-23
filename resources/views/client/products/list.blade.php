@@ -22,7 +22,7 @@
             <div class="row main">
                 <div class="row product-grid-equal-height-wrapper product-equal-height-4-columns flex multi-row">
                     @foreach($products as $product)
-                        <figure class="item" style="margin-top: 30px">
+                        <figure class="item" style="margin-top: 30px" >
                             <div class="product product-style-1">
                                 <div class="img-wrapper">
                                     <a href="{{ route('product-list.detail', ['id' => $product->id]) }}">
@@ -39,17 +39,20 @@
                                                 <span class="lnr lnr-heart"></span>
                                             </a>
                                         </div>
-                                        <div class="wrapper-control-item item-add-cart ">
-                                            <a class="animate-icon-cart" href="{{ route('cart.addToCart', ['id' => $product->id]) }}">
-                                                <span class="lnr lnr-cart"></span>
-                                            </a>
+                                        <div class="wrapper-control-item item-add-cart js-action-add-cart">
+
+                                             <form action="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" method="POST">
+                                                 @csrf
+                                             <button class="animate-icon-cart" type="submit"> <span class="lnr lnr-cart"></span></button>
+                                             </form>
+
                                             <svg x="0px" y="0px" width="36px" height="32px" viewbox="0 0 36 32">
                                                 <path stroke-dasharray="19.79 19.79" fill="none" ,="," stroke-width="1" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
                                             </svg>
                                         </div>
                                     </div>
                                 </div>
-                                <figcaption class="desc text-center" >
+                                <figcaption class="desc text-center" style="background-color: #FFFFFF" >
                                     <h3>
                                         <a class="product-name" href="{{ route('product-list.detail', ['id' => $product->id]) }}">{{$product->name}}</a>
                                     </h3>

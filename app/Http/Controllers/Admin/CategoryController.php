@@ -31,7 +31,7 @@ class CategoryController extends Controller
         $categories =Category::query()->create([
             'name' => $data['name'],
         ]);
-        toast('Tạo mới danh mục ' . $categories->name . ' thành công','success');
+        toast('Tạo mới danh mục ' . $categories->name . ' thành công', 'success');
 
         return redirect('categories');
     }
@@ -52,7 +52,7 @@ class CategoryController extends Controller
             'name' => $data['name'],
         ]);
 
-        toast('Cập nhật danh mục ' . $categories->name . ' thành công','success');
+        toast('Cập nhật danh mục ' . $categories->name . ' thành công', 'success');
 
         return redirect('categories');
     }
@@ -63,14 +63,14 @@ class CategoryController extends Controller
 
         if ($category->products->count() > 0) {
 
-            toast('Xóa sản phẩm thuộc danh mục trước khi xóa danh mục !!','warning');
+            toast('Xóa sản phẩm thuộc danh mục trước khi xóa danh mục !!', 'warning');
 
             return redirect('categories');
         }
 
         $category->delete();
 
-        toast('Xóa danh mục ' . $category->name . ' thành công','success');
+        toast('Xóa danh mục ' . $category->name . ' thành công', 'success');
 
         return redirect('categories');
     }

@@ -15,7 +15,6 @@ class ClientController extends Controller
 
         $products = Product::query()->orderByDesc('created_at')->paginate(8);
 
-
-        return view('client.home',compact('banners','products'));
+        return view('client.home', compact('banners', 'products'));
     }
 }

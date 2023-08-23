@@ -15,6 +15,6 @@ class ServiceContronller extends Controller
         $services = Service::orderByDesc('created_at')
             ->paginate($this->itemPerPage);
 
-        return view('client.service.list',compact('services'));
+        return view('client.service.list', compact('services'));
     }
 }

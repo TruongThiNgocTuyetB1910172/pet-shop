@@ -9,7 +9,6 @@ use App\Models\Appointment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-
 class AppointmentController extends Controller
 {
     public int $itemPerPage = 10;
@@ -48,23 +47,23 @@ class AppointmentController extends Controller
     public function edit(string $id): View
     {
         $appointment = Appointment::getAppointmentById($id);
-        return view('admin.appointments.edit' ,compact('appointment'));
+        return view('admin.appointments.edit', compact('appointment'));
     }
 
     public function update(UpdateAppointmentRequest $request, string $id): RedirectResponse
     {
-       $data = $request->validated();
+        $data = $request->validated();
 
-       $appointment = Appointment::getAppointmentById($id);
+        $appointment = Appointment::getAppointmentById($id);
 
-       $appointment->update([
-           'name'=> $data['name'] ,
-           'email'=> $data['email'] ,
-           'phone'=> $data['phone'] ,
-           'status' => $data['status'],
-           'appointment_at' => $data['appointment_at'],
-           'notes' => $data['notes'],
-       ]);
+        $appointment->update([
+            'name'=> $data['name'] ,
+            'email'=> $data['email'] ,
+            'phone'=> $data['phone'] ,
+            'status' => $data['status'],
+            'appointment_at' => $data['appointment_at'],
+            'notes' => $data['notes'],
+        ]);
 
         toast('Cập nhật '.$appointment->name.'thành công ', 'success');
 

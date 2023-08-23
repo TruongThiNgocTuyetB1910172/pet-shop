@@ -67,7 +67,7 @@ class ProductController extends Controller
             }
         }
 
-        toast('Thêm mới sản phẩm ' . $product->name .' thành công','success');
+        toast('Thêm mới sản phẩm ' . $product->name .' thành công', 'success');
 
         return redirect('products');
     }
@@ -78,10 +78,10 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.products.edit', compact('product','categories'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update(UpdateProductRequest $request,string $id): RedirectResponse
+    public function update(UpdateProductRequest $request, string $id): RedirectResponse
     {
         $data = $request->validated();
 
@@ -125,7 +125,7 @@ class ProductController extends Controller
             }
         }
 
-        toast('Cập nhật sản phẩm ' . $product->name . ' thành công','success');
+        toast('Cập nhật sản phẩm ' . $product->name . ' thành công', 'success');
 
         return redirect('products');
     }
@@ -145,7 +145,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        toast('Xóa sản phẩm ' . $product->name . ' thành công','success');
+        toast('Xóa sản phẩm ' . $product->name . ' thành công', 'success');
 
         return redirect('products');
     }
@@ -158,7 +158,7 @@ class ProductController extends Controller
 
         $image->delete();
 
-        toast('Xóa ảnh thành công','success');
+        toast('Xóa ảnh thành công', 'success');
 
         return redirect()->back();
     }

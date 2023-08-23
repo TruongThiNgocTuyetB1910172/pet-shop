@@ -18,14 +18,14 @@ class AnimalDetailController extends Controller
     {
         $animal_details = AnimalDetail::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
 
-        return view('admin.animalDetails.index',compact('animal_details'));
+        return view('admin.animalDetails.index', compact('animal_details'));
     }
 
     public function create(): View
     {
         $animals = Animal::all();
 
-        return view('admin.animalDetails.create',compact('animals'));
+        return view('admin.animalDetails.create', compact('animals'));
     }
 
     public function store(CreateAnimalDetailRequest $request): RedirectResponse
@@ -37,7 +37,7 @@ class AnimalDetailController extends Controller
             'animal_id' => $data['animal_id'],
         ]);
 
-        toast('Thêm thành công' ,'success');
+        toast('Thêm thành công', 'success');
 
         return  redirect('animal-details');
     }
@@ -48,7 +48,7 @@ class AnimalDetailController extends Controller
 
         $animals = Animal::all();
 
-        return view('admin.animalDetails.edit',compact('animalDetails','animals'));
+        return view('admin.animalDetails.edit', compact('animalDetails', 'animals'));
 
     }
 
@@ -62,7 +62,7 @@ class AnimalDetailController extends Controller
             'weight' => $data['weight'],
             'animal_id' => $data['animal_id'],
         ]);
-        toast('Cập nhật thành công' ,'success');
+        toast('Cập nhật thành công', 'success');
 
         return  redirect('animal-details');
     }
@@ -73,7 +73,7 @@ class AnimalDetailController extends Controller
 
         $animalDetail->delete();
 
-        toast('Xóa thành công' ,'success');
+        toast('Xóa thành công', 'success');
 
         return  redirect('animal-details');
     }

@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Service\CreateServiceRequest;
 use App\Http\Requests\Service\UpdateServiceRequest;
-use App\Models\Animal;
 use App\Models\AnimalDetail;
 use App\Models\Service;
 use App\Traits\ImageTrait;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class ServiceController extends Controller
@@ -32,20 +30,20 @@ class ServiceController extends Controller
 
         $services = Service::all();
 
-        return view('admin.services.create',compact('animal_details','services'));
+        return view('admin.services.create', compact('animal_details', 'services'));
     }
 
     public function store(CreateServiceRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-            $data['image'] = $this->uploadImage($request, 'image', 'images');
+        $data['image'] = $this->uploadImage($request, 'image', 'images');
 
-            $services = Service::query()->create([
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'image' => $data['image'],
-            ]);
+        $services = Service::query()->create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'image' => $data['image'],
+        ]);
 
 
         toast('Thêm mới dịch vụ ' . $services->name . ' thành công', 'success');
@@ -60,10 +58,10 @@ class ServiceController extends Controller
 
         $service = Service::getServiceById($id);
 
-        return view('admin.services.edit',compact('service','animal_details'));
+        return view('admin.services.edit', compact('service', 'animal_details'));
     }
 
-    public function update(UpdateServiceRequest $request,string $id): RedirectResponse
+    public function update(UpdateServiceRequest $request, string $id): RedirectResponse
     {
         $data = $request->validated();
 
@@ -88,7 +86,7 @@ class ServiceController extends Controller
         ]);
 
 
-        toast('Cập nhật dịch vụ' . $service->name . ' thành công','success');
+        toast('Cập nhật dịch vụ' . $service->name . ' thành công', 'success');
 
         return redirect('services');
     }
@@ -103,7 +101,7 @@ class ServiceController extends Controller
 
         $service->delete();
 
-        toast('Xóa dịch vụ ' . $service->name . ' thành công','success');
+        toast('Xóa dịch vụ ' . $service->name . ' thành công', 'success');
 
         return redirect('services');
     }

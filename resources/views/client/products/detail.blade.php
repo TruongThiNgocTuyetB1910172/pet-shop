@@ -122,10 +122,10 @@
                                 <br>
                                 <br>
                                 <div class="footer-desc">
-                                    <form class="cart" action="{{ route('cart.addToCart', ['id' => $product->id]) }}" method="POST" id="addCart">
+                                    <form class="cart" action="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" method="POST" id="addCart">
                                         @csrf
-                                        <div class="quantity buttons-added " style="margin-right: 20px">
-                                            <input class="minus" value="-" onclick="decQuantity" type="button" />
+                                        <div class="quantity buttons-added" style="margin-right: 20px">
+                                            <input class="minus"  value="-"  type="button" />
                                             <input
                                                 class="input-text qty text"
                                                 step="1"
@@ -140,10 +140,10 @@
                                                 id="qty"
 
                                             />
-                                            <input class="plus" value="+" onclick="incQuantity"  type="button"  />
+                                            <input class="plus" value="+" type="button"  />
                                         </div>
                                         <button class="btn btn-brand no-radius" style="margin-right: 20px" type="submit">
-                                            <a href="{{ route('cart.addToCart', ['id' => $product->id]) }}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('addcart').submit();">ADD TO CART</a>
+                                            <a href="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('addCart').submit();">ADD TO CART</a>
                                         </button>
                                         <button
                                             class="btn btn-wishlist btn-brand-ghost no-radius"
@@ -349,4 +349,5 @@
             </div>
         </div>
     </section>
+
 @endsection

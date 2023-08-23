@@ -31,28 +31,28 @@ class ProductContronller extends Controller
         return view('client.products.detail', compact('product', 'relatedProducts'));
     }
 
-    public function addToCart(int $productId, Request $request): RedirectResponse
+    public function addToCart(int $product_id, Request $request): RedirectResponse
     {
         $data = $request->validate([
             'qty' => ['nullable', 'int', 'min:1']
         ]);
 
         if (! Auth::check()) {
-            toast('Đăng nhập trước khi sử dụng dịch vụ','warning');
+            toast('Đăng nhập trước khi sử dụng dịch vụ', 'warning');
             return redirect('login');
         }
 
-        if (Cart::where('userId', Auth::user()->id)->where('productId', $productId)->exists()){
-            toast('Sản phẩm đã có trong giỏ hàng.','warning');
+        if (Cart::where('user_id', Auth::user()->id)->where('product_id', $product_id)->exists()) {
+            toast('Sản phẩm đã có trong giỏ hàng.', 'warning');
             return redirect()->back();
         }
 
-        $product = Product::getProductById($productId);
+        $product = Product::getProductById($product_id);
 
         if ($data['qty']) {
             Cart::create([
-                'userId' => Auth::id(),
-                'productId' => $productId,
+                'user_id' => Auth::id(),
+                'product_id' => $product_id,
                 'quantity' => $data['qty'],
             ]);
 
@@ -62,8 +62,8 @@ class ProductContronller extends Controller
         }
 
         Cart::create([
-            'userId' => Auth::id(),
-            'productId' => $productId,
+            'user_id' => Auth::id(),
+            'product_id' => $product_id,
             'quantity' => 1,
         ]);
 
@@ -74,8 +74,3 @@ class ProductContronller extends Controller
 
 
 }
-
-
-
-
-
