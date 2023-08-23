@@ -1,29 +1,17 @@
 @extends('admin.layouts.app')
-@section('head')
-    <script src="/ckeditor/ckeditor.js"></script>
-        <style>
-            .form-file-group{
-                width: 100%;
-                border: 2px dashed #000;
-            }
-            .form-file-group p {
-                width: 100%;
-                text-align: center;
-                line-height: 170px;
-            }
-        </style>
-@endsection
+
+@section('title','Thêm mới sản phẩm')
+
 @section('content')
+    <div><h4 class="card-title text-uppercase">Thêm mới sản phẩm</h4></div>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Sản phẩm mới</h4>
             <div class="basic-form">
                 <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Tên sản phẩm</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Tên sản phẩm:</strong></label>
+                        <div>
                             <input type="text " class="form-control" name="name" placeholder="Nhập tên sản phâm">
                             @error('name')
                             <span class="text-danger"> {{ $message }}</span>
@@ -32,13 +20,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Danh mục</label>
-                        <div  class="col-sm-10">
-                            <select class="select-form" name="category_id" >
-                                <option value="">Select a Category</option>
-                                @foreach ($categories as $item )
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-
+                        <label class="form-label"> <strong>Danh mục:</strong></label>
+                        <div class="form-group">
+                            <select class="form-control" name="category_id" >
+                                <option >Chọn danh mục</option>
+                                @foreach ($categories as $category )
+                                    <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -48,9 +35,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Mã sản phẩm</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="sku" placeholder="Nhập Mã sản phẩm	">
+                        <label class="form-label"><strong>Mã sản phẩm: </strong></label>
+                        <div >
+                            <input type="number" class="form-control" name="sku" placeholder="Nhập Mã sản phẩm	">
                             @error('sku')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
@@ -58,9 +45,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Số lượng</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="stock" placeholder="Nhập số lượng	">
+                        <label class="form-label"><strong>Số lượng: </strong></label>
+                        <div>
+                            <input type="number" class="form-control" name="stock" placeholder="Nhập số lượng	">
                             @error('stock')
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
@@ -68,8 +55,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Mô tả</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"><strong>Mô tả: </strong></label>
+                        <div >
                             <textarea type="text" class="form-control" id="editor" name="description" placeholder="Nhập mô tả"></textarea>
                             @error('description')
                             <span class="text-danger"> {{ $message }}</span>
@@ -78,8 +65,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Giá Gốc</label>
-                        <div class="col-sm-10">
+                        <label class="form-label"> <strong>Nổi bật:</strong></label>
+                        <div class="d-flex">
+                            <div class="justify-content-center align-content-center">
+                                <input type="radio" name="feature" value="1">
+                                <label for="is_active">Sp nổi bật</label><br></div>
+                            <div class="justify-content-center align-content-center ml-5">
+                                <input type="radio" name="feature" value="0">
+                                <label for="is_block">Sp thường</label><br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label"><strong>Giá Gốc: </strong></label>
+                        <div >
                             <input type="text" class="form-control" name="original_price" placeholder="Nhập giá góc">
                             @error('original_price')
                             <span class="text-danger"> {{ $message }}</span>
@@ -88,8 +88,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 col-form-label">Giá Bán</label>
-                        <div class="col-sm-10">
+                        <label class="form-label" ><strong>Giá Bán: </strong></label>
+                        <div >
                             <input type="text" class="form-control" name="selling_price" placeholder="Nhập giá bán">
                             @error('selling_price')
                             <span class="text-danger"> {{ $message }}</span>
@@ -99,14 +99,14 @@
 
                     <div class="form-group">
                         <div class="mb-3">
-                            <label for="editor" class="form-label">Chọn ảnh: </label>
-                            <div class="form-file-group">
-                                <input type="file" name="image" style="display: none" id="file-upload"
-                                       onchange="previewFile(this)">
-                                <p onclick="document.querySelector('#file-upload').click()">
-                                    Nhấn vào đây để chọn ảnh tải lên.
-                                </p>
-                            </div>
+                            <label for="editor" class="form-label"><strong>Chọn ảnh:</strong> </label>
+                                <div class="form-file-group">
+                                    <input type="file" name="image" style="display: none" id="file-upload"
+                                           onchange="previewFile(this)">
+                                    <p onclick="document.querySelector('#file-upload').click()">
+                                        Nhấn vào đây để chọn ảnh tải lên.
+                                    </p>
+                                </div>
                             <div id="previewBox" style="display: none" class="text-center">
                                 <img src="" id="previewImg" class="img-fluid rounded" width="100px" height="100px">
                                 <i class="uil-trash-alt text-danger" style="cursor: pointer"
@@ -119,10 +119,12 @@
                         </div>
                     </div>
 
+                    <div class="mb-3">
+                        <input type="file" name="product_image[]" multiple>
+                    </div>
+
                     <div class="form-group">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-dark">Create</button>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
                     </div>
                 </form>
             </div>
@@ -131,26 +133,3 @@
 
 @endsection
 
-@section('footer')
-    <script>
-        CKEDITOR.replace( 'editor' );
-
-        function previewFile(input){
-            let file = $("input[type=file]").get(0).files[0];
-            if(file){
-                let reader = new FileReader();
-                reader.onload = function (){
-                    $("#previewImg").attr('src', reader.result);
-                    $("#previewBox").css('display', 'block');
-                }
-                $(".form-file-group").css('display', 'none');
-                reader.readAsDataURL(file);
-            }
-        }
-        function removePreview(){
-            $("#previewImg").attr('src',"");
-            $("#previewBox").css('display', 'none');
-            $(".form-file-group").css('display', 'block');
-        }
-    </script>
-@endsection

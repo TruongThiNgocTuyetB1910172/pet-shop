@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration
-{
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
@@ -15,6 +14,7 @@ return new class () extends Migration
             $table->string('email');
             $table->dateTime('appointment_at');
             $table->string('notes')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

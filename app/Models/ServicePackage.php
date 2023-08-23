@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ServicePackage extends Model
 {
@@ -18,6 +21,12 @@ class ServicePackage extends Model
 
     public function services(): BelongsToMany
     {
-        return $this->belongsToMany(Service::class, 'service_service_packages', 'service_id','service_package_id');
+        return $this->belongsToMany(Service::class, 'service_service_packages', 'service_package_id', 'service_id')
+            ->withTimestamps();
     }
+    public static function getServicePackageById(string $id): Model|Collection|Builder|array|null
+    {
+        return ServicePackage::query()->findOrFail($id);
+    }
+
 }

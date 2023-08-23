@@ -18,7 +18,7 @@ class BannerController extends Controller
     public function index(): View
     {
         $banners = Banner::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
-        return view('admin.banners.index',compact('banners'));
+        return view('admin.banners.index', compact('banners'));
     }
 
     public function create(): View
@@ -36,7 +36,7 @@ class BannerController extends Controller
            'status' => $data['status'],
            'image' => $data['image'],
         ]);
-        toast('Tạo mới banner thành công','success');
+        toast('Tạo mới banner thành công', 'success');
 
         return redirect('banners');
     }
@@ -71,7 +71,7 @@ class BannerController extends Controller
             'image' => $data['image'],
         ]);
 
-        toast('Cập nhật banner thành công','success');
+        toast('Cập nhật banner thành công', 'success');
 
         return redirect('banners');
     }
@@ -86,7 +86,7 @@ class BannerController extends Controller
 
         $banner->delete();
 
-        toast('Xóa banner thành công','success');
+        toast('Xóa banner thành công', 'success');
 
         return redirect('banners');
     }

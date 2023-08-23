@@ -1,11 +1,18 @@
-@extends("admin.layouts.app")
-@section("content")
+@extends('admin.layouts.app')
+
+@section('title', 'Danh sách danh mục')
+
+@section('content')
     <div class="mb-3">
         <a href="{{ route('category.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Thêm danh mục</a>
     </div>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
+                <div >
+                    <h4>Danh sách danh mục</h4>
+                    <hr>
+                </div>
                 <table class="table">
                     <thead>
                     <tr>

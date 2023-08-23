@@ -10,6 +10,7 @@ use App\Traits\ImageTrait;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -35,12 +36,11 @@ class ProductController extends Controller
 
     public function store(CreateProductRequest $request): RedirectResponse
     {
-
         $data = $request->validated();
 
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
-        $product = Product::query()->create([
+        $product = Product::create([
             'name' => $data['name'],
             'description' => $data['description'],
             'stock' => $data['stock'],
@@ -49,9 +49,25 @@ class ProductController extends Controller
             'sku' => $data['sku'],
             'category_id' => $data['category_id'],
             'image' => $data['image'],
+            'feature' => $data['feature'],
         ]);
 
-        toast('Thêm mới sản phẩm ' . $product->name .' thành công','success');
+
+        if (isset($data['product_image'])) {
+            $images = $data['product_image'];
+
+            foreach ($images as $image) {
+                $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move('images/', $fileName);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => 'images/' . $fileName,
+                ]);
+            }
+        }
+
+        toast('Thêm mới sản phẩm ' . $product->name .' thành công', 'success');
 
         return redirect('products');
     }
@@ -62,10 +78,10 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.products.edit', compact('product','categories'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update(UpdateProductRequest $request,string $id): RedirectResponse
+    public function update(UpdateProductRequest $request, string $id): RedirectResponse
     {
         $data = $request->validated();
 
@@ -92,9 +108,24 @@ class ProductController extends Controller
             'image' => $data['image'],
             'original_price' => $data['original_price'],
             'selling_price' => $data['selling_price'],
+            'feature' => $data['feature'],
         ]);
 
-        toast('Cập nhật sản phẩm ' . $product->name . 'thành công','success');
+        if (isset($data['product_image'])) {
+            $images = $data['product_image'];
+
+            foreach ($images as $image) {
+                $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move('images/', $fileName);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => 'images/' . $fileName,
+                ]);
+            }
+        }
+
+        toast('Cập nhật sản phẩm ' . $product->name . ' thành công', 'success');
 
         return redirect('products');
     }
@@ -107,10 +138,28 @@ class ProductController extends Controller
 
         $this->deleteImage($image);
 
+        foreach ($product->productImages as $image) {
+            File::delete($image->image);
+            $image->delete();
+        }
+
         $product->delete();
 
-        toast('Xóa sản phẩm ' . $product->name . 'thành công','success');
+        toast('Xóa sản phẩm ' . $product->name . ' thành công', 'success');
 
         return redirect('products');
+    }
+
+    public function deleteProductImage(string $id): RedirectResponse
+    {
+        $image = ProductImage::findOrFail($id);
+
+        File::delete($image->image);
+
+        $image->delete();
+
+        toast('Xóa ảnh thành công', 'success');
+
+        return redirect()->back();
     }
 }

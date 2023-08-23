@@ -29,24 +29,24 @@ function quixSettings({version, layout, navheaderBg, headerBg, sidebarStyle, sid
 
 quixSettings.prototype.manageVersion = function() {
     switch(this.version) {
-        case "light": 
+        case "light":
             body.attr("data-theme-version", "light");
             break;
-        case "dark": 
+        case "dark":
             body.attr("data-theme-version", "dark");
             break;
-        default: 
+        default:
             body.attr("data-theme-version", "light");
     }
 }
 
 quixSettings.prototype.manageLayout = function() {
     switch(this.layout) {
-        case "horizontal": 
+        case "horizontal":
             this.sidebarStyle === "overlay" ? body.attr("data-sidebar-style", "full") : body.attr("data-sidebar-style", `${this.sidebarStyle}`);
             body.attr("data-layout", "horizontal");
             break;
-        case "vertical": 
+        case "vertical":
             body.attr("data-layout", "vertical");
             break;
         default:
@@ -56,34 +56,34 @@ quixSettings.prototype.manageLayout = function() {
 
 quixSettings.prototype.manageNavHeaderBg = function() {
     switch(this.navheaderBg) {
-        case "color_1": 
+        case "color_1":
             body.attr("data-nav-headerbg", "color_1");
             break;
-        case "color_2": 
+        case "color_2":
             body.attr("data-nav-headerbg", "color_2");
             break;
-        case "color_3": 
+        case "color_3":
             body.attr("data-nav-headerbg", "color_3");
             break;
-        case "color_4": 
+        case "color_4":
             body.attr("data-nav-headerbg", "color_4");
             break;
-        case "color_5": 
+        case "color_5":
             body.attr("data-nav-headerbg", "color_5");
             break;
-        case "color_6": 
+        case "color_6":
             body.attr("data-nav-headerbg", "color_6");
             break;
-        case "color_7": 
+        case "color_7":
             body.attr("data-nav-headerbg", "color_7");
             break;
-        case "color_8": 
+        case "color_8":
             body.attr("data-nav-headerbg", "color_8");
             break;
-        case "color_9": 
+        case "color_9":
             body.attr("data-nav-headerbg", "color_9");
             break;
-        case "color_10": 
+        case "color_10":
             body.attr("data-nav-headerbg", "color_10");
             break;
         default:
@@ -93,34 +93,34 @@ quixSettings.prototype.manageNavHeaderBg = function() {
 
 quixSettings.prototype.manageHeaderBg = function() {
     switch(this.headerBg) {
-        case "color_1": 
+        case "color_1":
             body.attr("data-headerbg", "color_1");
             break;
-        case "color_2": 
+        case "color_2":
             body.attr("data-headerbg", "color_2");
             break;
-        case "color_3": 
+        case "color_3":
             body.attr("data-headerbg", "color_3");
             break;
-        case "color_4": 
+        case "color_4":
             body.attr("data-headerbg", "color_4");
             break;
-        case "color_5": 
+        case "color_5":
             body.attr("data-headerbg", "color_5");
             break;
-        case "color_6": 
+        case "color_6":
             body.attr("data-headerbg", "color_6");
             break;
-        case "color_7": 
+        case "color_7":
             body.attr("data-headerbg", "color_7");
             break;
-        case "color_8": 
+        case "color_8":
             body.attr("data-headerbg", "color_8");
             break;
-        case "color_9": 
+        case "color_9":
             body.attr("data-headerbg", "color_9");
             break;
-        case "color_10": 
+        case "color_10":
             body.attr("data-headerbg", "color_10");
             break;
         default:
@@ -149,34 +149,34 @@ quixSettings.prototype.manageSidebarStyle = function() {
 
 quixSettings.prototype.manageSidebarBg = function() {
     switch(this.sidebarBg) {
-        case "color_1": 
+        case "color_1":
             body.attr("data-sibebarbg", "color_1");
             break;
-        case "color_2": 
+        case "color_2":
             body.attr("data-sibebarbg", "color_2");
             break;
-        case "color_3": 
+        case "color_3":
             body.attr("data-sibebarbg", "color_3");
             break;
-        case "color_4": 
+        case "color_4":
             body.attr("data-sibebarbg", "color_4");
             break;
-        case "color_5": 
+        case "color_5":
             body.attr("data-sibebarbg", "color_5");
             break;
-        case "color_6": 
+        case "color_6":
             body.attr("data-sibebarbg", "color_6");
             break;
-        case "color_7": 
+        case "color_7":
             body.attr("data-sibebarbg", "color_7");
             break;
-        case "color_8": 
+        case "color_8":
             body.attr("data-sibebarbg", "color_8");
             break;
-        case "color_9": 
+        case "color_9":
             body.attr("data-sibebarbg", "color_9");
             break;
-        case "color_10": 
+        case "color_10":
             body.attr("data-sibebarbg", "color_10");
             break;
         default:
@@ -186,27 +186,27 @@ quixSettings.prototype.manageSidebarBg = function() {
 
 quixSettings.prototype.manageSidebarPosition = function() {
     switch(this.sidebarPosition) {
-        case "fixed": 
+        case "fixed":
             this.sidebarStyle === "overlay" && this.layout === "vertical" ? body.attr("data-sidebar-position", "static") : body.attr("data-sidebar-position", "fixed");
             break;
-        case "static": 
+        case "static":
             body.attr("data-sidebar-position", "static");
             break;
-        default: 
-            body.attr("data-sidebar-position", "static");       
+        default:
+            body.attr("data-sidebar-position", "static");
     }
 }
 
 quixSettings.prototype.manageHeaderPosition = function() {
     switch(this.headerPosition) {
-        case "fixed": 
+        case "fixed":
             body.attr("data-header-position", "fixed");
             break;
-        case "static": 
+        case "static":
             body.attr("data-header-position", "static");
             break;
-        default: 
-            body.attr("data-header-position", "static");       
+        default:
+            body.attr("data-header-position", "static");
     }
 }
 
@@ -233,12 +233,12 @@ quixSettings.prototype.manageRtlLayout = function() {
             html.addClass('rtl');
             body.attr("direction", "rtl");
             break;
-        case "ltr": 
+        case "ltr":
             html.attr("dir", "ltr");
             html.removeClass('rtl');
             body.attr("direction", "ltr");
             break;
-        default: 
+        default:
             html.attr("dir", "ltr");
             body.attr("direction", "ltr");
     }
@@ -258,4 +258,22 @@ quixSettings.prototype.manageResponsiveSidebar = function() {
     if(innerWidth < 768) {
         body.attr("data-sidebar-style", "overlay");
     }
+}
+
+function previewFile(input){
+    let file = $("input[type=file]").get(0).files[0];
+    if(file){
+        let reader = new FileReader();
+        reader.onload = function (){
+            $("#previewImg").attr('src', reader.result);
+            $("#previewBox").css('display', 'block');
+        }
+        $(".form-file-group").css('display', 'none');
+        reader.readAsDataURL(file);
+    }
+}
+function removePreview(){
+    $("#previewImg").attr('src',"");
+    $("#previewBox").css('display', 'none');
+    $(".form-file-group").css('display', 'block');
 }
