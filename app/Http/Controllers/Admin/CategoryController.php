@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
         if ($category->products->count() > 0) {
 
-            toast('Xóa sản phẩm thuộc danh mục trước khi xóa danh mục !!', 'warning');
+            toast('Xóa sản phẩm thuộc danh mục trước khi xóa danh mục !', 'warning');
 
             return redirect('categories');
         }

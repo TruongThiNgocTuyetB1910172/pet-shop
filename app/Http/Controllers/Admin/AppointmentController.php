@@ -65,7 +65,7 @@ class AppointmentController extends Controller
             'notes' => $data['notes'],
         ]);
 
-        toast('Cập nhật '.$appointment->name.'thành công ', 'success');
+        toast('Cập nhật thành công ', 'success');
 
         return redirect('appointments');
     }
@@ -76,7 +76,7 @@ class AppointmentController extends Controller
 
         $appointment->delete();
 
-        toast('Xóa '.$appointment->name. 'thành công ', 'success');
+        toast('Xóa thành công ', 'success');
 
         return redirect('appointments');
     }
