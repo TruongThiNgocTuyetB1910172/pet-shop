@@ -102,8 +102,8 @@
 {{--                    </div>--}}
 {{--                </div>--}}
                 <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
-                    <a class="control" href="{{ route('cart-list.index') }}">
-                        <p class="counter">0</p>
+                    <a class="control" href="{{ route('cart-list.index') }}" >
+
                         <span class="lnr lnr-bag"></span>
                     </a>
                 </div>

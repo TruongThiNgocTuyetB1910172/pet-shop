@@ -17,6 +17,7 @@ class Order extends Model
         'quantity',
         'status',
         'notes',
+        'shippingAddress'
     ];
 
     public function product(): BelongsTo

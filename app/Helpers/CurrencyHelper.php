@@ -8,4 +8,5 @@ class CurrencyHelper
     {
         return number_format($amount, 0, ',', '.') . ' vn₫';
     }
+
 }

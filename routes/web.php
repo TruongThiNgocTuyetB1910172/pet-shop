@@ -17,6 +17,7 @@ use App\Http\Controllers\Client\ProductContronller;
 use App\Http\Controllers\Client\ServiceContronller;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Admin\VariantServiceController;
+use \App\Http\Controllers\Client\UserAcountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,11 +43,14 @@ Route::get('product-detail/{id}', [ProductContronller::class, 'detail'])->name('
 
 Route::post('cart/{id}', [ProductContronller::class,'addToCart'])->name('cart.add-to-cart');
 Route::get('cart-list', [CartController::class,'index'])->name('cart-list.index');
-//Route::put('cart-update-inc/{id}', [CartController::class,'updateInc'])->name('cart.update-inc');
-//Route::put('cart-update-dec/{id}', [CartController::class,'updateDec'])->name('cart.update-dec');
 Route::put('cart-update',[CartController::class, 'update'])->name('cart-update');
 Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('checkout', [CartController::class,'checkout'])->name('cart.checkout');
+
+Route::get('my-account', [UserAcountController::class, 'index'])->name('user.index');
+Route::post('get-district', [UserAcountController::class, 'getDistrict'])->name('user.get-district');
+Route::post('get-ward', [UserAcountController::class, 'getWard'])->name('user.get-ward');
+Route::post('new-address',[UserAcountController::class, 'newAddress'])->name('address.new-address');
 
 Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function () {
     Route::get('/dashboard', [HomeController::class ,'index']);
@@ -66,12 +70,12 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('delete-product/{id}', [ProductController::class ,'destroy'])->name('product.destroy');
     Route::get('delete-product-image/{id}', [ProductController::class ,'deleteProductImage'])->name('product.delete-image');
 
-    Route::get('users', [UserController::class ,'index'])->name('user.index');
-    Route::get('create-user', [UserController::class ,'create'])->name('user.create');
-    Route::post('store-user', [UserController::class ,'store'])->name('user.store');
-    Route::get('edit-user/{id}', [UserController::class ,'edit'])->name('user.edit');
-    Route::put('update-user/{id}', [UserController::class ,'update'])->name('user.update');
-    Route::put('update-user-password/{id}', [UserController::class ,'updatePassword'])->name('user.update-password');
+    Route::get('users', [UserAcountController::class ,'index'])->name('user.index');
+    Route::get('create-user', [UserAcountController::class ,'create'])->name('user.create');
+    Route::post('store-user', [UserAcountController::class ,'store'])->name('user.store');
+    Route::get('edit-user/{id}', [UserAcountController::class ,'edit'])->name('user.edit');
+    Route::put('update-user/{id}', [UserAcountController::class ,'update'])->name('user.update');
+    Route::put('update-user-password/{id}', [UserAcountController::class ,'updatePassword'])->name('user.update-password');
 
     Route::get('profiles', [ProfileController::class, 'index'])->name('profile.index');
 

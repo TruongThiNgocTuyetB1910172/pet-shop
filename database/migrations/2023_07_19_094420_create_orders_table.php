@@ -14,8 +14,11 @@ return new class () extends Migration {
             $table->string('amount');
             $table->string('total');
             $table->integer('quantity');
-            $table->string('status');
+            $table->enum('status',['pending', 'accepted', 'inDelivery', 'success', 'cancel', 'refund'])->default('pending');
             $table->string('notes');
+            $table->text('shippingAddress');
+            $table->string('emailAddress');
+            $table->string('username');
             $table->timestamps();
         });
     }
