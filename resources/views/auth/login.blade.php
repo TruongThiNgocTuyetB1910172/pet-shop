@@ -21,70 +21,85 @@
     </div>
 </div>
 
-<div class="login-form-bg h-100">
-    <div class="container h-100">
-        <div class="row justify-content-center h-100">
-            <div class="col-xl-6">
-                <div class="form-input-content">
-                    <div class="card login-form mb-0">
-                        <div class="card-body pt-5">
-                            <h4 class="text-center text-uppercase ">ĐĂNG NHẬP</h4>
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
+<section class="vh-100" style="background-color: #FFFFFF;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://images.pexels.com/photos/1314550/pexels-photo-1314550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                 alt="login form"  style="border-radius: 1rem 0 0 1rem;"  class="img-fluid"/>
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
 
-                                <div class="form-group">
-                                    <label for="email" class="form-label"><strong>{{ __('Địa chỉ email:') }}</strong></label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="form-label"><strong>{{ __('Mật khẩu:') }}</strong></label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                            <label class="form-check-label" for="remember">
-                                                {{ __('Ghi nhớ tôi') }}
-                                            </label>
-                                        </div>
+                                <form  method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="d-flex align-items-center mb-3 pb-1 text-center">
+                                        <span class="h1 fw-bold mb-0 ">Đăng nhập</span>
                                     </div>
-                                </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form2Example17">{{ __('Địa chỉ email') }}</label>
+                                        <input type="email" id="form2Example17" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Nhập email"/>
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                    </div>
 
-                                <div >
-                                    <button type="submit" class="btn btn-primary w-100" >
-                                        {{ __('Đăng nhập') }}
-                                    </button>
-                                </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form2Example27">{{ __('Mật khẩu') }}</label>
+                                        <input type="password" id="form2Example27" placeholder="Mật khẩu" class="form-control" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div >
+                                        @if (Route::has('password.request'))
+                                            <a  href="{{ route('password.request') }}">
+                                                {{ __('Quên mật khẩu ?') }}
+                                            </a>
+                                        @endif
+                                    </div>
+                                    <p class="mb-3 pb-lg-2" style="color: #393f81;">Bạn chưa có tài khoản? <a href="{{ route('register') }}"
+                                                                                                            >Đăng kí </a></p>
 
-                                <div >
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link mt-3" href="{{ route('password.request') }}">
-                                            {{ __('Quên mật khẩu ?') }}
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-primary btn-lg btn-block" type="submit"> {{ __('Đăng nhập') }}</button>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>hoặc</p>
+                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                                        </button>
+
+                                        <a  href="{{ route('socialite.redirect', ['provider' => 'google']) }}" class="btn btn-link btn-floating mx-1">
+                                            <i class="fa fa-google-plus-square" aria-hidden="true"></i>
                                         </a>
-                                    @endif
-                                </div>
 
+                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                            <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                                        </button>
 
-                            </form>
+                                        <button type="button" class="btn btn-link btn-floating mx-1">
+                                            <i class="fa fa-github" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <script src="admin/plugins/common/common.min.js"></script>
 <script src="admin/js/custom.min.js"></script>

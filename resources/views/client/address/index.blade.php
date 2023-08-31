@@ -4,57 +4,20 @@
     <section class="sub-header shop-detail-1">
         <img class="rellax bg-overlay" src="client/images/sub-header/015.jpg" alt="">
         <div class="overlay-call-to-action"></div>
-        <h3 class="heading-style-3">Checkout</h3>
+        <h3 class="heading-style-3">New Address</h3>
     </section>
     <hr>
     <section class="boxed-sm">
         <div class="container">
             <div class="woocommerce">
                 <div class="row">
-{{--                    <form class="woocommerce-checkout col-md-6">--}}
-
-{{--                        <h4 style="margin-bottom: 20px">Thông tin cá nhân</h4>--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-10">--}}
-{{--                                <div class="form-group organic-form no-radius">--}}
-{{--                                    <label>Full Name <span style="color: red">*</span></label>--}}
-{{--                                    <input class="form-control" type="text" name="name">--}}
-{{--                                    @error('name')--}}
-{{--                                    <span class="text-danger"> {{ $message }}</span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-10">--}}
-{{--                                <div class="form-group organic-form no-radius">--}}
-{{--                                    <label>Email Address <span style="color: red">*</span></label>--}}
-{{--                                    <input class="form-control" type="email" name="email">--}}
-{{--                                    @error('email')--}}
-{{--                                    <span class="text-danger"> {{ $message }}</span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-10">--}}
-{{--                                <div class="form-group organic-form no-radius">--}}
-{{--                                    <label>Phone <span style="color: red">*</span></label>--}}
-{{--                                    <input class="form-control" type="text" name="phone">--}}
-{{--                                    @error('phone')--}}
-{{--                                    <span class="text-danger"> {{ $message }}</span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-                    <form  class="woocommerce-checkout col-md-6"  action="{{ route('address.new-address') }}" method="POST">
+                    <form  action="{{ url('new-address') }}" method="POST">
                         @csrf
                         <h4 style="margin-bottom: 20px">Thêm địa chỉ giao hàng</h4>
                         <div class="row">
                             <div class="col-md-10">
                                 <label>Tên người nhận <span style="color: red">*</span></label>
-                                <input type="text" name="user_name" class="form-control"  >
+                                <input type="text" name="user_name" class="form-control">
                                 @error('user_name')
                                 <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -87,9 +50,9 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group organic-form no-radius">
-                                    <label>Địa chỉ: </label>
-                                    <textarea class="form-control" type="text" name="address"></textarea>
-                                    @error('address')
+                                    <label>Email: </label>
+                                    <input type="email" name="email" class="form-control" >
+                                    @error('email')
                                     <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                         </span>
@@ -153,8 +116,8 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-10 text-center"> <button class="btn btn-success" type="submit">Thêm Mới</button></div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Thêm mới</button>
                         </div>
                     </form>
                 </div>

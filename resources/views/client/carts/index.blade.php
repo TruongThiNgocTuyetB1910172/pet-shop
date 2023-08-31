@@ -61,7 +61,7 @@
                                       <td class="product-subtotal" data-title="Total">{{ CurrencyHelper::format($item->product->selling_price*$item->quantity) }}</td>
                                       <td class="product-remove">
 
-                                          <a  href="{{ route('cart.destroy', ['id' => $item->id]) }}" style="cursor: pointer" class="remove" aria-label="Remove this item">×</a>
+                                          <a  href="{{ route('cart.destroy', ['id' => $item->id]) }}" style="cursor: pointer" class="remove"  aria-label="Remove this item">×</a>
                                       </td>
                                   </form>
                               </tr>

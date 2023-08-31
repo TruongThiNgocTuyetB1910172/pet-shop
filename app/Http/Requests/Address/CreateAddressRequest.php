@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Client;
+namespace App\Http\Requests\Address;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateClientRequest extends FormRequest
+class CreateAddressRequest extends FormRequest
 {
+
 
     public function rules(): array
     {
@@ -13,7 +14,7 @@ class CreateClientRequest extends FormRequest
             'user_id' => ['required'],
             'user_name' => ['required','string'],
             'house_number' => ['required','string'],
-            'address' => ['required','string'],
+            'email' => ['required','string'],
             'ward_id' => ['required'],
             'district_id' => ['required'],
             'province_id' => ['required'],

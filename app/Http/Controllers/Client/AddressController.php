@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Address\CreateAddressRequest;
 use App\Http\Requests\Client\CreateClientRequest;
 use App\Models\Address;
 use App\Models\District;
@@ -14,12 +15,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class UserAcountController extends Controller
+class AddressController extends Controller
 {
     public function index(): View
     {
         $provinces = Province::all();
-        return view('client.MyAcount.index', compact('provinces'));
+        return view('client.address.index', compact('provinces'));
     }
     public function getDistrict(Request $request): JsonResponse
     {
@@ -46,24 +47,23 @@ class UserAcountController extends Controller
         return response()->json($html);
     }
 
-    public function newAddress(CreateClientRequest $request): RedirectResponse
+    public function Store(CreateAddressRequest $request): RedirectResponse
     {
-
             $data = $request->validate();
 
              Address::create([
-                'user_id' =>Auth::user()->id,
-                'user_name' => $data['user_name'],
-                'house_number' => $data['house_number'],
-                'address' => $data['address'],
-                'ward_id' => $data['ward_id'],
-                'district_id' => $data['district_id'],
-                'province_id' => $data['province_id'],
+                 'user_id' =>Auth::user()->id,
+                 'user_name' => $data['user_name'],
+                 'house_number' => $data['house_number'],
+                 'email' => $data['email'],
+                 'ward_id' => $data['ward_id'],
+                 'district_id' => $data['district_id'],
+                 'province_id' => $data['province_id'],
                  'phone_number' => $data['phone_number'],
-            ]);
+             ]);
             toast('tao moi dia chi thanh cong', 'success');
 
-            return redirect('my-account');
+            return redirect()->back();
 
     }
 

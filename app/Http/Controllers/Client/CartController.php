@@ -94,6 +94,8 @@ class CartController extends Controller
     {
 
         $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $provinces = Province::all();
+        $addresses = Address::where('user_id', Auth::user()->id)->get();
 
         foreach ($carts as $item){
             if(!Product::where('id', $item->product_id)->where('stock', '>=', $item->quantity)->exists()){
@@ -104,9 +106,15 @@ class CartController extends Controller
 
         $cartItems = Cart::where('user_id', Auth::user()->id)->get();
 
+        return view('client.carts.checkout', compact('cartItems','provinces','addresses'));
+    }
 
-
-        return view('client.carts.checkout', compact('cartItems'));
+    public function delete(string $id): RedirectResponse
+    {
+        $address = Address::query()->findOrFail($id);
+        $address->delete();
+        toast('Xóa địa chỉ thành công', 'success');
+        return redirect()->back();
     }
 
 

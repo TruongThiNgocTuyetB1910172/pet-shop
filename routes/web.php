@@ -17,7 +17,9 @@ use App\Http\Controllers\Client\ProductContronller;
 use App\Http\Controllers\Client\ServiceContronller;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Admin\VariantServiceController;
-use \App\Http\Controllers\Client\UserAcountController;
+use \App\Http\Controllers\Client\AddressController;
+use \App\Http\Controllers\Client\NewAddressController;
+use \App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,27 +32,29 @@ use \App\Http\Controllers\Client\UserAcountController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['verify' => true]);
+
+Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
+Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
+
 
 Route::get('/', [ClientController::class, 'index']) ->name('home');
 Route::get('products-list', [ProductContronller::class, 'index'])->name('product-list.index');
 Route::get('services-list', [ServiceContronller::class, 'index'])->name('service-list.index');
 Route::get('product-detail/{id}', [ProductContronller::class, 'detail'])->name('product-list.detail');
 
-Route::post('cart/{id}', [ProductContronller::class,'addToCart'])->name('cart.add-to-cart');
+Route::post('cart/{id}', [ProductContronller::class,'addToCart'])->name('cart.add-to-cart')->middleware(['auth', 'verified']);
 Route::get('cart-list', [CartController::class,'index'])->name('cart-list.index');
 Route::put('cart-update',[CartController::class, 'update'])->name('cart-update');
 Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('checkout', [CartController::class,'checkout'])->name('cart.checkout');
 
-Route::get('my-account', [UserAcountController::class, 'index'])->name('user.index');
-Route::post('get-district', [UserAcountController::class, 'getDistrict'])->name('user.get-district');
-Route::post('get-ward', [UserAcountController::class, 'getWard'])->name('user.get-ward');
-Route::post('new-address',[UserAcountController::class, 'newAddress'])->name('address.new-address');
+Route::get('my-address', [AddressController::class, 'index'])->name('user.index');
+Route::post('get-district', [AddressController::class, 'getDistrict'])->name('user.get-district');
+Route::post('get-ward', [AddressController::class, 'getWard'])->name('user.get-ward');
+Route::post('new-address',[AddressController::class, 'store'])->name('address.new-address');
+Route::get('location', [NewAddressController::class ,'index'])->name('location.new-add');
+Route::get('address-delete/{id}', [CartController::class,'delete'])->name('address.delete');
 
 Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function () {
     Route::get('/dashboard', [HomeController::class ,'index']);
@@ -70,12 +74,12 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('delete-product/{id}', [ProductController::class ,'destroy'])->name('product.destroy');
     Route::get('delete-product-image/{id}', [ProductController::class ,'deleteProductImage'])->name('product.delete-image');
 
-    Route::get('users', [UserAcountController::class ,'index'])->name('user.index');
-    Route::get('create-user', [UserAcountController::class ,'create'])->name('user.create');
-    Route::post('store-user', [UserAcountController::class ,'store'])->name('user.store');
-    Route::get('edit-user/{id}', [UserAcountController::class ,'edit'])->name('user.edit');
-    Route::put('update-user/{id}', [UserAcountController::class ,'update'])->name('user.update');
-    Route::put('update-user-password/{id}', [UserAcountController::class ,'updatePassword'])->name('user.update-password');
+    Route::get('users', [AddressController::class ,'index'])->name('user.index');
+    Route::get('create-user', [AddressController::class ,'create'])->name('user.create');
+    Route::post('store-user', [AddressController::class ,'store'])->name('user.store');
+    Route::get('edit-user/{id}', [AddressController::class ,'edit'])->name('user.edit');
+    Route::put('update-user/{id}', [AddressController::class ,'update'])->name('user.update');
+    Route::put('update-user-password/{id}', [AddressController::class ,'updatePassword'])->name('user.update-password');
 
     Route::get('profiles', [ProfileController::class, 'index'])->name('profile.index');
 

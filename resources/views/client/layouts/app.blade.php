@@ -257,5 +257,6 @@
 
  @include('client.layouts.footer')
 </div>
+@livewireScripts
 </body>
 </html>

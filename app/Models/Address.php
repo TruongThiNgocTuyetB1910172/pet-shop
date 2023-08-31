@@ -14,7 +14,7 @@ class Address extends Model
         'house_number',
         'user_id',
         'user_name',
-        'address',
+        'email',
         'ward_id',
         'district_id',
         'province_id',
