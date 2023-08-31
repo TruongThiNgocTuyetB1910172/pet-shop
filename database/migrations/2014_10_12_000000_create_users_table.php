@@ -18,6 +18,7 @@ return new class () extends Migration {
             $table->boolean('is_admin')->default(0);
             $table->boolean('status')->default(1);
             $table->boolean('is_root')->default(0);
+            $table->string('provider_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

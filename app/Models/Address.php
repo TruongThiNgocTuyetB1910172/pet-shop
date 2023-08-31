@@ -10,12 +10,15 @@ class Address extends Model
     protected $table = 'addresses';
 
     protected $fillable = [
+
         'house_number',
         'user_id',
-        'address',
+        'user_name',
+        'email',
         'ward_id',
         'district_id',
         'province_id',
+        'phone_number'
     ];
 
     public function ward(): BelongsTo

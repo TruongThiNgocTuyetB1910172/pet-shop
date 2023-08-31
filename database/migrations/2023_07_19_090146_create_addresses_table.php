@@ -10,8 +10,10 @@ return new class () extends Migration {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('user_name');
             $table->string('house_number');
-            $table->string('address');
+            $table->string('phone_number');
+            $table->string('email');
             $table->integer('ward_id');
             $table->integer('district_id');
             $table->integer('province_id');

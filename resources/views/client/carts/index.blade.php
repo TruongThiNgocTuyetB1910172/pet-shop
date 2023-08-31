@@ -12,6 +12,7 @@
     <section class="boxed-sm">
         <div class="container">
             @if ($carts->count() > 0)
+                @php $total = 0; @endphp
                 <div class="woocommerce">
                     <form class="woocommerce-cart-form">
                         <table class="woocommerce-cart-table">
@@ -27,6 +28,10 @@
                             </thead>
                             <tbody>
                           @foreach($carts as $item)
+
+                              @php
+                                  $total +=$item->product->selling_price* $item->quantity
+                                @endphp
                               <tr>
                                   <form  hidden id="formUpdateCart" action="{{ route('cart-update') }}" method="POST" id="update-qty">
                                       @csrf
@@ -56,28 +61,40 @@
                                       <td class="product-subtotal" data-title="Total">{{ CurrencyHelper::format($item->product->selling_price*$item->quantity) }}</td>
                                       <td class="product-remove">
 
-                                          <a  href="{{ route('cart.destroy', ['id' => $item->id]) }}" style="cursor: pointer" class="remove" aria-label="Remove this item">×</a>
+                                          <a  href="{{ route('cart.destroy', ['id' => $item->id]) }}" style="cursor: pointer" class="remove"  aria-label="Remove this item">×</a>
                                       </td>
                                   </form>
                               </tr>
                           @endforeach
 
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="form-coupon organic-form">
-                                        <div class="form-group update-cart">
-                                            <a class="btn btn-brand-ghost pill">CHECK OUT</a>
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            </tfoot>
                         </table>
                     </form>
                     <hr>
+                    <div class="cart_totals" style="margin-bottom: 50px">
+                        <h3 class="title">Cart Total</h3>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <table class="woocommerce-cart-subtotal">
+
+                                    <tbody>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td data-title="Subtotal">{{ CurrencyHelper::format($total) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <td data-title="Total">{{ CurrencyHelper::format($total) }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <div class="proceed-to-checkout">
+                                    <a class="btn btn-brand pill" href="{{ route('cart.checkout') }}">PROCEED TO CHECKOUT</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             @else

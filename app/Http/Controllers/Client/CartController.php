@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Cart;
+use App\Models\District;
+use App\Models\Product;
+use App\Models\Province;
+use App\Models\Ward;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -89,8 +94,18 @@ class CartController extends Controller
     {
 
         $carts = Cart::where('user_id', Auth::user()->id)->get();
-        return view('client.carts.checkout', compact('carts'));
+        $provinces = Province::all();
+        $addresses = Address::where('user_id', Auth::user()->id)->get();
+
+        foreach ($carts as $item){
+            if(! Product::where('id', $item->product_id)->where('stock', '>=', $item->quantity)->exists()){
+                $removeItem = Cart::where('user_id', Auth::user()->id)->where('product_id', $item->product_id)->first();
+                $removeItem -> delete();
+            }
+        }
+
+        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
+
+        return view('client.carts.checkout', compact('cartItems','provinces','addresses'));
     }
-
-
 }

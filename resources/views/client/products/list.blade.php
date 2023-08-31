@@ -39,11 +39,11 @@
                                                 <span class="lnr lnr-heart"></span>
                                             </a>
                                         </div>
-                                        <div class="wrapper-control-item item-add-cart js-action-add-cart">
+                                        <div class="wrapper-control-item item-add-cart ">
 
                                              <form action="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" method="POST">
                                                  @csrf
-                                             <button class="animate-icon-cart" type="submit"> <span class="lnr lnr-cart"></span></button>
+                                             <button class="animate-icon-cart" type="submit" name="qty"> <span class="lnr lnr-cart"></span></button>
                                              </form>
 
                                             <svg x="0px" y="0px" width="36px" height="32px" viewbox="0 0 36 32">
