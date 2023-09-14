@@ -11,7 +11,7 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('stock');
+            $table->integer('stock');
             $table->double('original_price');
             $table->double('selling_price');
             $table->string('sku');

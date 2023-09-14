@@ -13,12 +13,15 @@ use Illuminate\View\View;
 
 class ProductContronller extends Controller
 {
-    public int $itemPerPage = 8;
+    public int $itemPerPage = 6;
 
     public function index(): View
     {
         $categories = Category::all();
-        $products = Product::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
+        $products = Product::query()
+            ->where('stock', '>', 0)
+            ->orderByDesc('created_at')
+            ->paginate($this->itemPerPage);
         return view('client.products.list', compact('products', 'categories'));
     }
 

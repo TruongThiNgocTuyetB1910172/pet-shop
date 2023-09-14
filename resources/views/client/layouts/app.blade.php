@@ -44,7 +44,6 @@
 @include('sweetalert::alert')
 
 <div class="home-2" id="page">
-@include('client.layouts.navbar')
     <header class="header-style-2">
         <div class="header-2-inner">
             <div class="widget widget-control-header widget-search-header">
@@ -63,81 +62,13 @@
                     </form>
                 </div>
             </div>
-            <nav>
-                <ul class="menu hidden-xs">
-                    <li>
-                        <a href="{{route('home')}}">Trang chủ</a>
-                    </li>
-                    <li>
-                        <a href="{{route('product-list.index')}}">Sản phẩm</a>
-                    </li>
-                    <li>
-                        <a href="about.html">Về chúng tôi</a>
-                    </li>
-                </ul>
-                <a class="brand-logo" href="#">
-                    <img class="img-responsive" src="client/images/logo.png" alt="" />
-                </a>
-                <ul class="menu hidden-xs">
-                    <li>
-                        <a href="{{route('service-list.index')}}">Dịch vụ</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Gói dịch vụ</a>
-                    </li>
-                    <li>
-                        <a href="faq.html">Liên hệ</a>
-
-                    </li>
-
-                </ul>
-            </nav>
+           @include('client.layouts.navbar')
             <aside class="right">
-{{--                <div class="widget widget-control-header">--}}
-{{--                    <div class="select-custom-wrapper">--}}
-{{--                        <select class="no-border">--}}
-{{--                            <option>USD</option>--}}
-
-{{--                        </select>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
                 <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
                     <a class="control" href="{{ route('cart-list.index') }}" >
-
-                        <span class="lnr lnr-bag"></span>
+                        <span class="lnr lnr-bag">@if(Auth::check()) {{!is_null(\App\Models\Cart::where('user_id', Auth::user()->id)->get()) ? count(\App\Models\Cart::where('user_id', Auth::user()->id)->get()) : 0 }}@endif"</span>
                     </a>
                 </div>
-                <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
-                    <div class="dropdown-content-body">
-                        <ul>
-
-{{--                            <li>--}}
-{{--                                <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                                   onclick="event.preventDefault();--}}
-{{--                                document.getElementById('logout-form').submit();">--}}
-{{--                                    {{ __('Logout') }}--}}
-{{--                                </a>--}}
-
-{{--                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-{{--                                    @csrf--}}
-{{--                                </form>--}}
-{{--                            </li>--}}
-                            @if (Auth::check())
-                                <li><a href="" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">Logout
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </a>
-                                </li>
-                            @else
-                                <li><a href="{{ route("login") }}"><span class="icon icon-person">Login</span></a></li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-
                 <div class="widget widget-control-header hidden-lg hidden-md hidden-sm">
                     <a class="navbar-toggle js-offcanvas-has-events" type="button" href="#menu">
                         <span class="icon-bar"></span>
@@ -148,8 +79,9 @@
             </aside>
         </div>
     </header>
-{{--    @include('client.layouts.silder')--}}
-    @yield('content')
+
+        @yield('content')
+
     <div class="call-to-action-style-3">
         <img class="rellax bg-overlay" src="client/images/call-to-action/2.jpg" alt="" />
         <div class="overlay-call-to-action"></div>

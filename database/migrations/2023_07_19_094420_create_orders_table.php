@@ -9,16 +9,13 @@ return new class () extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
             $table->integer('user_id');
-            $table->string('amount');
-            $table->string('total');
-            $table->integer('quantity');
             $table->enum('status',['pending', 'accepted', 'inDelivery', 'success', 'cancel', 'refund'])->default('pending');
-            $table->string('notes');
-            $table->text('shippingAddress');
-            $table->string('emailAddress');
-            $table->string('username');
+            $table->string('notes')->nullable();
+            $table->text('shipping_address');
+            $table->string('tracking_number');
+            $table->integer('total');
+            $table->string('staff')->nullable();
             $table->timestamps();
         });
     }

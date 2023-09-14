@@ -63,6 +63,10 @@
                                         ID:
                                         <a href="#"> {{$product->sku}}</a>
                                     </p>
+                                    <p>
+                                        Mô tả: {{$product->description}}
+                                    </p>
+                                    <p>Hàng trong kho: {{$product->stock}}</p>
                                 </div>
                                 <br>
                                 <div class="widget-social align-left">
@@ -143,7 +147,7 @@
                                             <input class="plus" value="+" type="button"  />
                                         </div>
                                         <button class="btn btn-brand no-radius" style="margin-right: 20px" type="submit">
-                                            <a href="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('addCart').submit();">ADD TO CART</a>
+                                            <a href="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('addCart').submit();">Thêm vào giỏ hàng </a>
                                         </button>
                                         <button
                                             class="btn btn-wishlist btn-brand-ghost no-radius"
