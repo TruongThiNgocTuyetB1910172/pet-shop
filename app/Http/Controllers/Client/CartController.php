@@ -88,24 +88,6 @@ class CartController extends Controller
         return redirect('cart-list');
     }
 
-//    public function checkout(): View
-//    {
-//
-//        $carts = Cart::where('user_id', Auth::user()->id)->get();
-//        $addresses = Address::where('user_id', Auth::user()->id)->get();
-//
-//        foreach ($carts as $item){
-//            if(! Product::where('id', $item->product_id)->where('stock', '>=', $item->quantity)->exists()){
-//                $removeItem = Cart::where('user_id', Auth::user()->id)->where('product_id', $item->product_id)->first();
-//                $removeItem -> delete();
-//            }
-//        }
-//
-//        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
-//
-//        return view('client.carts.checkout', compact('cartItems','addresses'));
-//    }
-
     public function delete(string $id): RedirectResponse
     {
         $address = Address::getAddressByUserId($id);

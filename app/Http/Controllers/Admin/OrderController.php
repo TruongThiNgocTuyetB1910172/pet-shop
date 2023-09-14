@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class ListOrderController extends Controller
+class OrderController extends Controller
 {
     public int $itemPerPage = 10;
 

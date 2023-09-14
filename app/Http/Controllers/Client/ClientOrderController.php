@@ -3,19 +3,13 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
-use App\Models\Cart;
+
 use App\Models\Order;
 use App\Models\OrderProduct;
-use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
-use LaravelLang\Publisher\Console\Add;
 
-class OrderController extends Controller
+class ClientOrderController extends Controller
 {
 
     public function index(): View
