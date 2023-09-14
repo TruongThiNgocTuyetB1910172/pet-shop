@@ -17,9 +17,10 @@ use App\Http\Controllers\Client\ProductContronller;
 use App\Http\Controllers\Client\ServiceContronller;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Admin\VariantServiceController;
-use \App\Http\Controllers\Client\AddressController;
 use \App\Http\Controllers\Client\NewAddressController;
 use \App\Http\Controllers\SocialiteController;
+use \App\Http\Controllers\Client\OrderController;
+use \App\Http\Controllers\Admin\ListOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,12 +48,16 @@ Route::post('cart/{id}', [ProductContronller::class,'addToCart'])->name('cart.ad
 Route::get('cart-list', [CartController::class,'index'])->name('cart-list.index');
 Route::put('cart-update',[CartController::class, 'update'])->name('cart-update');
 Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-Route::get('checkout', [CartController::class,'checkout'])->name('cart.checkout');
 
-Route::get('my-address', [AddressController::class, 'index'])->name('user.index');
-Route::post('get-district', [AddressController::class, 'getDistrict'])->name('user.get-district');
-Route::post('get-ward', [AddressController::class, 'getWard'])->name('user.get-ward');
-Route::post('new-address',[AddressController::class, 'store'])->name('address.new-address');
+Route::get('order-product', [OrderController::class,'index'])->name('order-product.index');
+Route::get('purchase-history', [OrderController::class, 'history'])->name('purchase.history');
+Route::get('detail-history/{id}', [OrderController::class, 'detail'])->name('history.detail');
+
+
+//Route::get('my-address', [AddressController::class, 'index'])->name('user.index');
+//Route::post('get-district', [AddressController::class, 'getDistrict'])->name('user.get-district');
+//Route::post('get-ward', [AddressController::class, 'getWard'])->name('user.get-ward');
+//Route::post('new-address',[AddressController::class, 'store'])->name('address.new-address');
 Route::get('location', [NewAddressController::class ,'index'])->name('location.new-add');
 Route::get('address-delete/{id}', [CartController::class,'delete'])->name('address.delete');
 
@@ -74,12 +79,12 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('delete-product/{id}', [ProductController::class ,'destroy'])->name('product.destroy');
     Route::get('delete-product-image/{id}', [ProductController::class ,'deleteProductImage'])->name('product.delete-image');
 
-    Route::get('users', [AddressController::class ,'index'])->name('user.index');
-    Route::get('create-user', [AddressController::class ,'create'])->name('user.create');
-    Route::post('store-user', [AddressController::class ,'store'])->name('user.store');
-    Route::get('edit-user/{id}', [AddressController::class ,'edit'])->name('user.edit');
-    Route::put('update-user/{id}', [AddressController::class ,'update'])->name('user.update');
-    Route::put('update-user-password/{id}', [AddressController::class ,'updatePassword'])->name('user.update-password');
+    Route::get('users', [UserController::class ,'index'])->name('user.index');
+    Route::get('create-user', [UserController::class ,'create'])->name('user.create');
+    Route::post('store-user', [UserController::class ,'store'])->name('user.store');
+    Route::get('edit-user/{id}', [UserController::class ,'edit'])->name('user.edit');
+    Route::put('update-user/{id}', [UserController::class ,'update'])->name('user.update');
+    Route::put('update-user-password/{id}', [UserController::class ,'updatePassword'])->name('user.update-password');
 
     Route::get('profiles', [ProfileController::class, 'index'])->name('profile.index');
 
@@ -124,6 +129,10 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-animal-detail/{id}', [AnimalDetailController::class ,'edit'])->name('animal-detail.edit');
     Route::put('update-animal-detail/{id}', [AnimalDetailController::class ,'update'])->name('animal-detail.update');
     Route::get('delete-animal-detail/{id}', [AnimalDetailController::class ,'destroy'])->name('animal-detail.destroy');
+
+    Route::get('order', [ListOrderController::class,'index'])->name('order.index');
+    Route::get('edit-order/{id}', [ListOrderController::class,'edit'])->name('order.edit');
+    Route::put('update-order/{id}', [ListOrderController::class,'update'])->name('order.update');
 
 
 });

@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Cart;
-use App\Models\District;
 use App\Models\Product;
 use App\Models\Province;
-use App\Models\Ward;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -90,22 +88,33 @@ class CartController extends Controller
         return redirect('cart-list');
     }
 
-    public function checkout(): View
+//    public function checkout(): View
+//    {
+//
+//        $carts = Cart::where('user_id', Auth::user()->id)->get();
+//        $addresses = Address::where('user_id', Auth::user()->id)->get();
+//
+//        foreach ($carts as $item){
+//            if(! Product::where('id', $item->product_id)->where('stock', '>=', $item->quantity)->exists()){
+//                $removeItem = Cart::where('user_id', Auth::user()->id)->where('product_id', $item->product_id)->first();
+//                $removeItem -> delete();
+//            }
+//        }
+//
+//        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
+//
+//        return view('client.carts.checkout', compact('cartItems','addresses'));
+//    }
+
+    public function delete(string $id): RedirectResponse
     {
+        $address = Address::getAddressByUserId($id);
 
-        $carts = Cart::where('user_id', Auth::user()->id)->get();
-        $provinces = Province::all();
-        $addresses = Address::where('user_id', Auth::user()->id)->get();
+        $address->delete();
 
-        foreach ($carts as $item){
-            if(! Product::where('id', $item->product_id)->where('stock', '>=', $item->quantity)->exists()){
-                $removeItem = Cart::where('user_id', Auth::user()->id)->where('product_id', $item->product_id)->first();
-                $removeItem -> delete();
-            }
-        }
+        toast('Xóa địa chỉ thành công', 'success');
 
-        $cartItems = Cart::where('user_id', Auth::user()->id)->get();
+        return redirect()->back();
 
-        return view('client.carts.checkout', compact('cartItems','provinces','addresses'));
     }
 }

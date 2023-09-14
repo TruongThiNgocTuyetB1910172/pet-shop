@@ -6,7 +6,7 @@ class CurrencyHelper
 {
     public static function format($amount): string
     {
-        return number_format($amount, 0, ',', '.') . ' vn₫';
+        return number_format($amount, 0, ',', '.') . ' vnđ';
     }
 
 }

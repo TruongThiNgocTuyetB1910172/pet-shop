@@ -19,16 +19,6 @@
                 </a>
             </li>
 
-{{--            <li>--}}
-{{--                <a aria-expanded="false" href="{{ route('animal-detail.index') }}">--}}
-{{--                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>--}}
-{{--                    <span class="nav-text">--}}
-{{--                       Quản lý loài vật--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
-
             <li>
                 <a aria-expanded="false" href="{{ route('user.index') }}">
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -48,40 +38,49 @@
             </li>
 
             <li>
-                <a aria-expanded="false" href="{{ route('service.index') }}">
-                    <i class="fa fa-qq" aria-hidden="true"></i>
+                <a aria-expanded="false" href="{{ route('order.index') }}">
+                    <i class="fa fa-user" aria-hidden="true"></i>
                     <span class="nav-text">
-                        Quản lý dịch vụ
+                        Quản lý đơn hàng
                     </span>
                 </a>
             </li>
 
-            <li>
-                <a aria-expanded="false" href="{{ route('package-service.index') }}">
-                    <i class="fa fa-th-large" aria-hidden="true"></i>
-                    <span class="nav-text">
-                        Quản lý gói dịch vụ
-                    </span>
-                </a>
-            </li>
+{{--            <li>--}}
+{{--                <a aria-expanded="false" href="{{ route('service.index') }}">--}}
+{{--                    <i class="fa fa-qq" aria-hidden="true"></i>--}}
+{{--                    <span class="nav-text">--}}
+{{--                        Quản lý dịch vụ--}}
+{{--                    </span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
-            <li>
-                <a aria-expanded="false" href="{{ route('appointment.index') }}">
-                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                    <span class="nav-text">
-                        Quản lý cuộc hẹn
-                    </span>
-                </a>
-            </li>
+{{--            <li>--}}
+{{--                <a aria-expanded="false" href="{{ route('package-service.index') }}">--}}
+{{--                    <i class="fa fa-th-large" aria-hidden="true"></i>--}}
+{{--                    <span class="nav-text">--}}
+{{--                        Quản lý gói dịch vụ--}}
+{{--                    </span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
-            <li>
-                <a aria-expanded="false" href="{{ route('animal-detail.index') }}">
-                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                    <span class="nav-text">
-                            Quản lý loài vật
-                        </span>
-                </a>
-            </li>
+{{--            <li>--}}
+{{--                <a aria-expanded="false" href="{{ route('appointment.index') }}">--}}
+{{--                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>--}}
+{{--                    <span class="nav-text">--}}
+{{--                        Quản lý cuộc hẹn--}}
+{{--                    </span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+{{--            <li>--}}
+{{--                <a aria-expanded="false" href="{{ route('animal-detail.index') }}">--}}
+{{--                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>--}}
+{{--                    <span class="nav-text">--}}
+{{--                            Quản lý loài vật--}}
+{{--                        </span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
         </ul>
     </div>
 </div>

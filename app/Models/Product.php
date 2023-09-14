@@ -39,9 +39,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
-    public function orders(): HasMany
+
+    public function orderProducts(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(OrderProduct::class);
     }
     public static function getProductById(string $id): Model|Collection|Builder|array|null
     {

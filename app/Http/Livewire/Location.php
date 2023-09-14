@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Address;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\User;
 use App\Models\Ward;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -63,19 +64,24 @@ class Location extends Component
             ]);
 
             toast('thêm địa chỉ thành công','success');
-            redirect('checkout');
+
+            redirect('location');
+
         }
         else
         {
            toast('Mỗi người không được quá 3 địa chỉ', 'warning');
-           redirect('checkout');
+
+            redirect('location');
         }
 
     }
 
     public function render()
     {
+        $addresses = Address::where('user_id', Auth::user()->id)->get();
         $provinces = Province::all();
+        $users = User::where('id', Auth::user()->id)->get();
 
         if (! empty($this->provinceId)) {
             $this->districts = District::where('province_id', $this->provinceId)->get();
@@ -86,6 +92,8 @@ class Location extends Component
 
         return view('livewire.location', [
             'provinces' => $provinces,
+            'addresses' =>$addresses,
+            'users' =>$users,
         ]);
     }
 }
