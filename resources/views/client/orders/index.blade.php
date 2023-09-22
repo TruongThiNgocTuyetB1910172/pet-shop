@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        <livewire:order></livewire:order>
+        <livewire:checkout></livewire:checkout>
     </div>
 @endsection

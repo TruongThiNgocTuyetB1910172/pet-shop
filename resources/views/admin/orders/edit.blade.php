@@ -1,21 +1,20 @@
 @extends('admin.layouts.app')
-
 @section('title', 'Cập nhật đơn hàng')
-
 @section('content')
-    <div><h4 class="card-title text-uppercase">Cập nhật đơn hàng</h4></div>
-    <div class="card">
-        <div class="card-body">
-            <div class="basic-form">
-                <div class="text-uppercase text-center"><h4>Thông tin chi tiêt đơn hàng</h4>
-                </div><hr>
-                <div class="row mb-2">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title text-uppercase">Thông tin khách hàng</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
                         <div class="row col-6">
                             <div class="col-md-4 ">
                                 <strong>Tên khách hàng: </strong>
                             </div>
                             <div class="form-group col-md-8">
-                                <input class="form-control" type="text" value="{{$order->user->name}}" readonly="readonly">
+                                <p class="form-control">{{ $order->user->name }}</p>
                             </div>
                         </div>
                         <div class="row col-6">
@@ -23,69 +22,79 @@
                                 <strong>Số điện thoại: </strong>
                             </div>
                             <div class="form-group col-md-8">
-                                <input class="form-control" type="text" value="{{$order->user->phone}}" readonly="readonly">
+                                <p class="form-control" >{{ $order->user->phone }}</p>
                             </div>
                         </div>
                     </div>
-                <div class="row mb-2">
-                    <div class="row col-6">
-                        <div class="col-md-4 ">
-                            <strong>Tổng đơn hàng: </strong>
+                    <div class="row">
+                        <div class="row col-6">
+                            <div class="col-md-4 ">
+                                <strong>Tổng đơn hàng: </strong>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <p class="form-control">{{ CurrencyHelper::format($order->total) }}</p>
+                            </div>
                         </div>
-                        <div class="form-group col-md-8">
-                            <input class="form-control" type="text" value="{{ CurrencyHelper::format($order->total) }}" readonly="readonly">
+                        <div class="row col-6">
+                            <div class="col-md-4 ">
+                                <strong>Phương thức thanh toán: </strong>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <p class="form-control" >Thanh toán bằng tiền mặc</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row col-6">
-                        <div class="col-md-4 ">
-                            <strong>Phương thức thanh toán: </strong>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <input class="form-control" type="text" value="Thanh toán bằng tiền mặc" readonly="readonly">
-                        </div>
-                    </div>
 
-                </div>
-                <div class="row mb-2">
-                    <div class="row col-6">
-                        <div class="col-md-4 ">
-                            <strong>Thời gian đặt hàng: </strong>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <p class="form-control">{{$order->created_at->format('d')}} - {{$order->created_at->format('m')}} -
-                                {{$order->created_at->format('Y')}} <small>{{ $order->created_at->format('g:i A') }}</small></p>
-                        </div>
                     </div>
-                    <div class="row col-6">
-                        <div class="col-md-4 ">
-                            <strong>Thời gian cập nhật: </strong>
+                    <div class="row">
+                        <div class="row col-6">
+                            <div class="col-md-4 ">
+                                <strong>Thời gian đặt hàng: </strong>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <p class="form-control">{{ $order->created_at->format('d') }} - {{ $order->created_at->format('m') }} -
+                                    {{ $order->created_at->format('Y') }} <small>{{ $order->created_at->format('g:i A') }}</small></p>
+                            </div>
                         </div>
-                        <div class="form-group col-md-8">
-                            <p class="form-control">{{$order->updated_at->format('d')}} - {{$order->updated_at->format('m')}} -
-                                {{$order->updated_at->format('Y')}} <small>{{ $order->updated_at->format('g:i A') }}</small></p>
+                        <div class="row col-6">
+                            <div class="col-md-4 ">
+                                <strong>Thời gian cập nhật: </strong>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <p class="form-control">{{ $order->updated_at->format('d') }} - {{ $order->updated_at->format('m') }} -
+                                    {{ $order->updated_at->format('Y') }} <small>{{ $order->updated_at->format('g:i A') }}</small></p>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="row mb-2">
-                    <div class="row col-md-12">
-                        <div class="col-md-2 ">
-                            <strong>Địa chỉ nhận hàng: </strong>
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="col-md-2 ">
+                                <strong>Địa chỉ nhận hàng: </strong>
+                            </div>
+                            <div class="form-group col-md-10">
+                                <p class="form-control">{{ $order->shipping_address }}</p>
+                            </div>
                         </div>
-                        <div class="form-group col-md-10">
-                            <input class="form-control" type="text" value="{{ $order->shipping_address }}" readonly="readonly">
+                    </div>
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <div class="col-md-2 ">
+                                <strong>Ghi chú: </strong>
+                            </div>
+                            <div class="form-group col-md-10">
+                                <p class="form-control">{{ $order->notes }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </section>
     <div class="card">
         <div class="card-body">
             <div class="basic-form">
-                <div class="text-uppercase text-center"><h4>Danh sách sản phẩm của đơn hàng</h4>
-                </div><hr>
+                <div class="text-uppercase text-center"><h4>Thông tin đơn hàng</h4>
+                </div>
                 <table class="table">
                     <thead>
                     <tr>
@@ -121,6 +130,7 @@
                 <form action="{{ route('order.update', ['id' => $order->id]) }}" method="POST">
                     @method('PUT')
                     @csrf
+
                     <div class="form-group">
                         <div class="text-uppercase text-center"><h4>Xác nhận</h4></div>
                         <hr>
@@ -128,21 +138,12 @@
                         <div>
                             <select class="form-control text-center " name="status" style="border: none">
                                 <option>Chọn trạng thái đơn hàng</option>
-                                @switch($order->status)
-                                    @case('pending')
-                                        <option value="pending" >Đang chờ duyệt</option>
-                                    @case('accepted')
-                                        <option value="accepted">Đã được duyệt</option>
-                                    @case('inDelivery')
-                                        <option value="inDelivery">Đang vận chuyển</option>
-                                    @case('success')
-                                        <option value="success">Thành công</option>
-                                    @case('cancel')
-                                        <option value="cancel" >Hủy bỏ</option>
-                                    @case('refund')
-                                        <option value="refund">Hoàn tiền</option>
-                                        @break
-                                @endswitch
+                                <option value="pending"  {{ $order->status ==  'pending' ? 'selected' : ''}}>Đang chờ duyệt</option>
+                                <option value="accepted" {{ $order->status ==  'accepted' ? 'selected' : ''}}>Đã được duyệt</option>
+                                <option value="inDelivery" {{ $order->status ==  'inDelivery' ? 'selected' : ''}}>Đang vận chuyển</option>
+                                <option value="success" {{ $order->status ==  'success' ? 'selected' : ''}}>Thành công</option>
+                                <option value="cancel" {{ $order->status ==  'cancel' ? 'selected' : ''}} >Hủy bỏ</option>
+                                <option value="refund" {{ $order->status ==  'refund' ? 'selected' : ''}}>Hoàn tiền</option>
                             </select>
                         </div>
                     </div>
@@ -154,5 +155,4 @@
             </div>
         </div>
     </div>
-
 @endsection

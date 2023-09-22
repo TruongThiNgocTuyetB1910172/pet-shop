@@ -12,9 +12,10 @@ class CreateUserRequest extends FormRequest
             'name' => ['required','string', 'max:255'],
             'email' => ['required','string', 'unique:users'],
             'phone' => ['required', 'regex:/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/'],
+            'image' => ['nullable'],
             'password' => ['required', 'string', 'min:8', 'max:32'],
-            'is_admin' => ['required', 'in:0,1'],
             'status' => ['required', 'in:0,1'],
+            'gender' => ['required', 'in:0,1'],
         ];
     }
 }

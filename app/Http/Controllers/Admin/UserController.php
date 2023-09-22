@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use App\Traits\ImageTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,7 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
+    use ImageTrait;
     public int $itemPerPage = 10;
 
     public function index(): View
@@ -31,13 +33,16 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
+        $data['image'] = $this->uploadImage($request, 'image', 'images');
+
         User::query()->create([
             'name'=> $data['name'] ,
             'email'=> $data['email'] ,
+            'gender' => $data['gender'],
             'phone'=> $data['phone'] ,
             'password'=> Hash::make($data['password']),
-            'is_admin'=> $data['is_admin'],
             'status' => $data['status'],
+            'image' => $data['image'],
         ]);
 
         toast('Tạo mới người dùng thành công', 'success');
@@ -56,19 +61,25 @@ class UserController extends Controller
     {
         $user = User::getUserById($id);
 
-        if ($user->is_root == 1) {
-            toast('Đây là một tài khoản root bạn không thể cập nhật!', 'warning');
-
-            return redirect('users');
+        $data = $request->validated();
+        if (! $request->hasFile('image')) {
+            $data['image'] = $user->image;
         }
 
-        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $oldImage = 'storage/' . $user->image;
+
+            $this->deleteImage($oldImage);
+
+            $data['image'] = $this->uploadImage($request, 'image', 'images');
+        }
 
         $user->update([
             'name' => $data['name'] ,
             'phone' => $data['phone'] ,
-            'is_admin' => $data['is_admin'],
             'status' => $data['status'],
+            'image' => $data['image'],
+            'gender' => $data['gender'],
         ]);
 
         toast('Cập nhật hồ sơ người dùng thành công', 'success');

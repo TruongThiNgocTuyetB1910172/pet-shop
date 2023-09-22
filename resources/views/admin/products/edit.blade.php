@@ -3,56 +3,87 @@
 @section('title','Cập nhật sản phẩm')
 
 @section('content')
-    <div>  <h4 class="card-title text-uppercase">Cập nhật sản phẩm: {{ $product->name }}</h4></div>
-    <div class="card">
-        <div class="card-body">
-            <div class="basic-form">
-                <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
-                    @method('PUT')
-                    @csrf
-                    <div class="form-group">
-                        <label class="form-label"><strong>Tên sản phẩm: </strong></label>
-                        <div >
-                            <input type="text" class="form-control" name="name" value="{{ $product->name }}" placeholder="Nhập tên sản phâm">
-                            @error('name')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Thêm sản phẩm mới</h3>
+            </div>
+            <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label"><strong>Tên sản phẩm: </strong></label>
+                            <div >
+                                <input type="text" class="form-control" name="name" value="{{ $product->name }}" placeholder="Nhập tên sản phâm">
+                                @error('name')
+                                <span class="text-danger"> {{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label class="form-label"> <strong>Danh mục:</strong></label>
+                            <div class="form-group">
+                                <select class="form-control" name="category_id" >
+                                    <option >Chọn danh mục</option>
+                                    @foreach ($categories as $category )
+                                        <option value="{{ $category->id }}" {{ $product->category->id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <span class="text-danger"> {{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label"> <strong>Danh mục:</strong></label>
-                        <div class="form-group">
-                            <select class="form-control" name="category_id" >
-                                <option >Chọn danh mục</option>
-                                @foreach ($categories as $category )
-                                    <option value="{{ $category->id }}" {{ $product->category->id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
+                   <div class="row">
+                       <div class="form-group col-6">
+                           <label class="form-label"><strong>Mã sản phẩm: </strong></label>
+                           <div >
+                               <input type="text" class="form-control" name="sku" value="{{ $product->sku }}" placeholder="Nhập Mã sản phẩm">
+                               @error('sku')
+                               <span class="text-danger"> {{ $message }}</span>
+                               @enderror
+                           </div>
+                       </div>
 
-                    <div class="form-group">
-                        <label class="form-label"><strong>Mã sản phẩm: </strong></label>
-                        <div >
-                            <input type="text" class="form-control" name="sku" value="{{ $product->sku }}" placeholder="Nhập Mã sản phẩm">
-                            @error('sku')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
+                       <div class="form-group col-6">
+                           <label class="form-label"><strong>Số lượng</strong></label>
+                           <div >
+                               <input type="text" class="form-control" name="stock" value="{{ $product->stock }}" placeholder="Nhập số lượng	">
+                               @error('stock')
+                               <span class="text-danger"> {{ $message }}</span>
+                               @enderror
+                           </div>
+                       </div>
+                   </div>
 
-                    <div class="form-group">
-                        <label class="form-label"><strong>Số lượng</strong></label>
-                        <div >
-                            <input type="text" class="form-control" name="stock" value="{{ $product->stock }}" placeholder="Nhập số lượng	">
-                            @error('stock')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="form-label"><strong>Giá Gốc:</strong></label>
+                            <div >
+                                <input type="text" class="form-control" name="original_price" value="{{ $product->original_price }}" placeholder="Nhập giá góc">
+                                @error('original_price')
+                                <span class="text-danger"> {{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
+
+                        <div class="form-group col-6">
+                            <label class="form-label"><strong>Giá Bán:</strong></label>
+                            <div >
+                                <input type="text" class="form-control" name="selling_price" value="{{ $product->selling_price }}" placeholder="Nhập giá bán">
+                                @error('selling_price')
+                                <span class="text-danger"> {{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
@@ -75,26 +106,6 @@
                                 <input type="radio" id="is_block" name="feature" value="0" @if($product->feature == 0) checked @endif>
                                 <label for="is_block">SP thường</label><br>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label"><strong>Giá Gốc:</strong></label>
-                        <div >
-                            <input type="text" class="form-control" name="original_price" value="{{ $product->original_price }}" placeholder="Nhập giá góc">
-                            @error('original_price')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label"><strong>Giá Bán:</strong></label>
-                        <div >
-                            <input type="text" class="form-control" name="selling_price" value="{{ $product->selling_price }}" placeholder="Nhập giá bán">
-                            @error('selling_price')
-                            <span class="text-danger"> {{ $message }}</span>
-                            @enderror
                         </div>
                     </div>
 
@@ -146,14 +157,37 @@
                             <input type="file" name="product_image[]" multiple>
                         </div>
                     </div>
-
-                    <div class="form-group mt-3">
-                            <button type="submit" class="btn btn-dark">Cập nhật</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                </div>
+            </form>
         </div>
     </div>
+</section>
 
+@endsection
+@section('footer')
+    <script>
+        CKEDITOR.replace( 'editor' );
+
+        function previewFile(input){
+            let file = $("input[type=file]").get(0).files[0];
+            if(file){
+                let reader = new FileReader();
+                reader.onload = function (){
+                    $("#previewImg").attr('src', reader.result);
+                    $("#previewBox").css('display', 'block');
+                }
+                $(".form-file-group").css('display', 'none');
+                reader.readAsDataURL(file);
+            }
+        }
+        function removePreview(){
+            $("#previewImg").attr('src',"");
+            $("#previewBox").css('display', 'none');
+            $(".form-file-group").css('display', 'block');
+        }
+    </script>
 @endsection
 

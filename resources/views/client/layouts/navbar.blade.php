@@ -40,11 +40,28 @@
                                 <li>
                                     <a href="{{ route('purchase.history') }}">Đơn hàng của tôi</a>
                                 </li>
-                                @if(Auth::user()->is_admin == '1')
-                                    <li>
-                                        <a href="{{ url('/dashboard') }}">Trang quản trị</a>
-                                    </li>
-                                @endif
+                            </ul>
+                        </li>
+                        @elseif(Auth::check())
+                        <li>
+                            <a href="#">
+                                {{ auth('admin')->user()->name }}
+                            </a>
+                            <ul>
+                                <li><a href="" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Đăng xuất
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('location.new-add') }}">Trang cá nhân</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('purchase.history') }}">Đơn hàng của tôi</a>
+                                </li>
                             </ul>
                         </li>
                         @else

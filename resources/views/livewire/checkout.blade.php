@@ -37,13 +37,9 @@
 
         </head>
         <body class="animsition">
-
         <div class="bg0 p-t-95 p-b-50">
             <div class="container">
-
                 <form wire:submit.prevent="checkout">
-
-
                     <div class="p-t-17 p-b-70">
 
                         <div class="m-t-35 dis-none js-panel1">

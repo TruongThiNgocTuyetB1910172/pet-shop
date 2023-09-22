@@ -10,7 +10,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="admin/css/style.css" rel="stylesheet">
+    <link href="form/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -106,11 +106,11 @@
     </div>
 </section>
 
-<script src="admin/plugins/common/common.min.js"></script>
-<script src="admin/js/custom.min.js"></script>
-<script src="admin/js/settings.js"></script>
-<script src="admin/js/gleek.js"></script>
-<script src="admin/js/styleSwitcher.js"></script>
+<script src="form/plugins/common/common.min.js"></script>
+<script src="form/js/custom.min.js"></script>
+<script src="form/js/settings.js"></script>
+<script src="form/js/gleek.js"></script>
+<script src="form/js/styleSwitcher.js"></script>
 </body>
 </html>
 

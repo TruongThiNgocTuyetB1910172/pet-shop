@@ -3,37 +3,55 @@
 @section('title','Danh sách người dùng')
 
 @section('content')
-    <div class="mb-3">
-        <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới người dùng</a>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <h4>Danh sách người dùng</h4>
-                    <hr>
+<div class="row">
+    <div class="col-12">
+        <div class="mb-3">
+            <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Thêm khách hàng</a>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách khách hàng</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 500px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-head-fixed text-nowrap">
                     <thead>
                     <tr>
                         <th>Id</th>
                         <th>Tên người dùng</th>
+                        <th>Hình ảnh</th>
                         <th>Email</th>
                         <th>Số điện thoại</th>
-                        <th>Quyền</th>
+                        <th>Giới tính </th>
                         <th>Ngày thêm</th>
                         <th>Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
+                    @if($users->count() > 0)
+                        @foreach ($users as $user)
                         <tr>
                             <th>{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
+                            <td><img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
+                                     width="50px" height="50px"></td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
-                            @if($user->is_admin === 1)
-                                <td><span class="badge badge-success">Admin</span></td>
+                            @if($user->gender === 1)
+                                <td><span class="badge badge-success">Nam</span></td>
                             @else
-                                <td><span span class="badge badge-primary">User</span></td>
+                                <td><span span class="badge badge-primary">Nữ</span></td>
                             @endif
                             <td>{{$user->created_at->format('d')}} - {{$user->created_at->format('m')}} -
                                 {{$user->created_at->format('Y')}} <small>{{ $user->created_at->format('g:i A') }}</small>
@@ -44,10 +62,17 @@
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                        @endforeach
+
                     </tbody>
                 </table>
 
+                @else
+                    <div class="text-center mt-3 mb-3">
+                        <strong>Không có dữ liệu nào được thêm vào</strong>
+                    </div>
+
+                @endif
                 {{ $users->links() }}
             </div>
         </div>

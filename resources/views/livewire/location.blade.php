@@ -8,6 +8,7 @@
                         <p><a>Mật khẩu</a></p>
                         <p><a>Lịch sử mua hàng</a></p>
                     </div>
+
                     <div class="col-md-4" >
                         @foreach($users as $user)
                             <div class="text-uppercase text-center"  >
@@ -141,9 +142,9 @@
                     </form>
                 </div>
             </div>
-
         </div>
         <hr>
     </section>
 </div>
+
 
