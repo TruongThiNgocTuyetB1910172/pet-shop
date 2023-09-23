@@ -1,86 +1,82 @@
-<div class="nk-sidebar">
-    <div class="nk-nav-scroll">
-        <ul class="metismenu" id="menu">
-            <li>
-                <a aria-expanded="false" href="{{ route('category.index') }}">
-                    <i class="fa fa-tags"></i>
-                    <span class="nav-text">
-                        Quản lý danh mục
-                    </span>
-                </a>
-            </li>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="index3.html" class="brand-link">
+        <img src="admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+            </div>
+        </div>
 
-            <li>
-                <a aria-expanded="false" href="{{ route('product.index') }}">
-                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    <span class="nav-text">
-                       Quản lý sản phẩm
-                    </span>
-                </a>
-            </li>
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-            <li>
-                <a aria-expanded="false" href="{{ route('user.index') }}">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <span class="nav-text">
-                        Quản lý người dùng
-                    </span>
-                </a>
-            </li>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('category.index') }}" class="nav-link">
+                        <i class="fa fa-tags"></i>
+                        <p>
+                            Quản lý danh mục
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('product.index') }}" class="nav-link">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                        <p>
+                            Quản lý sản phẩm
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('banner.index') }}" class="nav-link">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        <p>
+                            Quản lý banner
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('user.index') }}" class="nav-link">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <p>
+                            Quản lý khách hàng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('order.index') }}" class="nav-link">
+                        <i class="fa fa-th-large" aria-hidden="true"></i>
+                        <p>
+                            Quản lý đơn hàng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('account.index') }}" class="nav-link">
+                        <i class="fa fa-th-large" aria-hidden="true"></i>
+                        <p>
+                            Quản lý tài khoản
+                        </p>
+                    </a>
+                </li>
 
-            <li>
-                <a aria-expanded="false" href="{{ route('banner.index') }}">
-                    <i class="fa fa-picture-o" aria-hidden="true"></i>
-                    <span class="nav-text">
-                        Quản lý banner
-                    </span>
-                </a>
-            </li>
-
-            <li>
-                <a aria-expanded="false" href="{{ route('order.index') }}">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <span class="nav-text">
-                        Quản lý đơn hàng
-                    </span>
-                </a>
-            </li>
-
-{{--            <li>--}}
-{{--                <a aria-expanded="false" href="{{ route('service.index') }}">--}}
-{{--                    <i class="fa fa-qq" aria-hidden="true"></i>--}}
-{{--                    <span class="nav-text">--}}
-{{--                        Quản lý dịch vụ--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
-{{--            <li>--}}
-{{--                <a aria-expanded="false" href="{{ route('package-service.index') }}">--}}
-{{--                    <i class="fa fa-th-large" aria-hidden="true"></i>--}}
-{{--                    <span class="nav-text">--}}
-{{--                        Quản lý gói dịch vụ--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
-{{--            <li>--}}
-{{--                <a aria-expanded="false" href="{{ route('appointment.index') }}">--}}
-{{--                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>--}}
-{{--                    <span class="nav-text">--}}
-{{--                        Quản lý cuộc hẹn--}}
-{{--                    </span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
-{{--            <li>--}}
-{{--                <a aria-expanded="false" href="{{ route('animal-detail.index') }}">--}}
-{{--                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>--}}
-{{--                    <span class="nav-text">--}}
-{{--                            Quản lý loài vật--}}
-{{--                        </span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-        </ul>
+            </ul>
+        </nav>
     </div>
-</div>
+</aside>

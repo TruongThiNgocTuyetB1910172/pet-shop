@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,9 @@ class OrderController extends Controller
 
     public function index(): View
     {
-        $orders = Order::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
+        $orders = Order::orderByDesc('created_at')
+            ->with('admin')
+            ->paginate($this->itemPerPage);
 
         return view('admin.orders.index', compact('orders'));
     }
@@ -39,8 +42,22 @@ class OrderController extends Controller
 
         $order->update([
             'status' => $data['status'],
-            'staff' => Auth::user()->id,
+            'staff' => Auth::guard('admin')->user()->id,
         ]);
+
+        if ($order->status == 'cancel'){
+            $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+            foreach ($orderProduct as $product){
+                OrderProduct::updated([
+                    'quantity' => $product->quantity,
+                ]);
+                $findProduct = Product::getProductById($product->product->id);
+
+                $findProduct->update([
+                    'stock' => $findProduct->stock + $product->quantity,
+                ]);
+            }
+        }
 
         toast('Cập nhật trạng thái thành công', 'success');
 

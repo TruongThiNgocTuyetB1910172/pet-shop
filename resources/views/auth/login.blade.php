@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Đăng nhập</title>
-    <link href="admin/css/style.css" rel="stylesheet">
+    <link href="form/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -101,10 +101,10 @@
     </div>
 </section>
 
-<script src="admin/plugins/common/common.min.js"></script>
-<script src="admin/js/custom.min.js"></script>
-<script src="admin/js/settings.js"></script>
-<script src="admin/js/gleek.js"></script>
-<script src="admin/js/styleSwitcher.js"></script>
+<script src="form/plugins/common/common.min.js"></script>
+<script src="form/js/custom.min.js"></script>
+<script src="form/js/settings.js"></script>
+<script src="form/js/gleek.js"></script>
+<script src="form/js/styleSwitcher.js"></script>
 </body>
 </html>
