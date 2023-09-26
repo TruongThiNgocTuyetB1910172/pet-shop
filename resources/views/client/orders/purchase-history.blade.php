@@ -9,10 +9,10 @@
         <h3 class="heading-style-3">Shop Cart</h3>
     </section>
     <hr>
+
     <section class="boxed-sm">
         <div class="container">
             @if ($orders->count() > 0)
-
                 <div class="woocommerce">
                     <form class="woocommerce-cart-form">
                         <table class="woocommerce-cart-table">
@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $order->id }}</td>
                                     <td class="product-name" >
-                                       {{ $order->shipping_address }}
+                                        {{ $order->shipping_address }}
                                     </td>
                                     @if($order->status === 'pending')
                                         <td><span class="badge badge-danger" style="background-color:#5252f3">Đang chờ duyệt</span></td>
@@ -71,7 +71,9 @@
             @endif
         </div>
     </section>
+
 @endsection
+
 
 
 

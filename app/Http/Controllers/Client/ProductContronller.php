@@ -13,7 +13,7 @@ use Illuminate\View\View;
 
 class ProductContronller extends Controller
 {
-    public int $itemPerPage = 6;
+    public int $itemPerPage = 8;
 
     public function index(): View
     {

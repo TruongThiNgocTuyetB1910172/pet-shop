@@ -1,174 +1,130 @@
-<div class="header">
-    <div class="header-content clearfix">
-        <div class="nav-control">
-            <div class="hamburger">
-                <span class="toggle-icon"><i class="icon-menu"></i></span>
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ route('home') }}" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Contact</a>
+        </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+        <li class="nav-item">
+            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+                <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-        <div class="header-left">
-            <div class="input-group icons">
-                <div class="input-group-prepend">
-                    <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-                </div>
-                <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
-                <div class="drop-down animated flipInX d-md-none">
-                    <form action="#">
-                        <input type="text" class="form-control" placeholder="Search">
+        </li>
+
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-comments"></i>
+                <span class="badge badge-danger navbar-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Brad Diesel
+                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">Call me whenever you can...</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                John Pierce
+                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">I got your message bro</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Nora Silvester
+                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">The subject goes here</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            </div>
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <i class="fa fa-address-card-o" aria-hidden="true"></i> Trang cá nhân
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();" class="dropdown-item" ><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
                     </form>
-                </div>
+                </a>
+                <div class="dropdown-divider"></div>
+
             </div>
-        </div>
-        <div class="header-right">
-            <ul class="clearfix">
-                <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                        <i class="mdi mdi-email-outline"></i>
-                        <span class="badge badge-pill gradient-1">3</span>
-                    </a>
-                    <div class="drop-down animated fadeIn dropdown-menu">
-                        <div class="dropdown-content-heading d-flex justify-content-between">
-                            <span class="">3 New Messages</span>
-                            <a href="javascript:void()" class="d-inline-block">
-                                <span class="badge badge-pill gradient-1">3</span>
-                            </a>
-                        </div>
-                        <div class="dropdown-content-body">
-                            <ul>
-                                <li class="notification-unread">
-                                    <a href="javascript:void()">
-                                        <img class="float-left mr-3 avatar-img" src="admin/images/avatar/1.jpg" alt="">
-                                        <div class="notification-content">
-                                            <div class="notification-heading">Saiful Islam</div>
-                                            <div class="notification-timestamp">08 Hours ago</div>
-                                            <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-unread">
-                                    <a href="javascript:void()">
-                                        <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
-                                        <div class="notification-content">
-                                            <div class="notification-heading">Adam Smith</div>
-                                            <div class="notification-timestamp">08 Hours ago</div>
-                                            <div class="notification-text">Can you do me a favour?</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
-                                        <div class="notification-content">
-                                            <div class="notification-heading">Barak Obama</div>
-                                            <div class="notification-timestamp">08 Hours ago</div>
-                                            <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
-                                        <div class="notification-content">
-                                            <div class="notification-heading">Hilari Clinton</div>
-                                            <div class="notification-timestamp">08 Hours ago</div>
-                                            <div class="notification-text">Hello</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                        <i class="mdi mdi-bell-outline"></i>
-                        <span class="badge badge-pill gradient-2">3</span>
-                    </a>
-                    <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
-                        <div class="dropdown-content-heading d-flex justify-content-between">
-                            <span class="">2 New Notifications</span>
-                            <a href="javascript:void()" class="d-inline-block">
-                                <span class="badge badge-pill gradient-2">5</span>
-                            </a>
-                        </div>
-                        <div class="dropdown-content-body">
-                            <ul>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                        <div class="notification-content">
-                                            <h6 class="notification-heading">Events near you</h6>
-                                            <span class="notification-text">Within next 5 days</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                        <div class="notification-content">
-                                            <h6 class="notification-heading">Event Started</h6>
-                                            <span class="notification-text">One hour ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                        <div class="notification-content">
-                                            <h6 class="notification-heading">Event Ended Successfully</h6>
-                                            <span class="notification-text">One hour ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-present"></i></span>
-                                        <div class="notification-content">
-                                            <h6 class="notification-heading">Events to Join</h6>
-                                            <span class="notification-text">After two days</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </li>
-                <li class="icons dropdown">
-                    <div class="user-img c-pointer position-relative" data-toggle="dropdown">
-                        <span class="activity active"></span>
-                        <img src="admin/images/user/1.png" height="40" width="40" alt="">
-                    </div>
-                    <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
-                        <div class="dropdown-content-body">
-                            <ul>
-                                <li>
-                                    <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void()">
-                                        <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
-                                    </a>
-                                </li>
-
-                                <hr class="my-2">
-                                <li>
-                                    <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+                <i class="fas fa-th-large"></i>
+            </a>
+        </li>
+    </ul>
+</nav>

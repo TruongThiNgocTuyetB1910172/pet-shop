@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\AnimalDetailController ;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ServicePackageController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\ClientController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,13 +22,26 @@ use \App\Http\Controllers\SocialiteController;
 use \App\Http\Controllers\Client\ClientOrderController;
 use \App\Http\Controllers\Admin\OrderController;
 use \App\Http\Controllers\Admin\ReceiptController;
+use \App\Http\Controllers\Admin\AccountController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
 Auth::routes(['verify' => true]);
 
 Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
 
+Route::get('/admin/login',[LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
+Route::post('/admin/login',[LoginController::class,'adminLogin'])->name('admin.login');
 
 Route::get('/', [ClientController::class, 'index']) ->name('home');
 Route::get('products-list', [ProductContronller::class, 'index'])->name('product-list.index');
@@ -43,12 +56,13 @@ Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.d
 Route::get('order-product', [ClientOrderController::class,'index'])->name('order-product.index');
 Route::get('purchase-history', [ClientOrderController::class, 'history'])->name('purchase.history');
 Route::get('detail-history/{id}', [ClientOrderController::class, 'detail'])->name('history.detail');
+Route::get('order-cancel/{id}', [ClientOrderController::class,'cancel'])->name('order.cancel');
 
 Route::get('location', [NewAddressController::class ,'index'])->name('location.new-add');
 Route::get('address-delete/{id}', [CartController::class,'delete'])->name('address.delete');
 
-Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function () {
-    Route::get('/dashboard', [HomeController::class ,'index']);
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/dashboard', [HomeController::class ,'index'])->name('dashboard');
 
     Route::get('categories', [CategoryController::class ,'index'])->name('category.index');
     Route::get('create-category', [CategoryController::class ,'create'])->name('category.create');
@@ -71,8 +85,6 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-user/{id}', [UserController::class ,'edit'])->name('user.edit');
     Route::put('update-user/{id}', [UserController::class ,'update'])->name('user.update');
     Route::put('update-user-password/{id}', [UserController::class ,'updatePassword'])->name('user.update-password');
-
-    Route::get('profiles', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::get('banners', [BannerController::class, 'index'])->name('banner.index');
     Route::get('create-banner', [BannerController::class ,'create'])->name('banner.create');
@@ -120,7 +132,12 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('edit-order/{id}', [OrderController::class,'edit'])->name('order.edit');
     Route::put('update-order/{id}', [OrderController::class,'update'])->name('order.update');
 
+    Route::get('account', [AccountController::class, 'index'])->name('account.index');
+    Route::get('create-account', [AccountController::class, 'create'])->name('account.create');
+    Route::post('store-account', [AccountController::class, 'store'])->name('account.store');
+    Route::get('edit-account/{id}', [AccountController::class, 'edit'])->name('account.edit');
+    Route::put('update-account/{id}', [AccountController::class, 'update'])->name('account.update');
+
     Route::get('receipt', [ReceiptController::class, 'index'])->name('receipt.index');
     Route::get('receipt', [ReceiptController::class, 'create'])->name('receipt.create');
-
 });
