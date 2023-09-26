@@ -21,17 +21,8 @@ use \App\Http\Controllers\Client\NewAddressController;
 use \App\Http\Controllers\SocialiteController;
 use \App\Http\Controllers\Client\ClientOrderController;
 use \App\Http\Controllers\Admin\OrderController;
+use \App\Http\Controllers\Admin\ReceiptController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Auth::routes(['verify' => true]);
 
@@ -128,5 +119,8 @@ Route::middleware(['auth', 'admin', 'activated', 'verified'])->group(function ()
     Route::get('order', [OrderController::class,'index'])->name('order.index');
     Route::get('edit-order/{id}', [OrderController::class,'edit'])->name('order.edit');
     Route::put('update-order/{id}', [OrderController::class,'update'])->name('order.update');
+
+    Route::get('receipt', [ReceiptController::class, 'index'])->name('receipt.index');
+    Route::get('receipt', [ReceiptController::class, 'create'])->name('receipt.create');
 
 });

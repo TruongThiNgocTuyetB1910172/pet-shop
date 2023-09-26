@@ -44,6 +44,11 @@ class Product extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function receiptDetails(): HasMany
+    {
+        return $this->hasMany(ReceiptDetail::class);
+    }
     public static function getProductById(string $id): Model|Collection|Builder|array|null
     {
         return Product::query()->findOrFail($id);
