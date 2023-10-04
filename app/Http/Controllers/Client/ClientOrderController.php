@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
@@ -14,10 +13,14 @@ use Illuminate\View\View;
 
 class ClientOrderController extends Controller
 {
-
     public function index(): View
     {
         return view('client.orders.index');
+    }
+
+    public function thankYou(): View
+    {
+        return view('client.orders.thank-you');
     }
 
     public function history(): View
@@ -33,7 +36,7 @@ class ClientOrderController extends Controller
 
         $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
-        return view('client.orders.detail', compact('order','orderProduct'));
+        return view('client.orders.detail', compact('order', 'orderProduct'));
     }
 
     public function cancel(string $id): RedirectResponse
@@ -45,7 +48,7 @@ class ClientOrderController extends Controller
         $order->update([
             'status' => 'cancel',
         ]);
-        foreach ($orderProduct as $product){
+        foreach ($orderProduct as $product) {
             OrderProduct::updated([
                 'quantity' => $product->quantity,
             ]);

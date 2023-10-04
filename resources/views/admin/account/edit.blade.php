@@ -3,7 +3,7 @@
 @section('title','Cập nhât tài khoản')
 
 @section('content')
-
+<div class="my-3">
     <section class="content">
         <div class="container-fluid">
             <!-- general form elements -->
@@ -112,16 +112,16 @@
                             <span class="text-danger"> {{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        </div>
                     </div>
                 </form>
             </div>
 
         </div>
     </section>
+</div>
     <section class="content">
         <div class="container-fluid">
             <!-- general form elements -->
@@ -132,7 +132,6 @@
                 <form action="{{ route('user.update-password', ['id' => $account->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="card">
                         <div class="card-body">
                             <div class="form-group">
                                 <label class="form-label"><strong>Mật khẩu mới:</strong></label>
@@ -145,21 +144,17 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
 
         </div>
     </section>
-
 @endsection
-
 @section('footer')
     @section('footer')
         <script>

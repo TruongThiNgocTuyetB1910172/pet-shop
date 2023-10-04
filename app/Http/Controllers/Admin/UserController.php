@@ -19,7 +19,19 @@ class UserController extends Controller
 
     public function index(): View
     {
-        $users= User::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+        $search = '%' . $searchTerm . '%';
+
+        $users = User::where(function ($query) use ($search) {
+            $query->where('name', 'like', $search)
+                ->orwhere('email', 'like', $search);
+        })->orderByDesc('created_at')
+            ->paginate($this->itemPerPage);
+
 
         return view('admin.users.index', compact('users'));
     }
@@ -36,11 +48,11 @@ class UserController extends Controller
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
         User::query()->create([
-            'name'=> $data['name'] ,
-            'email'=> $data['email'] ,
+            'name' => $data['name'] ,
+            'email' => $data['email'] ,
             'gender' => $data['gender'],
-            'phone'=> $data['phone'] ,
-            'password'=> Hash::make($data['password']),
+            'phone' => $data['phone'] ,
+            'password' => Hash::make($data['password']),
             'status' => $data['status'],
             'image' => $data['image'],
         ]);

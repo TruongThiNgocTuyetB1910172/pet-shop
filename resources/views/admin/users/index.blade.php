@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="mb-3">
+        <div class="mb-3 mt-3">
             <a href="{{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Thêm khách hàng</a>
         </div>
         <div class="card">
@@ -13,7 +13,13 @@
                 <h3 class="card-title">Danh sách khách hàng</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 500px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <form method="GET">
+                            <input
+                                type="text"
+                                name="searchTerm"
+                                class="form-control float-right"
+                                placeholder="Search">
+                        </form>
 
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
@@ -23,7 +29,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
@@ -66,14 +71,15 @@
 
                     </tbody>
                 </table>
-
                 @else
                     <div class="text-center mt-3 mb-3">
                         <strong>Không có dữ liệu nào được thêm vào</strong>
                     </div>
-
                 @endif
-                {{ $users->links() }}
+                <div class="my-3 mx-3">
+                    {{ $users->links() }}
+                </div>
+
             </div>
         </div>
     </div>

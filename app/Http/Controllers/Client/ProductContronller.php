@@ -18,10 +18,21 @@ class ProductContronller extends Controller
     public function index(): View
     {
         $categories = Category::all();
-        $products = Product::query()
+
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+        $search = '%' . $searchTerm . '%';
+
+        $products = Product::where(function ($query) use ($search) {
+            $query->where('name', 'like', $search)
+                ->orwhere('selling_price', 'like', $search);
+        }) ->orderByDesc('created_at')
             ->where('stock', '>', 0)
-            ->orderByDesc('created_at')
             ->paginate($this->itemPerPage);
+
         return view('client.products.list', compact('products', 'categories'));
     }
 

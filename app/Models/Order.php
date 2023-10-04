@@ -19,13 +19,8 @@ class Order extends Model
         'notes',
         'shipping_address',
         'tracking_number',
-        'staff',
+        'admin_id',
     ];
-
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
 
     public function user(): BelongsTo
     {
@@ -33,7 +28,7 @@ class Order extends Model
     }
     public function admin(): BelongsTo
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class, 'admin_id');
     }
 
     public function orderProducts(): HasMany

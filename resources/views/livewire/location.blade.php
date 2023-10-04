@@ -4,11 +4,27 @@
             <div class="woocommerce">
                 <div class="row ">
                     <div class="col-md-2">
-                        <p><a>Tài khoản</a></p>
-                        <p><a>Mật khẩu</a></p>
-                        <p><a>Lịch sử mua hàng</a></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+                            </li>
+                        </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+                        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+                        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
                     </div>
-
+                    </div>
                     <div class="col-md-4" >
                         @foreach($users as $user)
                             <div class="text-uppercase text-center"  >
@@ -17,7 +33,7 @@
                             </div>
                             <div>
                                 <div style=" text-align: center">
-                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/hinh-anh-anime-co-trang-1.jpg" width="100px", height="100px" style="border-radius: 50%;">
+                                    <img src="{{( 'storage/'.$user->image) }}" width="100px", height="100px" style="border-radius: 50%;">
                                     <p>Ảnh đại diện</p>
                                 </div>
                                 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -32,7 +48,6 @@
                             </div>
                         @endforeach
                     </div>
-
                     <form  wire:submit.prevent="addNew" method="POST" class="woocommerce-checkout col-md-6 ">
                         <div class="text-uppercase text-center" >
                             <h4><strong>Địa chỉ giao hàng</strong></h4>

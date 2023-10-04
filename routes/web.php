@@ -17,12 +17,12 @@ use App\Http\Controllers\Client\ProductContronller;
 use App\Http\Controllers\Client\ServiceContronller;
 use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Admin\VariantServiceController;
-use \App\Http\Controllers\Client\NewAddressController;
-use \App\Http\Controllers\SocialiteController;
-use \App\Http\Controllers\Client\ClientOrderController;
-use \App\Http\Controllers\Admin\OrderController;
-use \App\Http\Controllers\Admin\ReceiptController;
-use \App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Client\NewAddressController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\Client\ClientOrderController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ReceiptController;
+use App\Http\Controllers\Admin\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,28 +40,34 @@ Auth::routes(['verify' => true]);
 Route::get('auth/{provider}/redirect', [SocialiteController::class, 'redirect'])->name('socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])->name('socialite.callback');
 
-Route::get('/admin/login',[LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
-Route::post('/admin/login',[LoginController::class,'adminLogin'])->name('admin.login');
+Route::get('/admin/login', [LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
+Route::post('/admin/login', [LoginController::class,'adminLogin'])->name('admin.login');
 
 Route::get('/', [ClientController::class, 'index']) ->name('home');
 Route::get('products-list', [ProductContronller::class, 'index'])->name('product-list.index');
 Route::get('services-list', [ServiceContronller::class, 'index'])->name('service-list.index');
 Route::get('product-detail/{id}', [ProductContronller::class, 'detail'])->name('product-list.detail');
 
-Route::post('cart/{id}', [ProductContronller::class,'addToCart'])->name('cart.add-to-cart')->middleware(['auth', 'verified']);
-Route::get('cart-list', [CartController::class,'index'])->name('cart-list.index');
-Route::put('cart-update',[CartController::class, 'update'])->name('cart-update');
-Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::middleware(['auth','verified'])->group(function () {
 
-Route::get('order-product', [ClientOrderController::class,'index'])->name('order-product.index');
-Route::get('purchase-history', [ClientOrderController::class, 'history'])->name('purchase.history');
-Route::get('detail-history/{id}', [ClientOrderController::class, 'detail'])->name('history.detail');
-Route::get('order-cancel/{id}', [ClientOrderController::class,'cancel'])->name('order.cancel');
+    Route::post('cart/{id}', [ProductContronller::class, 'addToCart'])->name('cart.add-to-cart');
+    Route::get('cart-list', [CartController::class, 'index'])->name('cart-list.index');
+    Route::put('cart-update', [CartController::class, 'update'])->name('cart-update');
+    Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
-Route::get('location', [NewAddressController::class ,'index'])->name('location.new-add');
-Route::get('address-delete/{id}', [CartController::class,'delete'])->name('address.delete');
+    Route::get('order-product', [ClientOrderController::class, 'index'])->name('order-product.index');
+    Route::get('thank-you', [ClientOrderController::class,'thankYou'])->name('order.thank-you');
+    Route::get('purchase-history', [ClientOrderController::class, 'history'])->name('purchase.history');
+    Route::get('detail-history/{id}', [ClientOrderController::class, 'detail'])->name('history.detail');
+    Route::get('order-cancel/{id}', [ClientOrderController::class, 'cancel'])->name('order.cancel');
+
+    Route::get('location', [NewAddressController::class, 'index'])->name('location.new-add');
+    Route::get('address-delete/{id}', [CartController::class, 'delete'])->name('address.delete');
+});
+
 
 Route::middleware(['auth:admin'])->group(function () {
+
     Route::get('/dashboard', [HomeController::class ,'index'])->name('dashboard');
 
     Route::get('categories', [CategoryController::class ,'index'])->name('category.index');
@@ -139,5 +145,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('update-account/{id}', [AccountController::class, 'update'])->name('account.update');
 
     Route::get('receipt', [ReceiptController::class, 'index'])->name('receipt.index');
-    Route::get('receipt', [ReceiptController::class, 'create'])->name('receipt.create');
+    Route::get('create-receipt', [ReceiptController::class, 'create'])->name('receipt.create');
+    Route::post('add-product', [ReceiptController::class, 'addProductItemToReceipt'])->name('receipt.add-product-item-to-receipt');
+    Route::get('show-receipt', [ReceiptController::class, 'getReceiptProduct'])->name('receipt.get-receipt-product');
+    Route::post('add-price-quantity', [ReceiptController::class,'addPriceAndQuantity'])->name('receipt.add-price-and-quantity');
+    Route::post('store-receipt', [ReceiptController::class, 'storeReceipt'])->name('receipt.store-receipt');
+    Route::get('edit-receipt/{id}', [ReceiptController::class, 'edit'])->name('receipt.edit');
+    Route::put('update-receipt/{id}', [ReceiptController::class, 'update'])->name('receipt.update');
 });

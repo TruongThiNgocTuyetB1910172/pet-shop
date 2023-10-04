@@ -1,95 +1,97 @@
 @extends('admin.layouts.app')
 @section('title', 'Cập nhật đơn hàng')
 @section('content')
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title text-uppercase">Thông tin khách hàng</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="row col-6">
-                            <div class="col-md-4 ">
-                                <strong>Tên khách hàng: </strong>
-                            </div>
-                            <div class="form-group col-md-8">
-                                <p class="form-control">{{ $order->user->name }}</p>
-                            </div>
-                        </div>
-                        <div class="row col-6">
-                            <div class="col-md-4 ">
-                                <strong>Số điện thoại: </strong>
-                            </div>
-                            <div class="form-group col-md-8">
-                                <p class="form-control" >{{ $order->user->phone }}</p>
-                            </div>
-                        </div>
+    <div class="my-3">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title text-uppercase">Thông tin khách hàng</h3>
                     </div>
-                    <div class="row">
-                        <div class="row col-6">
-                            <div class="col-md-4 ">
-                                <strong>Tổng đơn hàng: </strong>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="row col-6">
+                                <div class="col-md-4 ">
+                                    <strong>Tên khách hàng: </strong>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p class="form-control">{{ $order->user->name }}</p>
+                                </div>
                             </div>
-                            <div class="form-group col-md-8">
-                                <p class="form-control">{{ CurrencyHelper::format($order->total) }}</p>
+                            <div class="row col-6">
+                                <div class="col-md-4 ">
+                                    <strong>Số điện thoại: </strong>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p class="form-control" >{{ $order->user->phone }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="row col-6">
-                            <div class="col-md-4 ">
-                                <strong>Phương thức thanh toán: </strong>
+                        <div class="row">
+                            <div class="row col-6">
+                                <div class="col-md-4 ">
+                                    <strong>Tổng đơn hàng: </strong>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p class="form-control">{{ CurrencyHelper::format($order->total) }}</p>
+                                </div>
                             </div>
-                            <div class="form-group col-md-8">
-                                <p class="form-control" >Thanh toán bằng tiền mặc</p>
+                            <div class="row col-6">
+                                <div class="col-md-4 ">
+                                    <strong>Phương thức thanh toán: </strong>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p class="form-control" >Thanh toán bằng tiền mặc</p>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="row col-6">
-                            <div class="col-md-4 ">
-                                <strong>Thời gian đặt hàng: </strong>
-                            </div>
-                            <div class="form-group col-md-8">
-                                <p class="form-control">{{ $order->created_at->format('d') }} - {{ $order->created_at->format('m') }} -
-                                    {{ $order->created_at->format('Y') }} <small>{{ $order->created_at->format('g:i A') }}</small></p>
-                            </div>
                         </div>
-                        <div class="row col-6">
-                            <div class="col-md-4 ">
-                                <strong>Thời gian cập nhật: </strong>
+                        <div class="row">
+                            <div class="row col-6">
+                                <div class="col-md-4 ">
+                                    <strong>Thời gian đặt hàng: </strong>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p class="form-control">{{ $order->created_at->format('d') }} - {{ $order->created_at->format('m') }} -
+                                        {{ $order->created_at->format('Y') }} <small>{{ $order->created_at->format('g:i A') }}</small></p>
+                                </div>
                             </div>
-                            <div class="form-group col-md-8">
-                                <p class="form-control">{{ $order->updated_at->format('d') }} - {{ $order->updated_at->format('m') }} -
-                                    {{ $order->updated_at->format('Y') }} <small>{{ $order->updated_at->format('g:i A') }}</small></p>
+                            <div class="row col-6">
+                                <div class="col-md-4 ">
+                                    <strong>Thời gian cập nhật: </strong>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <p class="form-control">{{ $order->updated_at->format('d') }} - {{ $order->updated_at->format('m') }} -
+                                        {{ $order->updated_at->format('Y') }} <small>{{ $order->updated_at->format('g:i A') }}</small></p>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="row col-md-12">
-                            <div class="col-md-2 ">
-                                <strong>Địa chỉ nhận hàng: </strong>
-                            </div>
-                            <div class="form-group col-md-10">
-                                <p class="form-control">{{ $order->shipping_address }}</p>
+                        </div>
+                        <div class="row">
+                            <div class="row col-md-12">
+                                <div class="col-md-2 ">
+                                    <strong>Địa chỉ nhận hàng: </strong>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <p class="form-control">{{ $order->shipping_address }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="row col-md-12">
-                            <div class="col-md-2 ">
-                                <strong>Ghi chú: </strong>
-                            </div>
-                            <div class="form-group col-md-10">
-                                <p class="form-control">{{ $order->notes }}</p>
+                        <div class="row">
+                            <div class="row col-md-12">
+                                <div class="col-md-2 ">
+                                    <strong>Ghi chú: </strong>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <p class="form-control">{{ $order->notes }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="basic-form">

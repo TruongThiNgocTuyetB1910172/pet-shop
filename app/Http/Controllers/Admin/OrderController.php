@@ -17,8 +17,20 @@ class OrderController extends Controller
 
     public function index(): View
     {
-        $orders = Order::orderByDesc('created_at')
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+
+        $search = '%' . $searchTerm . '%';
+
+        $orders = Order::where(function ($query) use ($search) {
+            $query->where('tracking_number', 'like', $search)
+                ->orWhere('shipping_address', 'like', $search);
+        })
             ->with('admin')
+            ->orderByDesc('created_at')
             ->paginate($this->itemPerPage);
 
         return view('admin.orders.index', compact('orders'));
@@ -30,7 +42,7 @@ class OrderController extends Controller
 
         $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 
-        return view('admin.orders.edit', compact('order','orderProducts'));
+        return view('admin.orders.edit', compact('order', 'orderProducts'));
     }
 
     public function update(Request $request, string $id): RedirectResponse
@@ -38,21 +50,21 @@ class OrderController extends Controller
         $data = $request->validate([
             'status' => 'in:pending,accepted,inDelivery,success,cancel,refund',
         ]);
+
         $order = Order::getOrderById($id);
 
         $order->update([
             'status' => $data['status'],
-            'staff' => Auth::guard('admin')->user()->id,
+            'admin_id' => Auth::guard('admin')->user()->id,
         ]);
 
-        if ($order->status == 'cancel'){
+        if ($order->status == 'cancel') {
             $orderProduct = OrderProduct::where('order_id', $order->id)->get();
-            foreach ($orderProduct as $product){
+            foreach ($orderProduct as $product) {
                 OrderProduct::updated([
                     'quantity' => $product->quantity,
                 ]);
                 $findProduct = Product::getProductById($product->product->id);
-
                 $findProduct->update([
                     'stock' => $findProduct->stock + $product->quantity,
                 ]);

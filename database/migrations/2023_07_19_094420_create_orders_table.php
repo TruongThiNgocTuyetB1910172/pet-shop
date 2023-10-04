@@ -10,12 +10,12 @@ return new class () extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->enum('status',['pending', 'accepted', 'inDelivery', 'success', 'cancel', 'refund'])->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'inDelivery', 'success', 'cancel', 'refund'])->default('pending');
             $table->string('notes')->nullable();
             $table->text('shipping_address');
             $table->string('tracking_number');
             $table->integer('total');
-            $table->string('staff')->nullable();
+            $table->string('admin_id')->nullable();
             $table->timestamps();
         });
     }

@@ -66,12 +66,12 @@
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <table class="table">
                             <div class="row">
-                                @foreach($orderProduct as $item)
+                                @foreach($orderProduct as $orderProduct)
                                     <thead>
                                     <tr>
-                                        <th class="col-md-2"><img src="{{( 'storage/'.$item->product->image) }}" height="80px" width="80px"></th>
-                                        <th class="col-md-10">{{ $item->product->name}}
-                                            <p>{{ CurrencyHelper::format($item->price) }} x {{ $item->quantity }} sản phẩm</p>
+                                        <th class="col-md-2"><img style="height: 70px; width: 70px" src="{{ 'storage/'. $orderProduct->product->image }}"></th>
+                                        <th class="col-md-10">{{ $orderProduct->product->name}}
+                                            <p>{{ CurrencyHelper::format($orderProduct->price) }} x {{ $orderProduct->quantity }} sản phẩm</p>
                                         </th>
                                     </tr>
                                     </thead>

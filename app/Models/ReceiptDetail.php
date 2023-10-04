@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use http\Exception\BadConversionException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,8 +13,8 @@ class ReceiptDetail extends Model
     protected $table = 'receipt_details';
 
     protected $fillable = [
-        'product_id',
         'receipt_id',
+        'product_id',
         'quantity',
         'price',
     ];

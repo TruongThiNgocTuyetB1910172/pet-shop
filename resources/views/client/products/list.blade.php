@@ -46,6 +46,21 @@
                                     </select>
                                 </form>
                             </div>
+                            <div class="woocommerce-top-control">
+                                <div class="form-outer">
+                                    <form method="GET">
+                                        <input
+                                            type="text"
+                                            name="searchTerm"
+                                            placeholder="Search">
+                                        <button class="search">
+                                            <span class="lnr lnr-magnifier"></span>
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </div>
                         </div>
                         <div class="row product-grid-equal-height-wrapper product-equal-height-3-columns flex multi-row">
                            @foreach($products as $product)

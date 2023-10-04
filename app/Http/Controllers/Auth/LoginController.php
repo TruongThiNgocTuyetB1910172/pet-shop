@@ -44,7 +44,7 @@ class LoginController extends Controller
 
     public function showAdminLoginForm()
     {
-        return view('admin.auth.login', ['url' => route('admin.login-view'), 'title'=>'Admin']);
+        return view('admin.auth.login', ['url' => route('admin.login-view'), 'title' => 'Admin']);
     }
 
     public function adminLogin(Request $request): RedirectResponse
@@ -54,7 +54,7 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        if (Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))){
+        if (Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))) {
             return redirect()->route('dashboard');
         }
 
