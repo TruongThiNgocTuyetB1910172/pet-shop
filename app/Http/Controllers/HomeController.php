@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -15,7 +16,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-
-
 }

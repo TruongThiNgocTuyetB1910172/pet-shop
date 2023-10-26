@@ -1,7 +1,6 @@
 @extends('client.layouts.app')
 
 @section('content')
-
     <div class="banner-slider-2 rev_slider" id="slider-2">
         <ul>
             @foreach($banners as $banner)
@@ -89,28 +88,8 @@
                                 <div class="product product-style-1">
                                     <div class="img-wrapper">
                                         <a href="{{ route('product-list.detail', ['id' => $product->id]) }}">
-                                            <img style="height:280px"  src="{{( 'storage/'.$product->image) }}"  alt="product thumbnail" />
+                                            <img style="height:280px"  src="{{ asset('storage/' . $product->image) }}"  alt="product thumbnail" />
                                         </a>
-                                        <div class="product-control-wrapper bottom-right">
-                                            <div class="wrapper-control-item">
-                                                <a class="js-quick-view"  href="{{ route('product-list.detail', ['id' => $product->id]) }}" type="button" data-toggle="modal" data-target="#quick-view-product">
-                                                    <span class="lnr lnr-eye"></span>
-                                                </a>
-                                            </div>
-                                            <div class="wrapper-control-item item-wish-list">
-                                                <a class="js-wish-list js-notify-add-wish-list" href="#">
-                                                    <span class="lnr lnr-heart"></span>
-                                                </a>
-                                            </div>
-                                            <div class="wrapper-control-item item-add-cart js-action-add-cart">
-                                                <a class="animate-icon-cart" href="#">
-                                                    <span class="lnr lnr-cart"></span>
-                                                </a>
-                                                <svg x="0px" y="0px" width="36px" height="32px" viewbox="0 0 36 32">
-                                                    <path stroke-dasharray="19.79 19.79" fill="none" ,="," stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
                                     </div>
                                     <figcaption class="desc text-center">
                                         <h3>

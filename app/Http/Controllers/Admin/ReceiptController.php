@@ -96,15 +96,15 @@ class ReceiptController extends Controller
                 'quantity' => $product['quantity'],
                 'price' => $product['price'],
             ]);
-
-            $findProduct = Product::getProductById($product['san_pham']);
-            $findProduct->update([
-                'stock' => $findProduct->stock + $product['quantity'],
-                'original_price' => $product['price']
-            ]);
+            //
+            //            $findProduct = Product::getProductById($product['san_pham']);
+            //            $findProduct->update([
+            //                'stock' => $findProduct->stock + $product['quantity'],
+            //                'original_price' => $product['price']
+            //            ]);
         }
         session()->forget('san_pham');
-        toast('success', trans('Them moi phieu nhap thanh cong hehe'));
+        toast('Thêm mới thành công phiếu nhập', 'success');
         return redirect()->route('receipt.index');
     }
 
@@ -112,9 +112,9 @@ class ReceiptController extends Controller
     {
         $receipt = Receipt::getReceiptById($id);
 
-        $receiptDetails = ReceiptDetail::where('receipt_id',$receipt->id)->get();
+        $receiptDetails = ReceiptDetail::where('receipt_id', $receipt->id)->get();
 
-        return view('admin.receipts.edit', compact('receiptDetails','receipt' ));
+        return view('admin.receipts.edit', compact('receiptDetails', 'receipt'));
     }
 
     public function update(Request $request, string $id): RedirectResponse
@@ -125,14 +125,46 @@ class ReceiptController extends Controller
             'notes' => 'nullable',
         ]);
         $receipt = Receipt::getReceiptById($id);
-
         $receipt->update([
             'status' => $data['status'],
             'notes' => $data['notes'],
         ]);
-
+        if($receipt->status == 'accepted') {
+            $receiptDetails = $receipt->receiptDetails;
+            foreach ($receiptDetails as $detail) {
+                $findProduct = Product::getProductById($detail->product_id);
+                $findProduct->update([
+                    'stock' => $findProduct->stock + $detail['quantity'],
+                    'original_price' => $detail['price']
+                ]);
+            }
+        }
         toast('Cập nhật thành công', 'success');
 
         return redirect('receipt');
     }
+
+    public function detail(string $id): View
+    {
+
+        $receipt  = Receipt::getReceiptById($id);
+
+        $receiptDetails = ReceiptDetail::where('receipt_id', $receipt->id)->get();
+
+        return view('admin.receipts.detail', compact('receipt', 'receiptDetails'));
+    }
+
+    public function delete(string $id)
+    {
+        $receipt = Receipt::getReceiptById($id);
+        $receiptDetails = $receipt->receiptDetails;
+        foreach ($receiptDetails as $detail) {
+            $detail->delete();
+        }
+        $receipt->delete();
+        toast('Xóa phiếu nhập thành công', 'success');
+        return redirect('receipt');
+    }
+
+
 }

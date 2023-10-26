@@ -11,15 +11,24 @@
         </li>
     </ul>
     <a class="brand-logo" href="#">
-        <img class="img-responsive" src="client/images/logo.png" alt="" />
+        <img class="img-responsive" src="{{asset('client/images/logo.png')}}" alt="" />
     </a>
     <ul class="menu hidden-xs">
         <li>
             <a href="#">Danh mục</a>
+            <ul>
+                @foreach($categories as $category)
+                   @if($category->products->count() >0 )
+                        <li>
+                            <a href="{{ route('product-by-category.index', ['id' => $category->id]) }}"> {{ $category->name }} ({{$category->products->count()}})</a>
+                        </li>
+                   @endif
+                @endforeach
+            </ul>
         </li>
-        <li>
-            <a href="contact.html">Gói dịch vụ</a>
-        </li>
+{{--        <li>--}}
+{{--            <a href="contact.html">Gói dịch vụ</a>--}}
+{{--        </li>--}}
         @if(Auth::check())
             <li>
                 <a href="#">
@@ -59,6 +68,23 @@
                     <li>
                         <a href="{{ route('dashboard') }}">Trang quản trị</a>
                     </li>
+                </ul>
+            </li>
+        @elseif(Auth::guard('shipper')->check())
+            <li>
+                <a href="#">
+                    {{Auth::guard('shipper')->user()->name}}
+                </a>
+                <ul>
+                    <li><a href="" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">Đăng xuất
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
         @else

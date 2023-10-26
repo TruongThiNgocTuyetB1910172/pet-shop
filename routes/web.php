@@ -23,6 +23,11 @@ use App\Http\Controllers\Client\ClientOrderController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ReceiptController;
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\VnPayController;
+use App\Http\Controllers\Admin\ShipperController;
+use App\Http\Controllers\Shipper\ShipperOrderController;
+use App\Http\Controllers\Client\ProductReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,13 +48,16 @@ Route::get('auth/{provider}/callback', [SocialiteController::class, 'callback'])
 Route::get('/admin/login', [LoginController::class,'showAdminLoginForm'])->name('admin.login-view');
 Route::post('/admin/login', [LoginController::class,'adminLogin'])->name('admin.login');
 
+Route::get('/shipper/login', [LoginController::class,'showShipperLoginForm'])->name('shipper.login-view');
+Route::post('/shipper/login', [LoginController::class,'shipperLogin'])->name('shipper.login');
+
 Route::get('/', [ClientController::class, 'index']) ->name('home');
 Route::get('products-list', [ProductContronller::class, 'index'])->name('product-list.index');
 Route::get('services-list', [ServiceContronller::class, 'index'])->name('service-list.index');
 Route::get('product-detail/{id}', [ProductContronller::class, 'detail'])->name('product-list.detail');
+Route::get('product-by-category/{id}', [ProductContronller::class, 'showProductsByCategory'])->name('product-by-category.index');
 
 Route::middleware(['auth','verified'])->group(function () {
-
     Route::post('cart/{id}', [ProductContronller::class, 'addToCart'])->name('cart.add-to-cart');
     Route::get('cart-list', [CartController::class, 'index'])->name('cart-list.index');
     Route::put('cart-update', [CartController::class, 'update'])->name('cart-update');
@@ -60,14 +68,30 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('purchase-history', [ClientOrderController::class, 'history'])->name('purchase.history');
     Route::get('detail-history/{id}', [ClientOrderController::class, 'detail'])->name('history.detail');
     Route::get('order-cancel/{id}', [ClientOrderController::class, 'cancel'])->name('order.cancel');
+    Route::put('review-order/{id}', [ClientOrderController::class, 'review'])->name('order.review');
+    Route::post('review-product/{id}', [ProductReviewController::class, 'create'])->name('review-product.create');
 
     Route::get('location', [NewAddressController::class, 'index'])->name('location.new-add');
     Route::get('address-delete/{id}', [CartController::class, 'delete'])->name('address.delete');
+    Route::get('edit-profile/{id}', [ProfileController::class,'edit'])->name('profile.edit');
+    Route::put('update-profile/{id}', [ProfileController::class,'update'])->name('profile.update');
+    Route::put('update-password/{id}', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+    // cong thanh toán
+    Route::post('online-checkout', [VnPayController::class, 'onlineCheckout'])->name('order.checkout-online');
+
+    //Review
+    Route::get('review', [ProductReviewController::class, 'create'])->name('review.create');
 });
+  Route::middleware(['auth:shipper'])->group(function (){
+      Route::get('shipperPage', [HomeController::class, 'shipperPage'])->name('shipper-page');
+      Route::get('order-list', [ShipperOrderController::class, 'index'])->name('order-list.index');
+      Route::get('edit-order-list/{id}', [ShipperOrderController::class, 'edit'])->name('order-list.edit');
+      Route::put('update-order-list/{id}', [ShipperOrderController::class, 'update'])->name('order-list.update');
+  });
 
 
 Route::middleware(['auth:admin'])->group(function () {
-
     Route::get('/dashboard', [HomeController::class ,'index'])->name('dashboard');
 
     Route::get('categories', [CategoryController::class ,'index'])->name('category.index');
@@ -152,4 +176,17 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('store-receipt', [ReceiptController::class, 'storeReceipt'])->name('receipt.store-receipt');
     Route::get('edit-receipt/{id}', [ReceiptController::class, 'edit'])->name('receipt.edit');
     Route::put('update-receipt/{id}', [ReceiptController::class, 'update'])->name('receipt.update');
+    Route::get('detail-receipt/{id}', [ReceiptController::class, 'detail'])->name('receipt.detail');
+    Route::get('delete-receipt/{id}', [ReceiptController::class, 'delete'])->name('receipt.delete');
+
+    Route::get('shipper', [ShipperController::class, 'index'])->name('shipper.index');
+    Route::get('create-shipper', [ShipperController::class, 'create'])->name('shipper.create');
+    Route::post('store-shipper', [ShipperController::class, 'store'])->name('shipper.store');
+    Route::get('edit-shipper/{id}', [ShipperController::class, 'edit'])->name('shipper.edit');
+    Route::put('update-shipper/{id}', [ShipperController::class, 'update'])->name('shipper.update');
+    Route::put('update-password-shipper/{id}', [ShipperController::class, 'updatePassword'])->name('shipper.update-password');
+
+    //ve bieu do
+
+    Route::get('/revenue-chart', [HomeController::class, 'chart'])->name('revenue-chart');
 });

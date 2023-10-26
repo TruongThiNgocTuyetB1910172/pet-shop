@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateReceiptRequest extends FormRequest
 {
-
     public function rules(): array
     {
         return [

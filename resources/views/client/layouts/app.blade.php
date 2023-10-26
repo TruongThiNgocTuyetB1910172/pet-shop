@@ -1,11 +1,14 @@
-
 <!DOCTYPE html>
 <html>
-
 @include('client.layouts.header')
 <body class="animsition">
 
 @include('sweetalert::alert')
+
+@php
+    $categories = app('categories');
+
+@endphp
 
 <div class="home-2" id="page">
     <header class="header-style-2">
@@ -36,7 +39,7 @@
     @yield('content')
 
     <div class="call-to-action-style-3">
-        <img class="rellax bg-overlay" src="client/images/call-to-action/2.jpg" alt="" />
+        <img class="rellax bg-overlay" src="{{asset('client/images/call-to-action/2.jpg')}}" alt="" />
         <div class="overlay-call-to-action"></div>
         <div class="container">
             <div class="row">
@@ -58,7 +61,7 @@
                 <div class="row">
                     <div class="widget-footer widget-text col-first col-small">
                         <a href="#">
-                            <img class="logo-footer" src="client/images/logo.png" alt="Logo Organic" />
+                            <img class="logo-footer" src="{{asset('client/images/logo.png')}}" alt="Logo Organic" />
                         </a>
                         <p>Suspendisse ut diam quis turpis convallis tempus. Sed ultrices lobortis dolor laoreet luctus. Morbi ornare nisi vitae tellus euismod bibendum. Pellentesque posuere iaculis volutpat. </p>
                     </div>
@@ -139,7 +142,6 @@
             </div>
         </div>
     </footer>
-
     @include('client.layouts.footer')
 </div>
 @livewireScripts

@@ -27,4 +27,10 @@ class Category extends Model
     {
         return Category::query()->findOrFail($id);
     }
+
+    public static function getAllCategories(): Collection
+    {
+        return self::all();
+    }
+
 }

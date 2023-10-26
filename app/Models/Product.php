@@ -49,6 +49,11 @@ class Product extends Model
     {
         return $this->hasMany(ReceiptDetail::class);
     }
+
+    public function productReviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class);
+    }
     public static function getProductById(string $id): Model|Collection|Builder|array|null
     {
         return Product::query()->findOrFail($id);

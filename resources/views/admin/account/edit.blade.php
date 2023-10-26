@@ -190,5 +190,18 @@
 
     @endsection
 @endsection
+@section('styles')
+    <style>
+        .form-file-group{
+            border: 2px dashed #000;
+            border-radius: .25rem;
+        }
+        .form-file-group p {
+            width: 100%;
+            text-align: center;
+            line-height: 170px;
+        }
+    </style>
+@endsection
 
 

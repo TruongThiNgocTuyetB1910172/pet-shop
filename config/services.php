@@ -36,4 +36,9 @@ return [
         'redirect' => env('GOOGLE_CALLBACK_URL'),
     ],
 
+    'VNPay' => [
+        'vnp_TmnCode' => env('VNP_TMNCODE'),
+        'vnp_HashSecret' => env('VNP_HASH_SECRET')
+    ]
+
 ];

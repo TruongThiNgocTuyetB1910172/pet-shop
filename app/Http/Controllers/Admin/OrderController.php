@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\Shipper;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,21 +43,31 @@ class OrderController extends Controller
 
         $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 
-        return view('admin.orders.edit', compact('order', 'orderProducts'));
+        $shippers = Shipper::where('status', '=', '1')->get();
+
+        return view('admin.orders.edit', compact('order', 'orderProducts', 'shippers'));
     }
 
     public function update(Request $request, string $id): RedirectResponse
     {
         $data = $request->validate([
             'status' => 'in:pending,accepted,inDelivery,success,cancel,refund',
+            'shipper_id' => 'nullable'
         ]);
 
         $order = Order::getOrderById($id);
 
-        $order->update([
-            'status' => $data['status'],
-            'admin_id' => Auth::guard('admin')->user()->id,
-        ]);
+       if ($order->status === 'accepted'){
+           $order->update([
+               'status' => $data['status'],
+               'admin_id' => Auth::guard('admin')->user()->id,
+               'shipper_id' => $data['shipper_id'],
+               'order_shipper_status' => 'pending',
+           ]);
+       }
+       $order->update([
+           'status' => $data['status'],
+       ]);
 
         if ($order->status == 'cancel') {
             $orderProduct = OrderProduct::where('order_id', $order->id)->get();

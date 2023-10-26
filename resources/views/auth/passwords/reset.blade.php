@@ -1,4 +1,4 @@
-
+<base href="/">
     <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Cập nhật mật khẩu</title>
-    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('form/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -76,11 +76,12 @@
     </div>
 </div>
 
-<script src="{{ asset('admin/plugins/common/common.min.js') }}"></script>
-<script src="{{ asset('admin/js/custom.min.js') }}"></script>
-<script src="{{ asset('admin/js/settings.js') }}"></script>
-<script src="{{ asset('admin/js/gleek.js') }}"></script>
-<script src="{{ asset('admin/js/styleSwitcher.js') }}"></script>
+<script src="{{ asset('form/plugins/common/common.min.js') }}"></script>
+<script src="{{ asset('form/js/custom.min.js') }}"></script>
+<script src="{{ asset('form/js/settings.js') }}"></script>
+<script src="{{ asset('form/js/gleek.js') }}"></script>
+<script src="{{ asset('form/js/styleSwitcher.js') }}"></script>
 </body>
 </html>
+
 

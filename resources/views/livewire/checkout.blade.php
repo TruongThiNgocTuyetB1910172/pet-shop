@@ -39,7 +39,7 @@
         <body class="animsition">
         <div class="bg0 p-t-95 p-b-50">
             <div class="container">
-                <form wire:submit.prevent="checkout">
+                <form>
                     <div class="p-t-17 p-b-70">
 
                         <div class="m-t-35 dis-none js-panel1">
@@ -131,16 +131,28 @@
                                     </div>
                                @endforeach
                                 <div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
-                            <span class="size-w-61 cl6">
-                                Tổng cộng
-                            </span>
-                                    <span class="size-w-62 cl9">
-                                {{ CurrencyHelper::format($total) }}
-                            </span>
+                                    <span class="size-w-61 cl6">
+                                        Tổng cộng
+                                    </span>
+                                            <span class="size-w-62 cl9">
+                                        {{ CurrencyHelper::format($total) }}
+                                    </span>
                                 </div>
-                                <button class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10">
-                                    Đặt hàng
-                                </button>
+
+
+                              <div class="mt-3">
+                                  <span
+                                      wire:click="checkoutCOD"
+                                      class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10">
+                                      Đặt hàng
+                                  </span>
+                              </div>
+
+                                <div class="my-3">
+                                    <span
+                                        wire:click="checkoutVNPAY"
+                                        class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" >Thanh toán bằng vnpay</span>
+                                </div>
                             </div>
                         </div>
                     </div>

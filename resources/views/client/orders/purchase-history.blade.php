@@ -56,7 +56,7 @@
                                     @foreach($orders as $order)
                                         <tr>
                                             <td>{{ $order->id }}</td>
-                                            <td  style="max-width: 150px;" class="text-truncate" >
+                                            <td  class="text-truncate" style="max-width: 150px;">
                                                 {{ $order->shipping_address }}
                                             </td>
                                             @if($order->status === 'pending')

@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ClientOrderController extends Controller
@@ -18,8 +21,22 @@ class ClientOrderController extends Controller
         return view('client.orders.index');
     }
 
-    public function thankYou(): View
+    public function thankYou()
     {
+        $response = request()->query->all();
+        if (! $response){
+            return view('client.orders.thank-you');
+        }
+
+        if ($response['vnp_TransactionStatus'] != '00') {
+            return redirect()->back();
+        }
+
+        Cart::where('user_id', Auth::user()->id)->delete();
+        Order::where('tracking_number', $response['vnp_TxnRef'])->update([
+            'payment_status' => 'thanh cong',
+        ]);
+
         return view('client.orders.thank-you');
     }
 
@@ -59,9 +76,26 @@ class ClientOrderController extends Controller
             ]);
         }
 
-        toast('cancel succes', 'success');
+        toast('Hủy đơn hàng thành công', 'success');
 
         return redirect()->route('purchase.history');
 
     }
+
+    public function review(Request $request, string $id): RedirectResponse
+    {
+        $data = $request->validate([
+            'reviews' => 'nullable',
+        ]);
+        $order = Order::getOrderById($id);
+
+        $order->update([
+            'reviews' =>$data['reviews'],
+        ]);
+
+        toast('Cập nhật thành công ', 'success');
+
+        return redirect('purchase-history');
+    }
+
 }

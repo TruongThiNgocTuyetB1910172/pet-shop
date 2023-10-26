@@ -61,12 +61,25 @@
                                     <td>{{ $receipt->created_at->format('d')}} - {{$receipt->created_at->format('m')}} -
                                         {{ $receipt->created_at->format('Y')}}
                                         <small>{{ $receipt->created_at->format('g:i A') }}</small></td>
+
                                     <td>
+                                        @if($receipt->status == 'pending')
                                         <a class="btn btn-primary btn-sm"
                                            href="{{ route('receipt.edit', ['id' => $receipt->id]) }}">
                                             <i class="fa fa-pencil"></i>
                                         </a>
+                                        <a class="btn btn-danger btn-sm"
+                                           href="{{ route('receipt.delete', ['id' => $receipt->id]) }}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                        @else
+                                        <a class="btn btn-primary btn-sm"
+                                           href="{{ route('receipt.detail', ['id' => $receipt->id]) }}">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        @endif
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

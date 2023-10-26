@@ -39,14 +39,14 @@
                                         @csrf
                                         @method('PUT')
                                         <td class="product-thumbnail">
-                                            <img style="height: 70px; width: 70px" src="{{ 'storage/'. $item->product->image }}">
+                                            <img style="height: 70px; width: 70px" src="{{asset( 'storage/'. $item->product->image) }}">
                                         </td>
                                         <td class="product-name" data-title="Product">
                                             <a class="product-name" >{{$item->product->name}}</a>
                                         </td>
                                         <td class="product-price" data-title="Price">{{ CurrencyHelper::format($item->product->selling_price) }}</td>
                                         <td class="cart-product-quantity" >
-                                            @if($item->product->stock > $item->quantity)
+                                            @if($item->product->stock >= $item->quantity)
                                                 <div class="input-group mb-3 flex" style="max-width: 120px;">
                                                     <div class="input-group-prepend p-2">
                                                         <button data-dec-product-id="{{ $item->id }}" id="decrease" class="decrease " type="button">&minus;</button>
@@ -74,7 +74,6 @@
                     </form>
                     <hr>
                     <div class="cart_totals" style="margin-bottom: 50px">
-                        {{--                        <h3 class="title">Cart Total</h3>--}}
                         <div class="row">
                             <div class="col-md-7"></div>
                             <div class="col-md-5">

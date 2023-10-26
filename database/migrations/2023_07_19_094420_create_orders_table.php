@@ -14,8 +14,13 @@ return new class () extends Migration {
             $table->string('notes')->nullable();
             $table->text('shipping_address');
             $table->string('tracking_number');
+            $table->string('payment_type');
+            $table->string('payment_status')->nullable();
             $table->integer('total');
             $table->string('admin_id')->nullable();
+            $table->string('shipper_id')->nullable();
+            $table->enum('order_shipper_status', ['pending', 'accepted', 'refuse', 'fail', 'success'])->default('pending');
+            $table->text('reviews')->nullable();
             $table->timestamps();
         });
     }

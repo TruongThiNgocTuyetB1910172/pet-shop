@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,11 @@ class Order extends Model
         'shipping_address',
         'tracking_number',
         'admin_id',
+        'payment_type',
+        'payment_status',
+        'order_shipper_status',
+        'shipper_id',
+        'reviews'
     ];
 
     public function user(): BelongsTo
@@ -29,6 +35,11 @@ class Order extends Model
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class, 'admin_id');
+    }
+
+    public function shipper(): BelongsTo
+    {
+        return $this->belongsTo(Shipper::class);
     }
 
     public function orderProducts(): HasMany
@@ -45,4 +56,27 @@ class Order extends Model
     {
         return Order::query()->findOrFail($id);
     }
+
+//    public static function getMonthlyRevenue()
+//    {
+//        return static::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(total) as revenue')
+//            ->groupBy('year', 'month')
+//            ->orderBy('year')
+//            ->orderBy('month')
+//            ->get();
+//    } doanh thu hang thang
+
+
+    public static function getMonthlyRevenue()
+    {
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        return static::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->where('status', 'success')
+            ->sum('total');
+    }
+
+    // doanh thu thanh hien tai
+
 }
