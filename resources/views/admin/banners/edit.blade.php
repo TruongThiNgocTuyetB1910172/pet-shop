@@ -3,61 +3,63 @@
 @section('title', 'Cập nhật banner')
 
 @section('content')
-<section class="content">
-    <div class="container-fluid">
-        <!-- general form elements -->
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Cập nhật banner</h3>
-            </div>
-            <form action="{{ route('banner.update' ,['id' => $banner->id]) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="card-body">
-                    <label class="form-label"> <strong>Trạng thái:</strong></label>
-                    <div class="d-flex">
-                        <div class="justify-content-center align-content-center">
-                            <input type="radio" id="is_active" name="status" value="1" @if($banner->status == 1) checked @endif>
-                            <label for="is_active">Hiện</label><br></div>
-                        <div class="justify-content-center align-content-center ml-5">
-                            <input type="radio" id="is_block" name="status" value="0" @if($banner->status == 0) checked @endif>
-                            <label for="is_block">Ẩn</label><br>
+<div class="my-3">
+    <section class="content">
+        <div class="container-fluid">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Cập nhật banner</h3>
+                </div>
+                <form action="{{ route('banner.update' ,['id' => $banner->id]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-body">
+                        <label class="form-label"> <strong>Trạng thái:</strong></label>
+                        <div class="d-flex">
+                            <div class="justify-content-center align-content-center">
+                                <input type="radio" id="is_active" name="status" value="1" @if($banner->status == 1) checked @endif>
+                                <label for="is_active">Hiện</label><br></div>
+                            <div class="justify-content-center align-content-center ml-5">
+                                <input type="radio" id="is_block" name="status" value="0" @if($banner->status == 0) checked @endif>
+                                <label for="is_block">Ẩn</label><br>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label"><strong>Hình ảnh: </strong></label>
-                        <div class="col-sm-10">
-                            <img src="{{( 'storage/'.$banner->image) }}" alt="{{ $banner->name }}"
-                                 class="img-fluid" width="100px", height="100px">
+                        <div class="form-group">
+                            <label class="form-label"><strong>Hình ảnh: </strong></label>
+                            <div class="col-sm-10">
+                                <img src="{{( 'storage/'.$banner->image) }}" alt="{{ $banner->name }}"
+                                     class="img-fluid" width="100px", height="100px">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="editor" class="form-label"><strong>Chọn ảnh thay thế: </strong></label>
-                        <div class="form-file-group">
-                            <input type="file" name="image" style="display: none" id="file-upload"
-                                   onchange="previewFile(this)">
-                            <p onclick="document.querySelector('#file-upload').click()">
-                                Nhấn vào đây để chọn ảnh tải lên.
-                            </p>
-                        </div>
-                        <div id="previewBox" style="display: none" class="text-center">
-                            <img src="" id="previewImg" class="img-fluid rounded" width="100px" height="100px">
-                            <i class="uil-trash-alt text-danger" style="cursor: pointer"
-                               onclick="removePreview()">Xóa ảnh</i>
-                        </div>
+                        <div class="form-group">
+                            <label for="editor" class="form-label"><strong>Chọn ảnh thay thế: </strong></label>
+                            <div class="form-file-group">
+                                <input type="file" name="image" style="display: none" id="file-upload"
+                                       onchange="previewFile(this)">
+                                <p onclick="document.querySelector('#file-upload').click()">
+                                    Nhấn vào đây để chọn ảnh tải lên.
+                                </p>
+                            </div>
+                            <div id="previewBox" style="display: none" class="text-center">
+                                <img src="" id="previewImg" class="img-fluid rounded" width="100px" height="100px">
+                                <i class="uil-trash-alt text-danger" style="cursor: pointer"
+                                   onclick="removePreview()">Xóa ảnh</i>
+                            </div>
 
-                        @error('image')
-                        <span class="text-danger"> {{ $message }}</span>
-                        @enderror
+                            @error('image')
+                            <span class="text-danger"> {{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Thêm mới</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 @endsection
 @section('footer')
@@ -83,3 +85,19 @@
         }
     </script>
 @endsection
+
+@section('styles')
+    <style>
+        .form-file-group{
+            border: 2px dashed #000;
+            border-radius: .25rem;
+        }
+        .form-file-group p {
+            width: 100%;
+            text-align: center;
+            line-height: 170px;
+        }
+    </style>
+@endsection
+
+

@@ -7,10 +7,8 @@ use App\Models\District;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\Ward;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
 
 class Location extends Component
 {
@@ -51,7 +49,7 @@ class Location extends Component
 
         $validatedData = $this->validate();
 
-        if (Auth::user()->addresses()->count() < 3){
+        if (Auth::user()->addresses()->count() < 3) {
             Address::create([
                 'user_id' => Auth::user()->id,
                 'user_name' => $validatedData['userName'],
@@ -63,14 +61,12 @@ class Location extends Component
                 'ward_id' => $validatedData['wardId'],
             ]);
 
-            toast('thêm địa chỉ thành công','success');
+            toast('thêm địa chỉ thành công', 'success');
 
             redirect('location');
 
-        }
-        else
-        {
-           toast('Mỗi người không được quá 3 địa chỉ', 'warning');
+        } else {
+            toast('Mỗi người không được quá 3 địa chỉ', 'warning');
 
             redirect('location');
         }
@@ -92,8 +88,8 @@ class Location extends Component
 
         return view('livewire.location', [
             'provinces' => $provinces,
-            'addresses' =>$addresses,
-            'users' =>$users,
+            'addresses' => $addresses,
+            'users' => $users,
         ]);
     }
 }

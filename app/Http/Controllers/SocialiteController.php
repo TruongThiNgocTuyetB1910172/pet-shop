@@ -14,6 +14,10 @@ class SocialiteController extends Controller
 {
     public function redirect(string $provider): RedirectResponse
     {
+        if($provider != 'google') {
+            abort(404);
+        }
+
         return Socialite::driver($provider)->redirect();
     }
 
@@ -27,7 +31,7 @@ class SocialiteController extends Controller
             ], [
                 'email' => $socialAccount->getEmail(),
                 'name' => $socialAccount->getName(),
-                'provider_id'=> $socialAccount->getId(),
+                'provider_id' => $socialAccount->getId(),
                 'status' => 1,
                 'is_admin' => 0,
                 'image' => $socialAccount->getAvatar(),

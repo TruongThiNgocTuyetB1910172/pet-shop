@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="mb-3">
+        <div class="mb-3 mt-3">
             <a href="{{ route('product.create') }}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>Thêm sản phẩm</a>
         </div>
         <div class="card">
@@ -13,7 +13,13 @@
                 <h3 class="card-title">Danh sách sản phẩm</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 500px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <form method="GET">
+                            <input
+                                type="text"
+                                name="searchTerm"
+                                class="form-control float-right"
+                                placeholder="Search">
+                        </form>
 
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
@@ -34,6 +40,7 @@
                         <th>Danh mục</th>
                         <th>Trạng thái</th>
                         <th>Số lượng còn lại</th>
+                        <th>Mã sp</th>
                         <th>Giá bán</th>
                         <th>Ngày thêm</th>
                         <th>Hành động</th>
@@ -54,6 +61,7 @@
                                 <td><span class="badge badge-primary">Sản phẩm thường</span></td>
                             @endif
                             <td>{{ $product->stock }}</td>
+                            <td>{{ $product->sku }}</td>
                             <td>{{ CurrencyHelper::format($product->selling_price) }}</td>
                             <td>{{ $product->created_at->format('d')}} - {{$product->created_at->format('m')}} -
                                 {{ $product->created_at->format('Y')}}
@@ -80,7 +88,9 @@
                     </div>
 
                 @endif
-                {{ $products->links() }}
+                <div class="my-3 mx-3">
+                    {{ $products->links() }}
+                </div>
             </div>
         </div>
     </div>

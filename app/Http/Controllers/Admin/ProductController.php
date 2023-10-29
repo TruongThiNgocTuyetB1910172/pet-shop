@@ -21,8 +21,17 @@ class ProductController extends Controller
 
     public function index(): View
     {
-        $products = Product::query()
-            ->orderByDesc('created_at')
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+        $search = '%' . $searchTerm . '%';
+
+        $products = Product::where(function ($query) use ($search) {
+            $query->where('name', 'like', $search)
+                ->orwhere('sku', 'like', $search);
+        }) ->orderByDesc('created_at')
             ->paginate($this->itemPerPage);
         return view('admin.products.index', compact('products'));
     }

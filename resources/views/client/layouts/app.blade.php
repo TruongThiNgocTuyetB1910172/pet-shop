@@ -1,47 +1,14 @@
-
 <!DOCTYPE html>
 <html>
-<style>
-    @media (min-width: 1025px) {
-        .h-custom {
-            height: 100vh !important;
-        }
-    }
-
-    .card-registration .select-input.form-control[readonly]:not([disabled]) {
-        font-size: 1rem;
-        line-height: 2.15;
-        padding-left: .75em;
-        padding-right: .75em;
-    }
-
-    .card-registration .select-arrow {
-        top: 13px;
-    }
-
-    .bg-grey {
-        background-color: #eae8e8;
-    }
-
-    @media (min-width: 992px) {
-        .card-registration-2 .bg-grey {
-            border-top-right-radius: 16px;
-            border-bottom-right-radius: 16px;
-        }
-    }
-
-    @media (max-width: 991px) {
-        .card-registration-2 .bg-grey {
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-        }
-    }
-</style>
-
 @include('client.layouts.header')
 <body class="animsition">
 
 @include('sweetalert::alert')
+
+@php
+    $categories = app('categories');
+
+@endphp
 
 <div class="home-2" id="page">
     <header class="header-style-2">
@@ -50,19 +17,8 @@
                 <a class="btn-open-search-form js-open-search-form-header" href="#">
                     <span class="lnr lnr-magnifier"></span>
                 </a>
-                <div class="form-outer">
-                    <button class="btn-close-form-search-header js-close-search-form-header">
-                        <span class="lnr lnr-cross"></span>
-                    </button>
-                    <form>
-                        <input placeholder="Search" />
-                        <button class="search">
-                            <span class="lnr lnr-magnifier"></span>
-                        </button>
-                    </form>
-                </div>
             </div>
-           @include('client.layouts.navbar')
+            @include('client.layouts.navbar')
             <aside class="right">
                 <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
                     <a class="control" href="{{ route('cart-list.index') }}" >
@@ -80,10 +36,10 @@
         </div>
     </header>
 
-        @yield('content')
+    @yield('content')
 
     <div class="call-to-action-style-3">
-        <img class="rellax bg-overlay" src="client/images/call-to-action/2.jpg" alt="" />
+        <img class="rellax bg-overlay" src="{{asset('client/images/call-to-action/2.jpg')}}" alt="" />
         <div class="overlay-call-to-action"></div>
         <div class="container">
             <div class="row">
@@ -105,7 +61,7 @@
                 <div class="row">
                     <div class="widget-footer widget-text col-first col-small">
                         <a href="#">
-                            <img class="logo-footer" src="client/images/logo.png" alt="Logo Organic" />
+                            <img class="logo-footer" src="{{asset('client/images/logo.png')}}" alt="Logo Organic" />
                         </a>
                         <p>Suspendisse ut diam quis turpis convallis tempus. Sed ultrices lobortis dolor laoreet luctus. Morbi ornare nisi vitae tellus euismod bibendum. Pellentesque posuere iaculis volutpat. </p>
                     </div>
@@ -186,8 +142,7 @@
             </div>
         </div>
     </footer>
-
- @include('client.layouts.footer')
+    @include('client.layouts.footer')
 </div>
 @livewireScripts
 </body>

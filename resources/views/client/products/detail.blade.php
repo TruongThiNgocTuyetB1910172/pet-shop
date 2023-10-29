@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="sub-header shop-detail-1">
-        <img class="rellax bg-overlay" src="images/sub-header/01.jpg" alt="" />
+        <img class="rellax bg-overlay" src="{{asset('client/images/sub-header/01.jpg')}}" alt="" />
         <div class="overlay-call-to-action"></div>
         <h3 class="heading-style-3">Chi tiết sản phẩm</h3>
     </section>
@@ -45,6 +45,26 @@
                                     <h2 class="product-title">{{$product->name}}</h2>
                                     <br>
                                     <span style="font-size: 20px" class="price">Giá: {{ CurrencyHelper::format($product->selling_price) }}</span>
+
+                                    <div>
+                                        @php
+                                            $fullStars = floor($productRating); // Số sao đầy
+                                            $halfStar = $productRating - $fullStars; // Phần nửa sao
+                                            $emptyStars = 5 - $fullStars - ceil($halfStar); // Số sao rỗng
+                                        @endphp
+                                        @for ($i = 1; $i <= $fullStars; $i++)
+                                            <i class="fa fa-star" aria-hidden="true"  style="color: yellow"></i>
+                                        @endfor
+
+                                        @if ($halfStar > 0)
+                                            <i class="fa fa-star-half"  style="color: yellow"></i>
+                                        @endif
+
+                                        @for ($i = 1; $i <= $emptyStars; $i++)
+                                            <i class="fa fa-star-o" style="color: yellow"></i>
+                                        @endfor
+                                        <span> {{$productRating}} ({{$feedbacks->count()}} reviewer)</span>
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="product-meta">
@@ -64,7 +84,7 @@
                                         <a href="#"> {{$product->sku}}</a>
                                     </p>
                                     <p>
-                                        Mô tả: {{$product->description}}
+                                        Mô tả: {!! $product->description !!}
                                     </p>
                                     <p>Hàng trong kho: {{$product->stock}}</p>
                                 </div>
@@ -142,166 +162,141 @@
                                                 pattern="[0-9]*"
                                                 inputmode="numeric"
                                                 id="qty"
+                                                type="number"
 
                                             />
                                             <input class="plus" value="+" type="button"  />
                                         </div>
                                         <button class="btn btn-brand no-radius" style="margin-right: 20px" type="submit">
-                                            <a href="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" class="primary-btn" onclick="event.preventDefault(); document.getElementById('addCart').submit();">Thêm vào giỏ hàng </a>
-                                        </button>
-                                        <button
-                                            class="btn btn-wishlist btn-brand-ghost no-radius"
-                                        >
-                                            <i class="fa fa-heart"></i>
+                                            <a href="{{ route('cart.add-to-cart', ['id' => $product->id]) }}" class="primary-btn" style="color: white" onclick="event.preventDefault(); document.getElementById('addCart').submit();">Thêm vào giỏ hàng </a>
                                         </button>
                                     </form>
+                                    <hr>
                                 </div>
                             </div>
                             <br>
-                            <div class="woocommerce-tabs">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <ul class="tabs tab-style-1" role="tablist">
-                                            <li class="active" role="presentation">
-                                                <a
-                                                    href="#Description"
-                                                    aria-controls="Description"
-                                                    role="tab"
-                                                    data-toggle="tab"
-                                                >Description
-                                                    <i class="more-less fa fa-angle-down"></i>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a
-                                                    href="#Additional-Information"
-                                                    aria-controls="Additional-Information"
-                                                    role="tab"
-                                                    data-toggle="tab"
-                                                >Additional Information
-                                                    <i class="more-less fa fa-angle-down"></i>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a
-                                                    href="#Review"
-                                                    aria-controls="Review"
-                                                    role="tab"
-                                                    data-toggle="tab"
-                                                >Review (2)
-                                                    <i class="more-less fa fa-angle-down"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="tab-content tab-content-style-1">
-                                            <div
-                                                class="tab-pane fade in active"
-                                                id="Description"
-                                                role="tabpanel"
-                                            >
-                                                <h3 class="title-tab">Description</h3>
-                                                <ul class="arrow">
-                                                    <li>Using energy and natural resources responsibly</li>
-                                                    <li>Maintaining biodiversity</li>
-                                                    <li>Respecting regional environmental balances</li>
-                                                    <li>Enhancing soil fertility</li>
-                                                    <li>Preserving water quality</li>
-                                                    <li>Promoting animal health and welfare</li>
-                                                    <li>Catering for animals' specific needs</li>
-                                                </ul>
-                                            </div>
-                                            <div
-                                                class="tab-pane fade"
-                                                id="Additional-Information"
-                                                role="tabpanel"
-                                            >
-                                                <h3 class="title-tab">Additional Information</h3>
-                                                <table
-                                                    class="shop_attributes table table-striped table-bordered"
-                                                >
-                                                    <tbody>
-                                                    <tr>
-                                                        <th>Country</th>
-                                                        <td>
-                                                            <p>England, London</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td>
-                                                            <p>3.5 Kg</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Next Day Delivery Available</th>
-                                                        <td>
-                                                            <p>Yes</p>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="tab-pane fade" id="Review" role="tabpanel">
-                                                <h3 class="title-tab">2 reviews for Salad Organic Shop</h3>
-                                                <ol class="comment-list">
-                                                    <li>
-                                                        <div class="the-comment">
-                                                            <div class="avatar">
-                                                                <img
-                                                                    class="avatar"
-                                                                    alt="avatar"
-                                                                    src="images/comment/01.png"
-                                                                />
-                                                            </div>
-                                                            <div class="comment-box">
-                                                                <div class="comment-author meta">
-                                                                    <p class="author">Mark Hunt</p>
-                                                                    <p class="time">15 March 2017</p>
-                                                                </div>
-                                                                <div class="comment-text">
-                                                                    <p>
-                                                                        This is a test … Quisque ligulas ipsum, euismod
-                                                                        atras vulputate iltricies etri elit.This is a
-                                                                        test …
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="the-comment">
-                                                            <div class="avatar">
-                                                                <img
-                                                                    class="avatar"
-                                                                    alt="avatar"
-                                                                    src="images/comment/02.png"
-                                                                />
-                                                            </div>
-                                                            <div class="comment-box">
-                                                                <div class="comment-author meta">
-                                                                    <p class="author">Lori Peters</p>
-                                                                    <p class="time">16 March 2017</p>
-                                                                </div>
-                                                                <div class="comment-text">
-                                                                    <p>This is a reply test …</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div >
+                <div class="heading-wrapper text-center">
+                    <h3 class="heading">Viết đánh giá</h3>
+                </div>
+                <div>
+                    <form action="{{ route('review-product.create', ['id' => $product->id]) }}" method="POST">
+                        @csrf
+                        <div style="margin-bottom: 20px">
+                            <h4>
+                               Đánh giá của bạn
+                            </h4>
+                        </div>
 
+                        <div class="rating my-4">
+                            <label>
+                                <input type="radio" name="rating" value="1" />
+                                <span class="fa fa-star icon"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="rating" value="2" />
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="rating" value="3" />
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="rating" value="4" />
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="rating" value="5" />
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                                <span class="fa fa-star icon"></span>
+                            </label>
+                        </div>
+                        <div style="margin-bottom: 20px">
+                            <h4>
+                                Viết đánh giá:
+                            </h4>
+                        </div>
+                        <div style="margin-top: 10px">
+                      <textarea
+                          class="form-control w-max" style="border-color: green; height: 150px;"
+                          name="comment" placeholder="Đánh giá của bạn *">
+                      </textarea>
+                        </div>
+                        @if($checkBought === true)
+                            <div style="margin-top: 20px">
+                                <button class="btn btn-brand no-radius" type="submit">
+                                    Gửi đánh giá
+                                </button>
+                            </div>
+                        @endif
+                    </form>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="woocommerce-tabs">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ul class="tabs tab-style-1" role="tablist">
+                                <li role="presentation">
+                                    <a href="#Review" aria-controls="Review" role="tab" data-toggle="tab">Review
+                                        <i class="more-less fa fa-angle-down"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="tab-content tab-content-style-1">
+                                <div class="tab-pane fade" id="Review" role="tabpanel">
+                                    <ol class="comment-list">
+                                        @foreach($productReviews as $productReview)
+                                            <li>
+                                                <div class="the-comment">
+                                                    <div class="avatar">
+                                                        <img class="avatar" alt="avatar" style="width: 30px" src="{{ asset('storage/' . $productReview->user->image) }}" alt="{{ $productReview->user->name }}">
+                                                    </div>
+                                                        <div class="comment-box">
+                                                            <div class="comment-author meta">
+                                                                <p class="author">{{ $productReview->user->name }}</p>
+                                                                <p class="time">{{ $productReview->created_at }}</p>
+                                                                @for ($i = 1; $i <= $productReview->rating; $i++)
+                                                                    <i class="fa fa-star" aria-hidden="true"  style="color: #e3e32c"></i>
+                                                                @endfor
+                                                            </div>
+                                                           <div class="row">
+                                                               <div class="col-md-11">
+                                                                   <p>{{ $productReview->comment }}</p>
+                                                               </div>
+                                                               @if(Auth::check())
+                                                                   <div class="col-md-1">
+                                                                       <a href=""><i class="fa fa-pencil-square-o"></i></a>
+                                                                   </div>
+                                                               @endif
+                                                           </div>
+
+                                                        </div>
+                                                    </div>
+                                            </li>
+                                        @endforeach
+                                    </ol>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="container">
             <div class="relate-product">
@@ -315,7 +310,7 @@
                                 <div class="product product-style-1">
                                     <div class="img-wrapper">
                                         <a href="{{ route('product-list.detail', ['id' => $product->id]) }}">
-                                            <img style="height:280px"  src="{{( 'storage/'.$product->image) }}"  alt="product thumbnail" />
+                                            <img style="height:280px"  src="{{asset( 'storage/'.$product->image) }}"  alt="product thumbnail" />
                                         </a>
                                         <div class="product-control-wrapper bottom-right">
                                             <div class="wrapper-control-item">
@@ -353,5 +348,74 @@
             </div>
         </div>
     </section>
+@endsection
 
+@section('styles')
+    <style>
+        .rating {
+            display: inline-block;
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            font-size: 25px;
+        }
+
+        .rating label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .rating label:last-child {
+            position: static;
+        }
+
+        .rating label:nth-child(1) {
+            z-index: 5;
+        }
+
+        .rating label:nth-child(2) {
+            z-index: 4;
+        }
+
+        .rating label:nth-child(3) {
+            z-index: 3;
+        }
+
+        .rating label:nth-child(4) {
+            z-index: 2;
+        }
+
+        .rating label:nth-child(5) {
+            z-index: 1;
+        }
+
+        .rating label input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .rating label .icon {
+            float: left;
+            color: transparent;
+        }
+
+        .rating label:last-child .icon {
+            color: black;
+        }
+
+        .rating:not(:hover) label input:checked ~ .icon,
+        .rating:hover label:hover input ~ .icon {
+            color: #ffa904;
+        }
+
+        .rating label input:focus:not(:checked) ~ .icon:last-child {
+            color: black;
+            text-shadow: 0 0 5px #ffa904;
+        }
+    </style>
 @endsection

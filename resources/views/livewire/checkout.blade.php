@@ -39,7 +39,7 @@
         <body class="animsition">
         <div class="bg0 p-t-95 p-b-50">
             <div class="container">
-                <form wire:submit.prevent="checkout">
+                <form>
                     <div class="p-t-17 p-b-70">
 
                         <div class="m-t-35 dis-none js-panel1">
@@ -107,9 +107,9 @@
                         <div class="col-md-5 col-lg-4 p-b-50">
                             <div class="how-bor4 p-t-35 p-b-40 p-rl-30 m-t-5">
                                 <h4 class="cl3 p-b-19 text-uppercase">
-                                    Đơn hàng của bạn
+                                    <strong>Đơn hàng của bạn</strong>
                                 </h4>
-                                <div class="flex-w flex-sb-m txt-m-103 cl6 bo-b-1 bo cl15 p-b-21 p-t-18">
+                                <div class="flex-w flex-sb-m txt-m-103 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
                             <span>
                                 Sản phẩm
                             </span>
@@ -118,38 +118,44 @@
                             </span>
                                 </div>
 
-                                <div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bo cl15 p-b-21 p-t-18">
-
-                                    @foreach( $cartItems as $item )
-
-                                        <span>
-                                {{ $item->product->name }}
-                                x{{$item->quantity}}
+                               @foreach( $cartItems as $item )
+                                    <div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
+                            <span>
+                                 {{ $item->product->name }}
+                               x
+                                {{$item->quantity}}
                             </span>
                                         <span>
-                               {{ CurrencyHelper::format($item->product->selling_price*$item->quantity) }}
+                                {{ CurrencyHelper::format($item->product->selling_price*$item->quantity) }}
                             </span>
-                                    @endforeach
-                                </div>
-
-
+                                    </div>
+                               @endforeach
                                 <div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
-                                </div>
-                                <div class="flex-w flex-m txt-m-103 p-tb-23">
                                     <span class="size-w-61 cl6">
                                         Tổng cộng
                                     </span>
-                                            <span class="size-w-62 cl10">
+                                            <span class="size-w-62 cl9">
                                         {{ CurrencyHelper::format($total) }}
                                     </span>
                                 </div>
-                                <button type="submit" class=" flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" >
-                                    Đặt hàng
-                                </button>
+
+
+                              <div class="mt-3">
+                                  <span
+                                      wire:click="checkoutCOD"
+                                      class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10">
+                                      Đặt hàng
+                                  </span>
+                              </div>
+
+                                <div class="my-3">
+                                    <span
+                                        wire:click="checkoutVNPAY"
+                                        class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" >Thanh toán bằng vnpay</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>

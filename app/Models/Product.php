@@ -33,7 +33,7 @@ class Product extends Model
     }
     public function carts(): HasMany
     {
-        return $this->hasMany(Cart::class, 'productId');
+        return $this->hasMany(Cart::class, 'product_id');
     }
     public function productImages(): HasMany
     {
@@ -42,7 +42,17 @@ class Product extends Model
 
     public function orderProducts(): HasMany
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->hasMany(OrderProduct::class, 'product_id');
+    }
+
+    public function receiptDetails(): HasMany
+    {
+        return $this->hasMany(ReceiptDetail::class);
+    }
+
+    public function productReviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class);
     }
     public static function getProductById(string $id): Model|Collection|Builder|array|null
     {

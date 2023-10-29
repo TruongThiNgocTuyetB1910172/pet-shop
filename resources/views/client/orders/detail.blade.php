@@ -1,13 +1,7 @@
 @extends('client.layouts.app')
 
-
 @section('content')
 
-    <section class="sub-header shop-detail-1">
-        <img class="rellax bg-overlay" src="client/images/sub-header/013.jpg" alt="">
-        <div class="overlay-call-to-action"></div>
-        <h3 class="heading-style-3">Order detail</h3>
-    </section>
     <hr>
     <section class="boxed-sm">
         <div class="container">
@@ -18,6 +12,37 @@
                             <div class="col-md-3"><a href="{{ route('order.cancel', ['id'=> $order->id]) }}" class="btn btn-danger"> <i class="fa fa-times" aria-hidden="true"></i> Hủy đơn hàng</a></div>
                         @endif
                     </div>
+{{--                    @if($order->status === 'success')--}}
+{{--                        <th>--}}
+{{--                            <a type="button" data-toggle="modal" data-target="#exampleModal">--}}
+{{--                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>--}}
+{{--                                <p>Danh gia don hang</p>--}}
+{{--                            </a>--}}
+{{--                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--                                <div class="modal-dialog" role="document">--}}
+{{--                                    <div class="modal-content">--}}
+{{--                                        <div class="modal-header">--}}
+{{--                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>--}}
+{{--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                                <span aria-hidden="true">&times;</span>--}}
+{{--                                            </button>--}}
+{{--                                        </div>--}}
+{{--                                        <form action="{{ route('order-review', ['id' => $order->id]) }}" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            @method('PUT')--}}
+{{--                                            <div class="modal-body">--}}
+{{--                                                <label>Comment:</label>--}}
+{{--                                                <textarea class="form-control w-auto" name="reviews"></textarea>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="modal-footer">--}}
+{{--                                                --}}{{--                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+{{--                                                <button type="submit" class="btn btn-primary" >Save changes</button>--}}
+{{--                                            </div>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div></th>--}}
+{{--                    @endif--}}
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                     <form class="woocommerce-cart-form">
                         <table class="woocommerce-cart-table" style="background-color: white">
@@ -66,13 +91,16 @@
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <table class="table">
                             <div class="row">
-                                @foreach($orderProduct as $item)
+                                @foreach($orderProduct as $orderProduct)
                                     <thead>
                                     <tr>
-                                        <th class="col-md-2"><img src="{{( 'storage/'.$item->product->image) }}" height="80px" width="80px"></th>
-                                        <th class="col-md-10">{{ $item->product->name}}
-                                            <p>{{ CurrencyHelper::format($item->price) }} x {{ $item->quantity }} sản phẩm</p>
+                                        <th class="col-md-2"><img style="height: 70px; width: 70px" src="{{ asset('storage/'. $orderProduct->product->image )}}"></th>
+                                        <th class="col-md-10" >{{ $orderProduct->product->name}}
+                                            <p>{{ CurrencyHelper::format($orderProduct->price) }} x {{ $orderProduct->quantity }} sản phẩm</p>
                                         </th>
+                                        <th></th>
+                                       
+'
                                     </tr>
                                     </thead>
                                 @endforeach

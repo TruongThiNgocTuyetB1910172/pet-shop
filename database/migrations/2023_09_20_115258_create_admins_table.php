@@ -4,9 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
@@ -20,7 +18,7 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('is_root')->default(0);
             $table->boolean('gender')->default(1);
-            $table->enum('role',['admin', 'employee', 'orderChecker'])->default('employee');
+            $table->enum('role', ['admin', 'employee', 'orderChecker'])->default('employee');
             $table->rememberToken();
             $table->timestamps();
         });

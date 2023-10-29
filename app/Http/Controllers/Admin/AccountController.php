@@ -19,8 +19,19 @@ class AccountController extends Controller
 
     public function index(): View
     {
-        $accounts = Admin::orderByDesc('created_at')
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+        $search = '%' . $searchTerm . '%';
+
+        $accounts = Admin::where(function ($query) use ($search) {
+            $query->where('name', 'like', $search)
+            ->orwhere('email', 'like', $search);
+        })->orderByDesc('created_at')
             ->paginate($this->itemPerPage);
+
         return view('admin.account.index', compact('accounts'));
     }
 
@@ -36,11 +47,11 @@ class AccountController extends Controller
         $data['image'] = $this->uploadImage($request, 'image', 'images');
 
         Admin::query()->create([
-            'name'=> $data['name'] ,
-            'email'=> $data['email'] ,
+            'name' => $data['name'] ,
+            'email' => $data['email'] ,
             'gender' => $data['gender'],
-            'phone'=> $data['phone'] ,
-            'password'=> Hash::make($data['password']),
+            'phone' => $data['phone'] ,
+            'password' => Hash::make($data['password']),
             'status' => $data['status'],
             'image' => $data['image'],
             'role' => $data['role'],
@@ -82,7 +93,7 @@ class AccountController extends Controller
             'status' => $data['status'],
             'image' => $data['image'],
             'gender' => $data['gender'],
-            'role' =>$data['role'],
+            'role' => $data['role'],
         ]);
 
         toast('Cập nhật ' .$account->name. ' thành công', 'success');

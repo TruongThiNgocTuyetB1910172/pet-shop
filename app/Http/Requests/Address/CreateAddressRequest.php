@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateAddressRequest extends FormRequest
 {
-
-
     public function rules(): array
     {
         return [
@@ -18,7 +16,7 @@ class CreateAddressRequest extends FormRequest
             'ward_id' => ['required'],
             'district_id' => ['required'],
             'province_id' => ['required'],
-            'phone_number'=> ['required', 'regex:/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/'],
+            'phone_number' => ['required', 'regex:/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/'],
         ];
     }
 }

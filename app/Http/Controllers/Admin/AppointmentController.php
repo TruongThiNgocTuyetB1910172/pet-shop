@@ -31,9 +31,9 @@ class AppointmentController extends Controller
         $data = $request->validated();
 
         Appointment::query()->create([
-            'name'=> $data['name'] ,
-            'email'=> $data['email'] ,
-            'phone'=> $data['phone'] ,
+            'name' => $data['name'] ,
+            'email' => $data['email'] ,
+            'phone' => $data['phone'] ,
             'status' => $data['status'],
             'appointment_at' => $data['appointment_at'],
             'notes' => $data['notes'],
@@ -57,9 +57,9 @@ class AppointmentController extends Controller
         $appointment = Appointment::getAppointmentById($id);
 
         $appointment->update([
-            'name'=> $data['name'] ,
-            'email'=> $data['email'] ,
-            'phone'=> $data['phone'] ,
+            'name' => $data['name'] ,
+            'email' => $data['email'] ,
+            'phone' => $data['phone'] ,
             'status' => $data['status'],
             'appointment_at' => $data['appointment_at'],
             'notes' => $data['notes'],

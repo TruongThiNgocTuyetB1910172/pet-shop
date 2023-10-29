@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductReview;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,21 +18,40 @@ class ProductContronller extends Controller
 
     public function index(): View
     {
-        $categories = Category::all();
-        $products = Product::query()
-            ->where('stock', '>', 0)
-            ->orderByDesc('created_at')
-            ->paginate($this->itemPerPage);
-        return view('client.products.list', compact('products', 'categories'));
+
+        return view('client.products.list');
     }
 
     public function detail(string $id): View
     {
+
         $product = Product::getProductById($id);
+
+        $productRating = round(ProductReview::where('product_id', $product->id)->avg('rating'),1);
+
+        $feedbacks = ProductReview::where('product_id', $product->id)->get();
 
         $relatedProducts = Product::all()->take(4);
 
-        return view('client.products.detail', compact('product', 'relatedProducts'));
+        $productReviews = ProductReview::where('product_id', $product->id)->get();
+
+        $checkBought = false;
+        if (Auth::user()) {
+            $productIds = [];
+
+            foreach (Auth::user()->orders as $order) {
+                foreach ($order->orderProducts as $orderProduct) {
+                    $productIds[] = $orderProduct->product_id;
+                }
+            }
+
+            if(in_array($id, $productIds)) {
+                $checkBought = true;
+            }
+        }
+
+
+        return view('client.products.detail', compact('product', 'relatedProducts','productReviews','checkBought', 'productRating', 'feedbacks'));
     }
 
     public function addToCart(int $product_id, Request $request): RedirectResponse
@@ -75,5 +95,12 @@ class ProductContronller extends Controller
         return redirect()->back();
     }
 
+    public function showProductsByCategory(string $id)
+    {
+        $category = Category::findOrFail($id);
+        $products = $category->products;
+
+        return view('client.products.list', compact('category', 'products'));
+    }
 
 }
