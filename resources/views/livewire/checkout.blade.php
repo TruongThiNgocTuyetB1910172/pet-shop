@@ -37,21 +37,9 @@
 
         </head>
         <body class="animsition">
-        <div class="bg0 p-t-95 p-b-50">
+        <div>
             <div class="container">
                 <form>
-                    <div class="p-t-17 p-b-70">
-
-                        <div class="m-t-35 dis-none js-panel1">
-                            <div class="size-w-60 flex-w m-rl-auto">
-                                <input class="bo-all-1 bo cl15 focus1 size-a-37 txt-s-120 cl3 plh2 p-rl-20 w-full-sm" type="text"
-                                       name="coupon" placeholder="Coupon code">
-                                <button class="bg10 size-a-36 txt-s-105 cl0 p-rl-15 trans-04 hov-btn2 mt-4 mt-sm-0 w-full-sm">
-                                    Apply coupon
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-7 col-lg-8 p-b-50">
                             <div>
@@ -78,7 +66,7 @@
                                                 {{ $address->province->name }}
                                             </label>
                                         </div>
-                                        <div><a href="{{ route('address.delete', ['id' => $address->id]) }}" style="color: red"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+{{--                                        <div><a href="{{ route('address.delete', ['id' => $address->id]) }}" style="color: red"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>--}}
                                         </span>
                                     </div>
                                 @endforeach
@@ -109,37 +97,25 @@
                                 <h4 class="cl3 p-b-19 text-uppercase">
                                     <strong>Đơn hàng của bạn</strong>
                                 </h4>
-                                <div class="flex-w flex-sb-m txt-m-103 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
-                            <span>
-                                Sản phẩm
-                            </span>
-                                    <span>
-                                Thành tiền
-                            </span>
+
+                                <div class="flex-w flex-sb-m txt-m-103 cl6 bo-b-1 bo cl15 p-b-21 p-t-18">
+                                    <span>Sản phẩm</span>
+                                    <span>Thành tiền</span>
                                 </div>
 
-                               @foreach( $cartItems as $item )
-                                    <div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
-                            <span>
-                                 {{ $item->product->name }}
-                               x
-                                {{$item->quantity}}
-                            </span>
-                                        <span>
-                                {{ CurrencyHelper::format($item->product->selling_price*$item->quantity) }}
-                            </span>
-                                    </div>
-                               @endforeach
-                                <div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
-                                    <span class="size-w-61 cl6">
-                                        Tổng cộng
-                                    </span>
-                                            <span class="size-w-62 cl9">
-                                        {{ CurrencyHelper::format($total) }}
-                                    </span>
+                                    @foreach( $cartItems as $item )
+                                        <div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bo cl15 p-b-21 p-t-18">
+                                            <span>
+                                                 {{ $item->product->name }} x   {{$item->quantity}} </span>
+                                            <span>
+                                                {{ CurrencyHelper::format($item->product->selling_price*$item->quantity) }}
+                                            </span>
+                                        </div>
+                                     @endforeach
+                                <div class="flex-w flex-m txt-m-103 bo-b-1 bo cl15 p-tb-23">
+                                    <span class="size-w-61 cl6"> Tổng cộng</span>
+                                    <span class="size-w-62 cl9"> {{ CurrencyHelper::format($total) }} </span>
                                 </div>
-
-
                               <div class="mt-3">
                                   <span
                                       wire:click="checkoutCOD"

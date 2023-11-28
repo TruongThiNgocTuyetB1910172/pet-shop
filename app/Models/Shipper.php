@@ -12,7 +12,6 @@ use Illuminate\Notifications\Notifiable;
 
 class Shipper extends Authenticatable implements MustVerifyEmail
 {
-
     use Notifiable;
 
     protected $guard = 'shipper';

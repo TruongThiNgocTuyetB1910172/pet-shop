@@ -28,7 +28,7 @@
                                                 <div class="form-check mt-3 ">
                                                     <label class="form-check-label">
                                                         <input type="checkbox" class="form-check-input" value="{{ $product->id }}" name="options[]">
-                                                        {{ $product->name }})
+                                                        {{ $product->name }}
 
                                                         @error('product_ids')
                                                         <span class="text-danger"> {{ $message }}</span>

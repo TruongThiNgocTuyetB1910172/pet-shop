@@ -25,7 +25,6 @@ class Order extends Model
         'payment_status',
         'order_shipper_status',
         'shipper_id',
-        'reviews'
     ];
 
     public function user(): BelongsTo
@@ -57,14 +56,26 @@ class Order extends Model
         return Order::query()->findOrFail($id);
     }
 
-//    public static function getMonthlyRevenue()
-//    {
-//        return static::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(total) as revenue')
-//            ->groupBy('year', 'month')
-//            ->orderBy('year')
-//            ->orderBy('month')
-//            ->get();
-//    } doanh thu hang thang
+    public function productReviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+
+    public function feedback(): BelongsTo
+    {
+        return $this->belongsTo(Feedback::class);
+    }
+
+    public static function getAllMonthlyRevenue()
+    {
+        return static::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(total) as revenue')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->where('status', 'success')
+            ->get();
+    }
+    //doanh thu hang thang
 
 
     public static function getMonthlyRevenue()

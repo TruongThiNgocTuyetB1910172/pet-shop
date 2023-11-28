@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductReviewController extends Controller
 {
-    public function create(Request $request, string $id): RedirectResponse
+    public function store(Request $request, string $productId): RedirectResponse
     {
 
         $data = $request->validate([
@@ -23,18 +23,22 @@ class ProductReviewController extends Controller
             return redirect('login');
         }
 
-        $product = Product::getProductById($id);
+        $product = Product::getProductById($productId);
 
-            ProductReview::create([
+
+        ProductReview::create([
                 'user_id' => Auth::user()->id,
                 'product_id' => $product->id,
                 'comment' => $data['comment'],
                 'rating' => $data['rating'],
-            ]);
 
-            toast('Đánh giá thành công', 'success');
+        ]);
 
-            return redirect()->back();
-   }
+        toast('Đánh giá thành công', 'success');
+
+        return redirect()->back();
+    }
+
+
 
 }

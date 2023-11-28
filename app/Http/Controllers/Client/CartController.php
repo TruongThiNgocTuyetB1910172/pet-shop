@@ -28,6 +28,8 @@ class CartController extends Controller
 
     public function update(Request $request): JsonResponse
     {
+
+
         $data = $request->validate([
             'id' => ['required', 'integer'],
             'type' => ['required', 'in:inc,dec'],

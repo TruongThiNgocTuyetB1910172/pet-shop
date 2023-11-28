@@ -50,10 +50,51 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('order.index') }}" class="nav-link">
-                            <i class="fa fa-th-large" aria-hidden="true"></i>
+                        <a class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Quản lý đơn hàng
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('order.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Danh sách tất cả đơn hàng
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('order-new.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Đơn hàng mới</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('order-success.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Đơn hàng thành công</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('review.index') }}" class="nav-link">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <p>
+                                Quản lý bình luận
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('feedback.index') }}" class="nav-link">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <p>
+                                Quản lý phản hồi
                             </p>
                         </a>
                     </li>
@@ -83,7 +124,17 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('thongke.index') }}" class="nav-link">
+                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            <p>
+                                Thống kê
+                            </p>
+                        </a>
+                    </li>
+
                 </ul>
+
             @endif
 
             @if((Auth::guard('admin')->user()->role) == 'orderChecker')

@@ -66,7 +66,7 @@
 
                         <div class="form-group col-6">
                             <label class="form-label"><strong>Quyền:</strong></label>
-                            <select class="form-control text-center " name="role" style="border: none">
+                            <select class="form-control text-center"name="role" style="border-style: solid; width: 50%">
                                 <option>Chọn quyền</option>
                                 <option value="admin" {{ $account->role ==  'admin' ? 'selected' : ''}}>Người quản trị</option>
                                 <option value="employee" {{ $account->role ==  'employee' ? 'selected' : ''}}>Nhân viên nhập kho</option>
@@ -82,7 +82,7 @@
                                     <label for="is_active">Hoạt động</label><br></div>
                                 <div class="justify-content-center align-content-center ml-5">
                                     <input type="radio" id="is_block" name="status" value="0" @if($account->status == 0) checked @endif>
-                                    <label for="is_block">Block</label><br>
+                                    <label for="is_block">Chặn</label><br>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                                 <label class="form-label"><strong>Mật khẩu mới:</strong></label>
                                 <div >
                                     <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu mới" id="pwd">
-                                    <p style="cursor: pointer" id="showHidePassword" onclick="showHidePassword()" class="mt-2"><em>Hiện mật khẩu</em></p>
+                                    <p style="cursor: pointer" id="showHidePassword" onclick="showHidePassword()" class="mt-2">Hiện mật khẩu</p>
                                     @error('password')
                                     <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -167,7 +167,7 @@
 
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
-                showHidePwd.textContent = (type === 'password') ? 'Show password' : 'Hide password';
+                showHidePwd.textContent = (type === 'password') ? 'Hiện mật khẩu' : 'Ẩn mật khẩu';
             }
             function previewFile(input){
                 let file = $("input[type=file]").get(0).files[0];

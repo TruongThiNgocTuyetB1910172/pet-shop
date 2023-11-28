@@ -22,4 +22,4 @@
         } );
 </script>
 @livewireScripts
-@yield('footer')
+@yield('scripts')

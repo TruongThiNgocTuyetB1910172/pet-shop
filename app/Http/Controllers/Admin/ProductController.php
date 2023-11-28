@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     use ImageTrait;
 
-    public int $itemPerPage = 10;
+    public int $itemPerPage = 6;
 
     public function index(): View
     {
@@ -52,8 +52,6 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $data['name'],
             'description' => $data['description'],
-            'stock' => $data['stock'],
-            'original_price' => $data['original_price'],
             'selling_price' => $data['selling_price'],
             'sku' => $data['sku'],
             'category_id' => $data['category_id'],
@@ -110,12 +108,10 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $data['name'],
-            'stock' => $data['stock'],
             'sku' => $data['sku'],
             'description' => $data['description'],
             'category_id' => $data['category_id'],
             'image' => $data['image'],
-            'original_price' => $data['original_price'],
             'selling_price' => $data['selling_price'],
             'feature' => $data['feature'],
         ]);

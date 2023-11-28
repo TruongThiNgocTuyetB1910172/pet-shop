@@ -51,7 +51,8 @@
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form2Example27">{{ __('Mật khẩu') }}</label>
-                                        <input type="password" id="form2Example27" placeholder="Mật khẩu" class="form-control" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
+                                        <input type="password" id="form2Example27" placeholder="Mật khẩu" class="form-control"
+                                               @error('password') is-invalid @enderror" name="password" required autocomplete="password"/>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -16,7 +16,7 @@ class OrderController extends Controller
 {
     public int $itemPerPage = 10;
 
-    public function index(): View
+    public function index()
     {
         $searchTerm = request()->query('searchTerm') ?? '';
 
@@ -34,8 +34,54 @@ class OrderController extends Controller
             ->orderByDesc('created_at')
             ->paginate($this->itemPerPage);
 
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact('orders'))->render();
+        //        return view('admin.orders.index', ['orders' => $orders])->render();
     }
+
+    public function newOrder()
+    {
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+
+        $search = '%' . $searchTerm . '%';
+
+        $orders = Order::where(function ($query) use ($search) {
+            $query->where('tracking_number', 'like', $search)
+                ->orWhere('shipping_address', 'like', $search);
+        })
+            ->with('admin')
+            ->orderByDesc('created_at')
+            ->where('status', 'pending')
+            ->paginate($this->itemPerPage);
+
+        return view('admin.orders.index', compact('orders'))->render();
+    }
+    public function successOrder()
+    {
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+
+        $search = '%' . $searchTerm . '%';
+
+        $orders = Order::where(function ($query) use ($search) {
+            $query->where('tracking_number', 'like', $search)
+                ->orWhere('shipping_address', 'like', $search);
+        })
+            ->with('admin')
+            ->orderByDesc('created_at')
+            ->where('status', 'success')
+            ->paginate($this->itemPerPage);
+
+        return view('admin.orders.index', compact('orders'))->render();
+    }
+
+
 
     public function edit(string $id): View
     {
@@ -47,6 +93,16 @@ class OrderController extends Controller
 
         return view('admin.orders.edit', compact('order', 'orderProducts', 'shippers'));
     }
+    public function show(string $id)
+    {
+        $order = Order::getOrderById($id);
+
+        $orderProducts = OrderProduct::where('order_id', $order->id)->get();
+
+
+        return view('admin.orders.show', compact('order', 'orderProducts'));
+    }
+
 
     public function update(Request $request, string $id): RedirectResponse
     {
@@ -57,17 +113,17 @@ class OrderController extends Controller
 
         $order = Order::getOrderById($id);
 
-       if ($order->status === 'accepted'){
-           $order->update([
-               'status' => $data['status'],
-               'admin_id' => Auth::guard('admin')->user()->id,
-               'shipper_id' => $data['shipper_id'],
-               'order_shipper_status' => 'pending',
-           ]);
-       }
-       $order->update([
-           'status' => $data['status'],
-       ]);
+        if ($order->status === 'accepted') {
+            $order->update([
+                'status' => $data['status'],
+                'admin_id' => Auth::guard('admin')->user()->id,
+                'shipper_id' => $data['shipper_id'],
+                'order_shipper_status' => 'pending',
+            ]);
+        }
+        $order->update([
+            'status' => $data['status'],
+        ]);
 
         if ($order->status == 'cancel') {
             $orderProduct = OrderProduct::where('order_id', $order->id)->get();
@@ -86,4 +142,7 @@ class OrderController extends Controller
 
         return redirect('order');
     }
+
+
+
 }

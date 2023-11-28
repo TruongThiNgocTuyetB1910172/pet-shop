@@ -125,7 +125,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="text-info">Tổng tiền: {{ CurrencyHelper::format($orderProduct->order->total) }}</div>
+                <div class="text-info">Tổng tiền: {{ CurrencyHelper::format($order->total) }}</div>
             </div>
         </div>
     </div>
@@ -142,7 +142,7 @@
                             <hr>
                             <div>
                                 <label>Trạng thái đơn hàng:</label>
-                                <select class="form-control" name="status" style="border: none">
+                                <select class="form-control" name="status" style="border-style: solid; width: 50%">
                                     <option>Chọn trạng thái đơn hàng</option>
                                     <option value="pending"  {{ $order->status ==  'pending' ? 'selected' : ''}}>Đang chờ duyệt</option>
                                     <option value="accepted" {{ $order->status ==  'accepted' ? 'selected' : ''}}>Đã được duyệt</option>
@@ -155,7 +155,7 @@
                            @if($order->status === 'accepted')
                                 <div>
                                     <label>Chọn người giao hàng: </label>
-                                    <select class="form-control" name="shipper_id" style="border: none">
+                                    <select class="form-control" name="shipper_id" style="border-style: solid; width: 50%">
                                         @foreach($shippers as $shipper)
                                             <option value="{{ $shipper->id }}">{{ $shipper->name }}</option>
                                         @endforeach

@@ -15,7 +15,7 @@
                         $subtotal = 0;
                 @endphp
                 <div class="woocommerce">
-                    <form class="woocommerce-cart-form">
+                    <div class="woocommerce-cart-form">
                         <table class="woocommerce-cart-table">
                             <thead>
                             <tr>
@@ -39,7 +39,7 @@
                                         @csrf
                                         @method('PUT')
                                         <td class="product-thumbnail">
-                                            <img style="height: 70px; width: 70px" src="{{asset( 'storage/'. $item->product->image) }}">
+                                            <a href="{{ route('product-list.detail', ['id' => $item->product->id]) }}"> <img style="height: 70px; width: 70px" src="{{asset( 'storage/'. $item->product->image) }}"></a>
                                         </td>
                                         <td class="product-name" data-title="Product">
                                             <a class="product-name" >{{$item->product->name}}</a>
@@ -49,11 +49,11 @@
                                             @if($item->product->stock >= $item->quantity)
                                                 <div class="input-group mb-3 flex" style="max-width: 120px;">
                                                     <div class="input-group-prepend p-2">
-                                                        <button data-dec-product-id="{{ $item->id }}" id="decrease" class="decrease " type="button">&minus;</button>
+                                                        <button data-dec-product-id="{{ $item->id }}" value="-" id="decrease" class="decrease " type="button">&minus;</button>
                                                     </div>
                                                     <input type="text" class="text-center p-2" style="width: 60px" name="quantity" value="{{ $item->quantity }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                                                     <div class="input-group-append p-2">
-                                                        <button data-inc-product-id="{{ $item->id }}" id="increase" class="increase " type="button">&plus;</button>
+                                                        <button data-inc-product-id="{{ $item->id }}" value="+" id="increase" class="increase " type="button">&plus;</button>
                                                     </div>
                                                 </div>
                                             @else
@@ -71,12 +71,12 @@
 
                             </tbody>
                         </table>
-                    </form>
+                    </div>
                     <hr>
                     <div class="cart_totals" style="margin-bottom: 50px">
                         <div class="row">
-                            <div class="col-md-7"></div>
-                            <div class="col-md-5">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <span>Tổng cộng:</span>
@@ -97,12 +97,11 @@
                                     <div class="col-md-6">
                                         <span style="color: red">{{ CurrencyHelper::format($subtotal) }}</span>
                                     </div>
-
                                 </div>
                                 <hr>
                                 <div class="proceed-to-checkout">
-                                    <a class="btn btn-brand " href="{{ route('order-product.index') }}">Thanh toán</a>
                                     <a class="btn btn-brand " href="{{ route('product-list.index') }}">Tiếp tục mua hàng</a>
+                                    <a class="btn btn-brand " href="{{ route('order-product.index') }}">Thanh toán</a>
                                 </div>
                             </div>
                         </div>
@@ -117,6 +116,9 @@
         </div>
     </section>
 
+
+@endsection
+@section('scripts')
     <script type="text/javascript">
         $('.increase').on('click', function(e) {
             e.preventDefault()
@@ -171,3 +173,4 @@
         });
     </script>
 @endsection
+

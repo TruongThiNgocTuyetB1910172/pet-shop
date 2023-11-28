@@ -27,7 +27,7 @@ class ProductContronller extends Controller
 
         $product = Product::getProductById($id);
 
-        $productRating = round(ProductReview::where('product_id', $product->id)->avg('rating'),1);
+        $productRating = round(ProductReview::where('product_id', $product->id)->avg('rating'), 1);
 
         $feedbacks = ProductReview::where('product_id', $product->id)->get();
 
@@ -51,7 +51,7 @@ class ProductContronller extends Controller
         }
 
 
-        return view('client.products.detail', compact('product', 'relatedProducts','productReviews','checkBought', 'productRating', 'feedbacks'));
+        return view('client.products.detail', compact('product', 'relatedProducts', 'productReviews', 'productRating', 'feedbacks', 'checkBought'));
     }
 
     public function addToCart(int $product_id, Request $request): RedirectResponse
@@ -60,17 +60,22 @@ class ProductContronller extends Controller
             'qty' => ['nullable', 'int', 'min:1']
         ]);
 
+        $product = Product::getProductById($product_id);
+
         if (! Auth::check()) {
             toast('Đăng nhập trước khi sử dụng dịch vụ', 'warning');
             return redirect('login');
+        }
+
+        if ($data['qty'] > $product->stock) {
+            toast('Số lượng sản phẩm không đủ.', 'warning');
+            return redirect()->back();
         }
 
         if (Cart::where('user_id', Auth::user()->id)->where('product_id', $product_id)->exists()) {
             toast('Sản phẩm đã có trong giỏ hàng.', 'warning');
             return redirect()->back();
         }
-
-        $product = Product::getProductById($product_id);
 
         if ($data['qty']) {
             Cart::create([

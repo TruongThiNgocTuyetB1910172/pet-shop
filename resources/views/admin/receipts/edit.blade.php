@@ -77,7 +77,7 @@
                                 <hr>
                                 <p class="form-label text-center"> <strong>Trạng thái của đơn hàng: </strong></p>
                                 <div>
-                                    <select class="form-control text-center " name="status" style="border: none">
+                                    <select class="form-control text-center " name="status" style="border-style: solid">
                                         <option>Chọn trạng thái đơn hàng</option>
                                         <option value="pending"  {{ $receipt->status ==  'pending' ? 'selected' : ''}}>Đang chờ duyệt</option>
                                         <option value="accepted" {{ $receipt->status ==  'accepted' ? 'selected' : ''}}>Đã được duyệt</option>

@@ -6,46 +6,47 @@
     <div class="my-3">
         <section class="content">
             <div class="container-fluid">
-               <div class="row">
-                   <div class=" card-primary col-6">
-                       <div class="card-header">
-                           <h3 class="card-title">Thông tin</h3>
-                       </div>
-                       <div class="row mt-3 mx-2" >
-                           <div class="col-3 ">
-                               <strong>Người lập phiếu: </strong>
-                           </div>
-                           <div class="form-group col-9">
-                               <p class="form-control">{{ $receipt->admin->name }}</p>
-                           </div>
-                       </div>
+                <div class="row">
+                    <div class="card-primary col-6">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin</h3>
+                        </div>
+                        <div class="row mt-3 mx-2" >
+                            <div class="col-3 ">
+                                <strong>Người lập phiếu: </strong>
+                            </div>
+                            <div class="form-group col-9">
+                                <p class="form-control">{{ $receipt->admin->name }}</p>
+                            </div>
+                        </div>
+                    </div>
 
-                   </div>
-                   <div class=" card-primary col-6">
-                       <div class="card-header">
-                           <h3 class="card-title">Nội dung</h3>
-                       </div>
-                       <div class="row mt-3 mx-2" >
-                           <div class="col-3 ">
-                               <strong>Ghi chú: </strong>
-                           </div>
-                           <div class="form-group col-9">
-                               <p class="form-control">{{ $receipt->notes }}</p>
-                           </div>
-                       </div>
-                       <div class="row mx-2" >
-                           <div class="col-3 ">
-                               <strong>Ngày duyệt: </strong>
-                           </div>
-                           <div class="form-group col-9">
-                               <p class="form-control">{{ $receipt->created_at->format('d')}} - {{$receipt->created_at->format('m')}} -
-                                   {{ $receipt->created_at->format('Y')}}
-                                   <small>{{ $receipt->created_at->format('g:i A') }}</small></p>
-                           </div>
-                       </div>
+                    <div class="card-primary col-6">
+                        <div class="card-header">
+                            <h3 class="card-title">Nội dung</h3>
+                        </div>
+                        <div class="row mt-3 mx-2" >
+                            <div class="col-3 ">
+                                <strong>Ghi chú: </strong>
+                            </div>
+                            <div class="form-group col-9">
+                                <p class="form-control">{{ $receipt->notes }}</p>
+                            </div>
+                        </div>
+                        <div class="row mx-2" >
+                            <div class="col-3 ">
+                                <strong>Ngày duyệt: </strong>
+                            </div>
+                            <div class="form-group col-9">
+                                <p class="form-control">{{ $receipt->created_at->format('d')}} - {{$receipt->created_at->format('m')}} -
+                                    {{ $receipt->created_at->format('Y')}}
+                                    <small>{{ $receipt->created_at->format('g:i A') }}</small></p>
+                            </div>
+                        </div>
 
-                   </div>
-               </div>
+                    </div>
+
+                </div>
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Danh sách sản phẩm nhập</h3>
@@ -57,8 +58,8 @@
                             @endphp
                             <thead>
                             <tr>
-                                <td>Id</td>
-                                <td>Hình</td>
+                                <th>Id</th>
+                                <th>Hình</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Giá nhập</th>
                                 <th>Số lượng</th>
@@ -87,12 +88,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="mx-3 mt-3">
-
-                                <p class="badge badge-warning">Tổng tiền: {{ CurrencyHelper::format($total) }}</p>
-                                <p class="badge badge-warning">Tổng SL: {{ $sum }}</p>
-
-                        </div>
+                            <div class="mx-3 mt-3">
+                                <p class="badge badge-warning" style="font-size: medium">Tổng tiền: {{ CurrencyHelper::format($total) }}</p>
+                                <p class="badge badge-warning" style="font-size: medium">Tổng SL: {{ $sum }}</p>
+                            </div>
                         @else
                             <div class="text-center mt-3 mb-3">
                                 <strong>Không có dữ liệu nào được thêm vào</strong>

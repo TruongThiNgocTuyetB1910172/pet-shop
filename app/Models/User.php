@@ -59,6 +59,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(ProductReview::class);
     }
+
+    public function Feedbacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function wishLists(): HasMany
+    {
+        return $this->hasMany(WishList::class);
+    }
     public static function getUserById(string $id): Model|Collection|Builder|array|null
     {
         return User::query()->findOrFail($id);

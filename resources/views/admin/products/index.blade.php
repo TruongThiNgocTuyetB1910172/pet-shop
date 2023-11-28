@@ -12,7 +12,7 @@
             <div class="card-header">
                 <h3 class="card-title">Danh sách sản phẩm</h3>
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 500px;">
+                    <div class="input-group input-group-sm">
                         <form method="GET">
                             <input
                                 type="text"
@@ -39,8 +39,8 @@
                         <th>Hình ảnh</th>
                         <th>Danh mục</th>
                         <th>Trạng thái</th>
-                        <th>Số lượng còn lại</th>
-                        <th>Mã sp</th>
+                        <th>Số lượng kho</th>
+                        <th>Giá nhập</th>
                         <th>Giá bán</th>
                         <th>Ngày thêm</th>
                         <th>Hành động</th>
@@ -61,7 +61,7 @@
                                 <td><span class="badge badge-primary">Sản phẩm thường</span></td>
                             @endif
                             <td>{{ $product->stock }}</td>
-                            <td>{{ $product->sku }}</td>
+                            <td>{{ CurrencyHelper::format($product->original_price) }}</td>
                             <td>{{ CurrencyHelper::format($product->selling_price) }}</td>
                             <td>{{ $product->created_at->format('d')}} - {{$product->created_at->format('m')}} -
                                 {{ $product->created_at->format('Y')}}

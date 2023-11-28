@@ -19,11 +19,17 @@ class ProductReview extends Model
         'user_id',
         'comment',
         'rating',
+        'status'
     ];
 
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
     }
 
     public function user(): BelongsTo

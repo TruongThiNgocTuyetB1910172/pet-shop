@@ -72,7 +72,7 @@
                                         <label for="is_active">Hoạt động</label><br></div>
                                     <div class="justify-content-center align-content-center ml-5">
                                         <input type="radio" id="is_block" name="status" value="0" @if($user->status == 0) checked @endif>
-                                        <label for="is_block">Block</label><br>
+                                        <label for="is_block">Chặn</label><br>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
 
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
-            showHidePwd.textContent = (type === 'password') ? 'Show password' : 'Hide password';
+            showHidePwd.textContent = (type === 'password') ? 'Hiện mật khẩu' : 'Ẩn mật khẩu';
         }
         function previewFile(input){
             let file = $("input[type=file]").get(0).files[0];

@@ -8,7 +8,7 @@
                     <li data-transition="fade">
                         <img src="{{ asset( 'storage/'.$banner->image) }}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10">
                         <div class="tp-caption" data-x="center" data-y="center" data-voffset="['-100','-100','-140','-140']" data-transform_in="y:-80px;opacity:0;s:800;e:easeInOutCubic;" data-transform_out="y:-80px;opacity:0;s:300;" data-start="1000">
-                            <h2>Fresh Organic Food</h2>
+                            <h2>Cửa hàng đồ dùng cho pet</h2>
                         </div>
                         <div class="tp-caption" data-x="center" data-y="center" data-voffset="['20','20','40','40']" data-width="['650','550','480','320']" data-whitespace="normal" data-transform_in="y:80px;opacity:0;s:800;e:easeInOutCubic;" data-transform_out="y:80px;opacity:0;s:300;" data-start="1400">
                             <p>Nunc suscipit elit ligula, ut porttitor justo rutrum eget. Proin et diam fringilla, elementum nisi volutpat, eleifend eros. Nullam venenatis nunc nisl, elementum euismod dui imperdiet id.</p>
@@ -33,12 +33,12 @@
                     <div class="post">
                         <div class="video-wrapper js-set-bg-blog-thumb">
                             <a href="blog-detail.html">
-                                <img src="client/images/blog/010.jpg" alt="blog-thumb" />
+                                <img src="https://images.pexels.com/photos/1693443/pexels-photo-1693443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="blog-thumb" />
                             </a>
                         </div>
                         <div class="desc">
                             <h3>
-                                <a href="blog-detail.html">Create your Green Space with Plant</a>
+                                <a href="blog-detail.html">Lịch sử ra đời của Pet Shop</a>
                             </h3>
                             <p class="meta">
                                 <span class="time">March 05, 2017</span>
@@ -54,12 +54,12 @@
                     <div class="post">
                         <div class="video-wrapper js-set-bg-blog-thumb">
                             <a href="blog-detail.html">
-                                <img src="client/images/blog/011.jpg" alt="blog-thumb" />
+                                <img src="https://images.pexels.com/photos/17050293/pexels-photo-17050293/free-photo-of-thien-nhien-hoa-mua-he-v-n.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="blog-thumb" />
                             </a>
                         </div>
                         <div class="desc">
                             <h3>
-                                <a href="blog-detail.html">Emerald Green Interiors</a>
+                                <a href="blog-detail.html">Hướng phát triển của Pet Shop</a>
                             </h3>
                             <p class="meta">
                                 <span class="time">March 12, 2017</span>

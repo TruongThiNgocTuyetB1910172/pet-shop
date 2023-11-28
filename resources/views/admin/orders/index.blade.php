@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive p-0" id="order-list">
                     <table class="table table-head-fixed text-nowrap">
                         <thead>
                         <tr>
@@ -36,7 +36,6 @@
                             <th>Trạng thái Shipper</th>
                             <th>Tổng tiền</th>
                             <th>Ngày đặt</th>
-                            <th>Người duyệt </th>
                             <th>Hành động</th>
                         </tr>
                         </thead>
@@ -74,13 +73,22 @@
                                     <td>{{ $order->created_at->format('d')}} - {{$order->created_at->format('m')}} -
                                         {{ $order->created_at->format('Y')}}
                                         <small>{{ $order->created_at->format('g:i A') }}</small></td>
-                                        <td>{{ $order->admin ? $order->admin->name : 'co ai cap nhat dau' }}</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm"
-                                           href="{{ route('order.edit', ['id' => $order->id]) }}">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                    </td>
+{{--                                        <td>{{ $order->admin ? $order->admin->name : 'co ai cap nhat dau' }}</td>--}}
+                                   @if($order->status == 'success')
+                                        <td>
+                                            <a class="btn btn-warning btn-sm"
+                                               href="{{ route('order.show', ['id' => $order->id]) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <a class="btn btn-primary btn-sm"
+                                               href="{{ route('order.edit', ['id' => $order->id]) }}">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                   @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -98,3 +106,5 @@
         </div>
 </div>
 @endsection
+
+

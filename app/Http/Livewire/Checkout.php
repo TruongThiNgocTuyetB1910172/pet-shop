@@ -56,7 +56,7 @@ class Checkout extends Component
         $validatedData = $this->validate();
 
         $vnp_Url = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
-        $vnp_Returnurl = 'https://pet-shop.com/thank-you';
+        $vnp_Returnurl = 'https://pet-shop.com/order-paymentCallback';
         $vnp_TmnCode = config('services.VNPay.vnp_TmnCode');
         $vnp_HashSecret = config('services.VNPay.vnp_HashSecret');
 
@@ -126,7 +126,7 @@ class Checkout extends Component
             'shipping_address' => $shippingAddresses,
             'total' => $this->total,
             'payment_type' => 'VNPAY',
-            'payment_status' =>'Thanh cong',
+            'payment_status' => 'Thành công',
 
         ]);
 
@@ -172,11 +172,11 @@ class Checkout extends Component
             'shipping_address' => $shippingAddresses,
             'total' => $this->total,
             'payment_type' => 'COD',
-            'payment_status' =>'Thanh cong',
+            'payment_status' => '0',
         ]);
 
         foreach ($this->cartProducts as $product) {
-            OrderProduct::create([
+           OrderProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $product->product->id,
                 'quantity' => $product->quantity,
@@ -189,8 +189,8 @@ class Checkout extends Component
                 'stock' => $findProduct->stock - $product->quantity,
             ]);
         }
+        Mail::to($order->user->email)->send(new OrderMail($order));
 
-        //        Mail::to($order->user->email)->send(new OrderMail($order));
         Cart::where('user_id', Auth::user()->id)->delete();
 
         toast('Đặt hàng thành công', 'success');

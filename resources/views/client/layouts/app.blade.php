@@ -25,6 +25,12 @@
                         <span class="lnr lnr-bag">@if(Auth::check()) {{!is_null(\App\Models\Cart::where('user_id', Auth::user()->id)->get()) ? count(\App\Models\Cart::where('user_id', Auth::user()->id)->get()) : 0 }}@endif"</span>
                     </a>
                 </div>
+
+                <div class="widget widget-control-header widget-shop-cart js-widget-shop-cart">
+                    <a class="control" href="{{ route('product-wishlist.index') }}" >
+                        <span class="lnr lnr-heart"></span>
+                    </a>
+                </div>
                 <div class="widget widget-control-header hidden-lg hidden-md hidden-sm">
                     <a class="navbar-toggle js-offcanvas-has-events" type="button" href="#menu">
                         <span class="icon-bar"></span>
@@ -54,14 +60,43 @@
             </div>
         </div>
     </div>
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
 
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "169452882913924");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml            : true,
+                version          : 'v18.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <footer class="footer-style-2">
         <div class="footer-style-2-inner">
             <div class="container">
                 <div class="row">
                     <div class="widget-footer widget-text col-first col-small">
                         <a href="#">
-                            <img class="logo-footer" src="{{asset('client/images/logo.png')}}" alt="Logo Organic" />
+                            <img class="logo-footer" src="{{asset('client/images/logo33.png')}}" alt="Logo Organic" />
                         </a>
                         <p>Suspendisse ut diam quis turpis convallis tempus. Sed ultrices lobortis dolor laoreet luctus. Morbi ornare nisi vitae tellus euismod bibendum. Pellentesque posuere iaculis volutpat. </p>
                     </div>
@@ -120,22 +155,9 @@
             <div class="container">
                 <div class="row">
                     <div class="copy-right-inner">
-                        <p>Copyright © 2017 Designed by AuThemes. All rights reserved.</p>
+                        <p>Copyright © 2023 TruongThiNgocTuyet B1910172</p>
                         <div class="widget widget-footer widget-footer-link-inline">
-                            <ul class="list-unstyle">
-                                <li>
-                                    <a href="#">Term of Uses</a>
-                                </li>
-                                <li>
-                                    <a href="#">Privacy</a>
-                                </li>
-                                <li>
-                                    <a href="#">Shipping</a>
-                                </li>
-                                <li>
-                                    <a href="#">Policy</a>
-                                </li>
-                            </ul>
+
                         </div>
                     </div>
                 </div>

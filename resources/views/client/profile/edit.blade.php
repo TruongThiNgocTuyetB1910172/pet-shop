@@ -14,6 +14,7 @@
                                <h4><strong>Cập nhật thông tin cá nhân</strong></h4>
                                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                            </div>
+
                                <div class="">
                                    <label>Tên khách hàng: <span style="color: red">*</span></label>
                                    <input type="text" name="name" class="form-control" value="{{ $user->name }}" >
@@ -25,7 +26,7 @@
                                </div>
 
 
-                               <div >
+                               <div>
                                    <label> Số điện thoại: <span style="color: red">*</span></label>
                                    <input type="text" name="phone" class="form-control" value="{{ $user->phone }}" >
                                    @error('phone')
@@ -49,14 +50,13 @@
                            <div class="form-group">
                                <div class="row" >
                                    <div class="col-md-4 ">
-                                       <i class="fa fa-transgender" aria-hidden="true"></i>
                                        <label class="form-label"><strong>Giới tính:</strong></label>
                                    </div>
                                    <div  class="form-group col-md-8">
-                                       <input type="radio" name="gender" value="1" @if($user->status == 1) checked @endif>
+                                       <input type="radio" name="gender" value="1" @if($user->gender == 1) checked @endif>
                                        <label >Nam</label>
 
-                                       <input type="radio" name="gender" value="0"  @if($user->status == 0) checked @endif>
+                                       <input type="radio" name="gender" value="0"  @if($user->gender == 0) checked @endif>
                                        <label >Nữ</label>
                                    </div>
                                </div>
@@ -87,7 +87,7 @@
                                @enderror
                            </div>
                            <div style="margin-bottom: 30px">
-                               <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                               <button type="submit" class="btn btn-success">Lưu thay đổi</button>
                            </div>
                        </form>
                    </div>
@@ -117,6 +117,15 @@
                                 </span>
                                @enderror
                            </div>
+                           <div>
+                               <label>Nhập lại mật khẩu mới: <span style="color: red">*</span></label>
+                               <input type="password" name="new_password_confirmation"  id="password" class="form-control"  >
+                               @error('new_password_confirmation')
+                               <span class="text-danger" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                </span>
+                               @enderror
+                           </div>
 {{--                           <div>--}}
 {{--                               <label>Nhập lại mật khẩu: <span style="color: red">*</span></label>--}}
 {{--                               <input type="password" name="password_confirm" class="form-control"  >--}}
@@ -127,7 +136,7 @@
 {{--                               @enderror--}}
 {{--                           </div>--}}
                            <div style="margin-bottom: 30px; margin-top: 30px">
-                               <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                               <button type="submit" class="btn btn-success">Lưu thay đổi</button>
                            </div>
                        </form>
                    </div>

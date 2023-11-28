@@ -4,9 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('product_reviews', function (Blueprint $table) {
@@ -15,6 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('comment');
             $table->float('rating');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
