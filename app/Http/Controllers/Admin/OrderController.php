@@ -58,7 +58,6 @@ class OrderController extends Controller
             ->paginate($this->itemPerPage);
 
         return view('admin.orders.index', compact('orders'))->render();
-        //        return view('admin.orders.index', ['orders' => $orders])->render();
     }
     public function successOrder()
     {
@@ -80,7 +79,6 @@ class OrderController extends Controller
             ->paginate($this->itemPerPage);
 
         return view('admin.orders.index', compact('orders'))->render();
-        //        return view('admin.orders.index', ['orders' => $orders])->render();
     }
 
 

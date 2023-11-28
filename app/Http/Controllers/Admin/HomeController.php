@@ -117,16 +117,6 @@ class HomeController extends Controller
     public function filterGetRevenueByYear(Request $request)
     {
         $year = $request->input('year');
-
-//        $startDate = Carbon::parse()->startOfYear()->year($year);
-//        $endDate = Carbon::parse()->endOfYear()->year($year);
-
-//        $query = Order::orderBy('updated_at')
-//            ->whereBetween('updated_at', [$startDate, $endDate])
-//            ->where('status', 'success')
-//            ->selectRaw('MONTH(updated_at) as month, SUM(total) as revenue')
-//            ->groupBy('month');
-
         $query = Order::whereYear('updated_at', $year)
             ->selectRaw('MONTH(updated_at) as month, SUM(total) as revenue')
             ->groupBy('month')
@@ -134,11 +124,6 @@ class HomeController extends Controller
             ->where('status', 'success')
             ->get();
 
-
-//        $revenueData = $query->get();
-//
-//        $labels = $revenueData->pluck('month')->toArray();
-//        $data = $revenueData->pluck('revenue')->toArray();
         $labels = [];
         $data = [];
         foreach ($query as $item) {
@@ -146,7 +131,6 @@ class HomeController extends Controller
             $data[] = $item->revenue;
         }
 
-        // Trả về view với dữ liệu doanh thu và năm đã chọn
         return response()->json([
             'labels' => $labels,
             'data' => $data,
@@ -167,7 +151,6 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        // Tổng số sản phẩm đã được bán trong tháng hiện tại
         $totalProductsSold = OrderProduct::whereMonth('updated_at', $currentMonth)
             ->whereYear('updated_at', $currentYear)
             ->count();
