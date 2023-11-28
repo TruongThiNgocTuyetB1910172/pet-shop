@@ -132,39 +132,39 @@
     <div class="card">
         <div class="card-body">
             <div class="basic-form">
-                    <div class="form-group">
-                        <form action="{{ route('order-list.update', ['id' => $order->id]) }}" method="POST">
-                            @method('PUT')
-                            @csrf
-                            <div class="form-group">
-                                <div class="text-uppercase text-center"><h4>Xác nhận</h4></div>
-                                <hr>
-                                @if($order->order_shipper_status === 'accepted')
-                                    <div>
-                                        <label>Trạng thái đơn hàng:</label>
-                                        <select class="form-control" name="order_shipper_status" style="border: none">
-                                            <option>Chọn trạng thái giao hàng</option>
-                                            <option value="success"  {{ $order->order_shipper_status ==  'success' ? 'selected' : ''}}>Giao hàng thành công</option>
-                                            <option value="fail" {{ $order->order_shipper_status ==  'fail' ? 'selected' : ''}}>Giao hàng thất bại</option>
-                                        </select>
-                                    </div>
-                                @else
-                                    <div>
-                                        <label>Trạng thái đơn hàng:</label>
-                                        <select class="form-control" name="order_shipper_status" style="border: none">
-                                            <option>Chọn trạng thái giao hàng</option>
-                                            <option value="pending"  {{ $order->order_shipper_status ==  'pending' ? 'selected' : ''}}>Đang chờ duyệt</option>
-                                            <option value="accepted" {{ $order->order_shipper_status ==  'accepted' ? 'selected' : ''}}>Đã nhận đơn</option>
-                                            <option value="refuse" {{ $order->order_shipper_status ==  'refuse' ? 'selected' : ''}}>Từ chối</option>
-                                        </select>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="form-group text-center mt-3">
-                                <button type="submit" class="btn btn-success mb-2">Cập nhật</button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="form-group">
+                    <form action="{{ route('order-list.update', ['id' => $order->id]) }}" method="POST">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-group">
+                            <div class="text-uppercase text-center"><h4>Xác nhận</h4></div>
+                            <hr>
+                            @if($order->order_shipper_status === 'accepted')
+                                <div>
+                                    <label>Trạng thái đơn hàng:</label>
+                                    <select class="form-control" name="order_shipper_status" style="border: none">
+                                        <option>Chọn trạng thái giao hàng</option>
+                                        <option value="success"  {{ $order->order_shipper_status ==  'success' ? 'selected' : ''}}>Giao hàng thành công</option>
+                                        <option value="fail" {{ $order->order_shipper_status ==  'fail' ? 'selected' : ''}}>Giao hàng thất bại</option>
+                                    </select>
+                                </div>
+                            @else
+                                <div>
+                                    <label>Trạng thái đơn hàng:</label>
+                                    <select class="form-control" name="order_shipper_status" style="border: none">
+                                        <option>Chọn trạng thái giao hàng</option>
+                                        <option value="pending"  {{ $order->order_shipper_status ==  'pending' ? 'selected' : ''}}>Đang chờ duyệt</option>
+                                        <option value="accepted" {{ $order->order_shipper_status ==  'accepted' ? 'selected' : ''}}>Đã nhận đơn</option>
+                                        <option value="refuse" {{ $order->order_shipper_status ==  'refuse' ? 'selected' : ''}}>Từ chối</option>
+                                    </select>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group text-center mt-3">
+                            <button type="submit" class="btn btn-success mb-2">Cập nhật</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -3,36 +3,35 @@
 
         $categories=app('categories')
     @endphp
-    <section class="sub-header shop-layout-1">
-        <img class="rellax bg-overlay" src="{{asset('client/images/sub-header/01.jpg')}}" alt="">
-        <div class="overlay-call-to-action"></div>
-        <h3 class="heading-style-3">Mua sắm </h3>
-    </section>
+{{--    <section class="sub-header shop-layout-1">--}}
+{{--        <img class="rellax bg-overlay" src="{{asset('client/images/sub-header/01.jpg')}}" alt="">--}}
+{{--        <div class="overlay-call-to-action"></div>--}}
+{{--        <h3 class="heading-style-3">Mua sắm </h3>--}}
+{{--    </section>--}}
     <section class="boxed-sm">
         <div class="container">
             <div class="heading-wrapper text-center">
                 <h3 class="heading-style-2">Sản phẩm của chúng tôi</h3>
             </div>
-            <div class="row">
-                <div class="row main">
-                    <div class="col-md-3">
-                        <div class="sidebar">
-                            <div class="widget widget-categories">
-                                <h4 class="title-widget text-center">Danh mục</h4>
-                                <div class="woocommerce-top-control">
-                                    <form method="GET">
-                                        <input
-                                            wire:model.live.debounce.500ms="searchTerm"
-                                            type="text"
-                                            placeholder="Search" style="width: 100%;
+            <form method="GET" class="text-center">
+                <input
+                    wire:model.live.debounce.500ms="searchTerm"
+                    type="text"
+                    placeholder="Tìm kiếm sản phẩm" style="width: 50%;
                                             font-size: 15px;
                                             color: #b7b7b7;
                                             margin: 15px;
                                             padding-left: 15px;
                                             border: 1px solid #e5e5e5;
                                             height: 40px;">
-                                    </form>
-                                </div>
+            </form>
+
+            <div class="row">
+                <div class="row main">
+                    <div class="col-md-3">
+                        <div class="sidebar">
+                            <div class="widget widget-categories">
+                                <h4 class="title-widget text-center">Danh mục</h4>
                                 @if($categories->count()>0)
                                     <ul>
                                         @foreach($categories as $key => $category)
@@ -40,14 +39,26 @@
                                                <div>
                                                    <input
                                                        wire:model="selectedCategory"
-                                                       class="form-check-input hidden" type="radio" value="{{ $category->id }}" id="{{ $key }}">
+                                                       class="form-check-input" type="radio" value="{{ $category->id }}" id="{{ $key }}">
                                                    <label class="form-group" for="{{ $key }}">
                                                        {{ $category->name }} ({{$category->products->count()}}sp)
                                                    </label>
                                                </div>
                                             @endif
                                         @endforeach
+
                                     </ul>
+{{--                                   <div>--}}
+{{--                                       <select wire:model="selectedCategory">--}}
+{{--                                           <option >Tất cả danh mục</option>--}}
+{{--                                               @foreach ($categories as $category )--}}
+{{--                                                   @if( $category->products->count() > 0)--}}
+{{--                                                   <option value="{{ $category->id }}" > {{ $category->name }} ({{$category->products->count()}}sp)</option>--}}
+{{--                                               @endif--}}
+{{--                                               @endforeach--}}
+
+{{--                                       </select>--}}
+{{--                                   </div>--}}
                                 @else
                                     <li>Không có danh mục nào</li>
                                 @endif
@@ -72,7 +83,7 @@
                                         <div class="product product-style-1">
                                             <div class="img-wrapper">
                                                 <a href="{{ route('product-list.detail', ['id' => $product->id]) }}">
-                                                    <img class="img-responsive" style="height:250px" src="{{asset( 'storage/'.$product->image) }}"  alt="product thumbnail" />
+                                                    <img class="img-responsive" style="height:280px" src="{{asset( 'storage/'.$product->image) }}"  alt="product thumbnail" />
                                                 </a>
                                                 <div class="product-control-wrapper bottom-right">
                                                     <div class="wrapper-control-item">
@@ -83,10 +94,18 @@
                                                             @csrf
                                                             <button class="animate-icon-cart" type="submit" name="qty"> <span class="lnr lnr-cart"></span></button>
                                                         </form>
-
                                                         <svg x="0px" y="0px" width="36px" height="32px" viewbox="0 0 36 32">
                                                             <path stroke-dasharray="19.79 19.79" fill="none" ,="," stroke-width="1" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
                                                         </svg>
+                                                    </div>
+                                                    <div class="wrapper-control-item item-wish-list">
+                                                        <form action="{{ route('product-wishlist.addToWishList', ['id'=> $product->id]) }}" method="POST">
+                                                            @csrf
+                                                        <button
+                                                            type="submit">
+                                                            <span class="lnr lnr-heart " ></span>
+                                                        </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

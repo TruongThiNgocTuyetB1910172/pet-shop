@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Account\UpdateAccountRequest;
 use App\Http\Requests\Shipper\CreateShipperRequest;
 use App\Http\Requests\Shipper\UpdateShipperRequest;
-use App\Models\Admin;
 use App\Models\Shipper;
 use App\Models\User;
 use App\Traits\ImageTrait;
@@ -23,8 +21,20 @@ class ShipperController extends Controller
 
     public function index(): View
     {
-        $shippers = Shipper::query()->orderByDesc('created_at')->paginate($this->itemPerPage);
-        return view('admin.shippers.index',compact('shippers'));
+        $searchTerm = request()->query('searchTerm') ?? '';
+
+        if (is_array($searchTerm)) {
+            $searchTerm = '';
+        }
+        $search = '%' . $searchTerm . '%';
+
+        $shippers = Shipper::where(function ($query) use ($search) {
+            $query->where('name', 'like', $search)
+                ->orwhere('email', 'like', $search);
+        })->orderByDesc('created_at')
+            ->paginate($this->itemPerPage);
+
+        return view('admin.shippers.index', compact('shippers'));
     }
 
     public function create(): View

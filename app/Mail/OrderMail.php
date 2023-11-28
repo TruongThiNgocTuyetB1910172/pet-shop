@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -15,14 +16,13 @@ class OrderMail extends Mailable
     use SerializesModels;
 
     protected Order $order;
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+
     public function __construct(Order $order)
     {
         $this->order = $order;
+
+
+
     }
 
     /**

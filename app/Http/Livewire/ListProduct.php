@@ -29,8 +29,11 @@ class ListProduct extends Component
     {
         $query = Product::query();
 
+        $product = Product::all();
+
         if ($this->searchTerm) {
-            $query->where('name', 'like', '%' . $this->searchTerm . '%');
+            $query->where('name', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('selling_price', 'like', '%' . $this->searchTerm . '%');
         }
 
         if ($this->selectedCategory) {

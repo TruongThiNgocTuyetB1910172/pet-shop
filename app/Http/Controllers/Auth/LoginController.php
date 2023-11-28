@@ -12,7 +12,6 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-
     use AuthenticatesUsers;
 
     /**

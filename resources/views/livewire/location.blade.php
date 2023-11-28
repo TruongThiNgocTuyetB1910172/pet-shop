@@ -10,12 +10,18 @@
                                     <div>
                                         <div class="text-uppercase text-center"  >
                                             <h4><strong>Thông tin cá nhân</strong></h4>
-                                            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                                            <hr style="height:1px;border-width:0;color:gray;background-color:gray">
+                                        </div>
+                                        <div class="form-group">
+                                            <div style="text-align: center">
+                                                <img src="{{ asset('storage/'.$user->image) }}" alt="{{ $user->name }}"
+                                                     class="img-fluid" width="140px", height="140px" style="border-radius: 50%">
+                                            </div>
                                         </div>
                                         <div >
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-address-book" aria-hidden="true"></i>
                                                     <strong>Tên khách hàng: </strong>
                                                 </div>
                                                 <div class="form-group col-md-8">
@@ -33,7 +39,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 ">
-                                                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
                                                     <strong>Địa chỉ email: </strong>
                                                 </div>
                                                 <div class="form-group col-md-8">
@@ -47,30 +53,15 @@
                                                         <label class="form-label"><strong>Giới tính:</strong></label>
                                                     </div>
                                                     <div  class="form-group col-md-8">
-                                                        <input type="radio" name="gender" value="1" @if($user->status == 1) checked @endif>
-                                                        <label >Nam</label>
-                                                        <input type="radio" name="gender" value="0" @if($user->status == 0) checked @endif>
-                                                        <label >Nữ</label>
+                                                            <p class="form-control">{{ $user->gender == 1 ? 'Nam' : 'Nữ' }}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{--                                    <div class="col-md-3" >--}}
-                                    {{--                                        <div class="text-uppercase text-center"  >--}}
-                                    {{--                                            <h4><strong>Ảnh đại diện</strong></h4>--}}
-                                    {{--                                            <hr style="height:2px;border-width:0;color:gray;background-color:gray">--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        <div>--}}
-                                    {{--                                            <div style=" text-align: center">--}}
-                                    {{--                                                <img src="{{( 'storage/'.$user->image) }}" width="200px", height="200px" style="border-radius: 50%;">--}}
-                                    {{--                                                <p>Ảnh đại diện</p>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
                                 </div>
                             @endforeach
-                            <div class="mt-3">
+                            <div>
                                 <a href="{{ route('profile.edit', ['id' => $user->id]) }}" type="submit" class="btn btn-primary">Thay đổi</a>
                             </div>
                         </form>
@@ -79,7 +70,7 @@
                         <form  wire:submit.prevent="addNew" method="POST" class="woocommerce-checkout ">
                             <div class="text-uppercase text-center" >
                                 <h4><strong>Địa chỉ giao hàng</strong></h4>
-                                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                                <hr style="height:1px;border-width:0;color:gray;background-color:gray">
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -179,7 +170,7 @@
                                 @endforeach
                             </div>
                             <div class="form-group ">
-                                <button type="submit" class="btn btn-success">Thêm mới</button>
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
                             </div>
 
                         </form>

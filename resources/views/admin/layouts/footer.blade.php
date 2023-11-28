@@ -21,5 +21,6 @@
             console.error( error );
         } );
 </script>
-@livewireScripts
+
 @yield('footer')
+@livewireScripts

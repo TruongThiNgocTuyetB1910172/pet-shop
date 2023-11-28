@@ -49,7 +49,7 @@ class Location extends Component
 
         $validatedData = $this->validate();
 
-        if (Auth::user()->addresses()->count() < 3) {
+        if (Auth::user()->addresses()->count() < 5) {
             Address::create([
                 'user_id' => Auth::user()->id,
                 'user_name' => $validatedData['userName'],
@@ -66,7 +66,7 @@ class Location extends Component
             redirect('location');
 
         } else {
-            toast('Mỗi người không được quá 3 địa chỉ', 'warning');
+            toast('Mỗi người không được quá 5 địa chỉ', 'warning');
 
             redirect('location');
         }

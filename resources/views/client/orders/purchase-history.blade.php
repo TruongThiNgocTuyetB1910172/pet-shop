@@ -1,6 +1,4 @@
 @extends('client.layouts.app')
-
-
 @section('content')
 
     <section class="sub-header shop-detail-1">

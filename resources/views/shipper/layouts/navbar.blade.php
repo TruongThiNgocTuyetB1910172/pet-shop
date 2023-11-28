@@ -63,7 +63,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('shipper-profile.index', ['id' => Auth::guard('shipper')->id()]) }}" class="dropdown-item">
                     <i class="fa fa-address-card-o" aria-hidden="true"></i> Trang cá nhân
                 </a>
                 <div class="dropdown-divider"></div>

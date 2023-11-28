@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Danh sách danh mục</h3>
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 500px;">
+                        <div class="input-group input-group-sm">
                             <form method="GET">
                                 <input
                                     type="text"

@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use function Symfony\Component\Translation\t;
 
 class ProfileController extends Controller
 {
@@ -62,10 +61,11 @@ class ProfileController extends Controller
         $data = $request->validate([
             'password_old' => 'required',
             'password' => ['required', 'string', 'min:8', 'max:32'],
+            'new_password_confirmation' => ['required','same:password'],
         ]);
 
         if(!Hash::check($request->password_old, $user->password)) {
-            toast('Mật khẩu cũ không chính xác','warning');
+            toast('Mật khẩu cũ không chính xác', 'warning');
             return redirect()->back();
         }
 
@@ -73,9 +73,10 @@ class ProfileController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        toast('Cập nhật mật khẩu người dùng ' . $user->name  . ' thành công' , 'success');
+        toast('Cập nhật mật khẩu người dùng ' . $user->name  . ' thành công', 'success');
 
         return redirect()->back();
+
     }
 
 }

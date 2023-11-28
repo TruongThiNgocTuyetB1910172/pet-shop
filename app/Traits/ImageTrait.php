@@ -19,6 +19,7 @@ trait ImageTrait
         return null;
     }
 
+
     public function deleteImage(string $path): bool
     {
         return File::delete($path);

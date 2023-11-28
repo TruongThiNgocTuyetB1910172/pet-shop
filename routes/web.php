@@ -1,33 +1,42 @@
 <?php
 
-use App\Http\Controllers\Admin\AnimalDetailController ;
+use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AnimalDetailController;
+use App\Http\Controllers\Admin\AppointmentController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FeedBackController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ReceiptController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServicePackageController;
+use App\Http\Controllers\Admin\ShipperController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VariantServiceController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Client\ClientFeedBackController;
+use App\Http\Controllers\Client\ClientOrderController;
+use App\Http\Controllers\Client\NewAddressController;
+use App\Http\Controllers\Client\ProductContronller;
+use App\Http\Controllers\Client\ProductReviewController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\ServiceContronller;
+use App\Http\Controllers\Client\ThanhYouController;
+use App\Http\Controllers\Shipper\ShipperOrderController;
+use App\Http\Controllers\Shipper\ShipperProfileController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\VnPayController;
+use App\Http\Controllers\Client\Wishlistcontroller;
+use App\Http\Controllers\Admin\ThongKeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CategoryController;
-use  App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\AppointmentController;
-use App\Http\Controllers\Client\ProductContronller;
-use App\Http\Controllers\Client\ServiceContronller;
-use App\Http\Controllers\Client\CartController;
-use App\Http\Controllers\Admin\VariantServiceController;
-use App\Http\Controllers\Client\NewAddressController;
-use App\Http\Controllers\SocialiteController;
-use App\Http\Controllers\Client\ClientOrderController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ReceiptController;
-use App\Http\Controllers\Admin\AccountController;
-use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\VnPayController;
-use App\Http\Controllers\Admin\ShipperController;
-use App\Http\Controllers\Shipper\ShipperOrderController;
-use App\Http\Controllers\Client\ProductReviewController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +65,9 @@ Route::get('products-list', [ProductContronller::class, 'index'])->name('product
 Route::get('services-list', [ServiceContronller::class, 'index'])->name('service-list.index');
 Route::get('product-detail/{id}', [ProductContronller::class, 'detail'])->name('product-list.detail');
 Route::get('product-by-category/{id}', [ProductContronller::class, 'showProductsByCategory'])->name('product-by-category.index');
+Route::get('product-wishlist', [Wishlistcontroller::class, 'index'])->name('product-wishlist.index');
+Route::post('add-to-wishlist/{id}', [Wishlistcontroller::class, 'addToWishList'])->name('product-wishlist.addToWishList');
+Route::get('delete-wishlist/{id}', [Wishlistcontroller::class, 'destroy'])->name('product-wishlist.destroy');
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::post('cart/{id}', [ProductContronller::class, 'addToCart'])->name('cart.add-to-cart');
@@ -64,12 +76,14 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('cart-delete/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
     Route::get('order-product', [ClientOrderController::class, 'index'])->name('order-product.index');
-    Route::get('thank-you', [ClientOrderController::class,'thankYou'])->name('order.thank-you');
+    Route::get('thank-you', [ThanhYouController::class,'thankYou'])->name('order.thank-you');
+    Route::get('order-paymentCallback', [ThanhYouController::class, 'paymentCallback'])->name('order.paymentCallback');
     Route::get('purchase-history', [ClientOrderController::class, 'history'])->name('purchase.history');
     Route::get('detail-history/{id}', [ClientOrderController::class, 'detail'])->name('history.detail');
     Route::get('order-cancel/{id}', [ClientOrderController::class, 'cancel'])->name('order.cancel');
-    Route::put('review-order/{id}', [ClientOrderController::class, 'review'])->name('order.review');
-    Route::post('review-product/{id}', [ProductReviewController::class, 'create'])->name('review-product.create');
+    Route::post('feedback-order/{id}', [ClientFeedBackController::class, 'store'])->name('order-feedback.store');
+    Route::get('comment-product/{id}', [ClientOrderController::class, 'commentOnProduct'])->name('comment-product.commentOnProduct');
+    Route::post('review-product/{productId}', [ProductReviewController::class, 'store'])->name('review-product.store');
 
     Route::get('location', [NewAddressController::class, 'index'])->name('location.new-add');
     Route::get('address-delete/{id}', [CartController::class, 'delete'])->name('address.delete');
@@ -83,12 +97,18 @@ Route::middleware(['auth','verified'])->group(function () {
     //Review
     Route::get('review', [ProductReviewController::class, 'create'])->name('review.create');
 });
-  Route::middleware(['auth:shipper'])->group(function (){
-      Route::get('shipperPage', [HomeController::class, 'shipperPage'])->name('shipper-page');
-      Route::get('order-list', [ShipperOrderController::class, 'index'])->name('order-list.index');
-      Route::get('edit-order-list/{id}', [ShipperOrderController::class, 'edit'])->name('order-list.edit');
-      Route::put('update-order-list/{id}', [ShipperOrderController::class, 'update'])->name('order-list.update');
-  });
+Route::middleware(['auth:shipper'])->group(function () {
+    Route::get('shipperPage', [HomeController::class, 'shipperPage'])->name('shipper-page');
+    Route::get('order-list', [ShipperOrderController::class, 'index'])->name('order-list.index');
+    Route::get('edit-order-list/{id}', [ShipperOrderController::class, 'edit'])->name('order-list.edit');
+    Route::put('update-order-list/{id}', [ShipperOrderController::class, 'update'])->name('order-list.update');
+
+    //profile shipper
+
+    Route::get('profile-shipper/{id}', [ShipperProfileController::class,'index'])->name('shipper-profile.index');
+    Route::put('update-profile-shipper/{id}', [ShipperProfileController::class, 'update'])->name('shipper-profile.update');
+    Route::put('update-password-shipper/{id}', [ShipperProfileController::class, 'updatePassword'])->name('shipper-password.update');
+});
 
 
 Route::middleware(['auth:admin'])->group(function () {
@@ -160,7 +180,10 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('order', [OrderController::class,'index'])->name('order.index');
     Route::get('edit-order/{id}', [OrderController::class,'edit'])->name('order.edit');
+    Route::get('show-order/{id}', [OrderController::class, 'show'])->name('order.show');
     Route::put('update-order/{id}', [OrderController::class,'update'])->name('order.update');
+    Route::get('new-order-list', [OrderController::class, 'newOrder'])->name('order-new.index');
+    Route::get('success-order-list', [OrderController::class, 'successOrder'])->name('order-success.index');
 
     Route::get('account', [AccountController::class, 'index'])->name('account.index');
     Route::get('create-account', [AccountController::class, 'create'])->name('account.create');
@@ -186,7 +209,26 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('update-shipper/{id}', [ShipperController::class, 'update'])->name('shipper.update');
     Route::put('update-password-shipper/{id}', [ShipperController::class, 'updatePassword'])->name('shipper.update-password');
 
-    //ve bieu do
+    Route::get('manager-review', [ReviewController::class,'index'])->name('review.index');
+    Route::get('edit-review/{id}', [ReviewController::class, 'edit'])->name('review.edit');
+    Route::put('update-review/{id}', [ReviewController::class, 'update'])->name('review.update');
 
-    Route::get('/revenue-chart', [HomeController::class, 'chart'])->name('revenue-chart');
+    Route::get('manager-feedback', [FeedBackController::class, 'index'])->name('feedback.index');
+
+    //ve bieu do
+    Route::get('revenue-chart-only-month', [HomeController::class, 'getChartOnlyMonth'])->name('getChartOnlyMonth.revenue');
+    Route::get('filler-revenue-chart-only-month', [HomeController::class, 'filterGetChartOnlyMonth'])->name('filterGetChartOnlyMonth.revenue');
+    Route::get('revenue-chart-only-year', [HomeController::class, 'getRevenueByYear'])->name('getRevenueByYear.revenue');
+    Route::get('filler-revenue-chart-only-year', [HomeController::class, 'filterGetRevenueByYear'])->name('filterGetRevenueByYear.revenue');
+    Route::get('get-order-status-data',[HomeController::class, 'getOrderStatusData'])->name('order.getOrderStatusData');
+
+    Route::get('selling-product-chart', [HomeController::class, 'productChartSale'])->name('productChartOnlyYear.sellingBest');
+    Route::get('get-top-customers-chart', [HomeController::class, 'getTopCustomersChart'])->name('user.getTopCustomersChart');
+    //profile admin
+    Route::get('profile-admin/{id}', [AdminProfileController::class,'index'])->name('admin-profile.index');
+    Route::put('update-profile-admin/{id}', [AdminProfileController::class, 'update'])->name('admin-profile.update');
+    Route::put('update-password-admin/{id}', [AdminProfileController::class, 'updatePassword'])->name('admin-password.update');
+
+    Route::get('thong-ke', [ThongKeController::class, 'index'])->name('thongke.index');
+
 });
